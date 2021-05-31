@@ -17,6 +17,7 @@ DROP TABLE WineDB.Pessoa
 
 --ver tambem aquilo do cascade e dos alter e o crlh
 CREATE TABLE WineDB.Adega (
+--DEVIA SER ID_Adega meu menino
 	ID			VARCHAR(5)		NOT NULL,
 	Nome		VARCHAR(256)	NOT NULL,
 	Endereco	VARCHAR(256)	NOT NULL,
@@ -112,9 +113,9 @@ CREATE TABLE WineDB.Venda (
 	Preco			FLOAT			NOT NULL,
 	IVA				INT				DEFAULT 23,
 	NIF				VARCHAR(9),
-	Quantidade		FLOAT,
+	Quantidade		INT,
 
-	PRIMARY KEY(ID_Produto),
+	PRIMARY KEY(ID),
 );
 GO
 DROP TABLE WineDB.Venda
@@ -131,8 +132,8 @@ DROP TABLE WineDB.Cliente
 
 CREATE TABLE WineDB.Funcionario(
 	NIF						VARCHAR(9),
-	IBAN					VARCHAR(16)		NOT NULL,
-	Num_SS					VARCHAR(9)		NOT NULL,
+	IBAN					VARCHAR(25)		NOT NULL,
+	Num_SS					VARCHAR(11)		NOT NULL,
 	Data_Inicio_Atividade	DATE			NOT NULL,
 
 	PRIMARY KEY (NIF),
@@ -197,21 +198,21 @@ DROP TABLE WineDB.Armazenado
 
 CREATE TABLE WineDB.TemProdutos(
 	ID_Armazem		VARCHAR(5)		NOT NULL,
-	ID_Produto		VARCHAR(5)		NOT NULL,
+	ID_Venda		VARCHAR(8)		NOT NULL,
 
-	PRIMARY KEY (ID_Armazem, ID_Produto),
+	PRIMARY KEY (ID_Armazem, ID_Venda),
 	FOREIGN KEY (ID_Armazem) REFERENCES WineDB.Armazem(ID),
-	FOREIGN KEY (ID_Produto) REFERENCES WineDB.Venda(ID_Produto)
+	FOREIGN KEY (ID_Venda) REFERENCES WineDB.Venda(ID)
 
 );
 GO
 DROP TABLE WineDB.TemProdutos
 
 CREATE TABLE WineDB.Compra (
-	ID_Produto		VARCHAR(5)		NOT NULL,
+	ID_Venda		VARCHAR(8)		NOT NULL,
 	NIF				VARCHAR(9)		NULL,
 
-	FOREIGN KEY (ID_Produto) REFERENCES WineDB.Venda(ID_Produto),
+	FOREIGN KEY (ID_Venda) REFERENCES WineDB.Venda(ID),
 	FOREIGN KEY (NIF) REFERENCES WineDB.Cliente(NIF),
 );
 GO
@@ -230,17 +231,12 @@ DROP TABLE WineDB.Trabalha
 
 
 --INSERT DATA IN THE TABLES
-INSERT INTO WineDB.Adega(ID,Nome,Endereco,Cap_Max,Num_Cubas) VALUES
-('6A3E4','Solar Dona Maria','Rua de Cima, 234, Ervedosa do Douro',350000,38),
-('54W3T','Casa dos Vinhos','Estrada Municipal 501, 12, Soutelo do Douro',1250000,80),
-('03ED5','Boa Uva','Travessa da Laranja, 12, Anadia',250000,32),
-('6S4U3','Adega La Rose','Estrada Nacional 10, 123, Azeitão',900000,75),
-('3H5O8','Adega dos Tintos','Rua de Santa Cristina, 80, Peso da Régua',1500000,64),
-('A7V10','Residência de Chopp','Avenida Magna, 33, Valença do Douro',500000,50),
-('0S76B','Herdade da Silveira','Rua Doutor Silveira Lopes, 22, Évora',600000,58),
-('42FG5','Dona Barca','Estrada Municipal 222, 76, Barca D´Alva',345000,42),
-('0Y12Q','Adega Cooperativa do Porto','Avenida Ramos Pinto, 70, Vila Nova de Gaia',735000,66),
-('60W7R','Adega Cooperativa dos Tintos','Rua dos Gatos, 58, Leiria',4750000,40);
+--DEVIAM TER TODAS O MESMO NOME
+INSERT INTO WineDB.Adega(ID,Nome,Endereco,Cap_Max,Num_Cubas, NIF_Func) VALUES
+('6A3E4','Solar Dona Maria','Rua de Cima, 234, Ervedosa do Douro',350000,38, '237489547'),
+('54W3T','Casa dos Vinhos','Estrada Municipal 501, 12, Soutelo do Douro',1250000,80, '233765487'),
+('03ED5','Boa Uva','Travessa da Laranja, 12, Anadia',250000,32, '257483675'),
+('6S4U3','Adega La Rose','Estrada Nacional 10, 123, Azeitão',900000,75, '374985902');
 
 Select * FROM WineDB.Adega
 
@@ -260,7 +256,20 @@ INSERT INTO WineDB.Pessoa(Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUE
 ('Miguel Silva', 'Estrada Municipal 23, 1, Guarda', '233765487', '1994-07-18', 'M', '967893541'),
 ('Maria Trindade', 'Estrada Nacional 222, 56, Viseu', '257483675', '1989-03-01', 'F', '923456712'),
 ('Inês Sequeira', 'Bairro das Laranjas, 87, Vila Real', '374985902', '1976-04-15', 'F', '961234512'),
-('Sofia Sousa', 'Bairro de Santiago, 51, Porto', '237598309', '1999-05-23', 'F', '934567123');
+('Sofia Sousa', 'Bairro de Santiago, 51, Porto', '237598309', '1999-05-23', 'F', '934567123'),
+('Laurindo Vilas', 'Avenida Dessarges, 100, S.J.Pesqueira', '235400888', '2000-04-23', 'M', '961051386'),
+('Carla Setúbal', 'Rua Lisabon, 30, Porto', '236978309', '1960-10-13', 'F', '919898982'),
+('Luis Lopes', 'Urbanização Chavinha, 52, Aveiro', '236696379', '1975-06-27', 'M', '924468103'),
+('Mariana Rodriguez', 'Rua do Corvo, 33 , Setúbal', '237588123', '1995-07-28', 'F', '925562223'),
+('Marta Fradique', 'Rua de Biana, 50, Esposende', '255246336', '1988-08-04', 'F', '934427533'),
+('Joana Rafaela', 'Bairro de Nova Deli, 150, Porto', '237256978', '2001-01-03', 'F', '933458903'),
+('João Cruz', 'Rua da Laranjeira, 56, Faro', '234555999', '2002-02-15', 'M', '964554668'),
+('Luisa Setúbal', 'Rua Abon, 35, Funchal', '227578689', '1980-10-13', 'F', '915598982'),
+('Vitor Sanches', 'Rua dos Gatos, 13, Arouca', '266699979', '1985-04-27', 'M', '923468103'),
+('Raquel Silveira', 'Rua do Pássaro, 55 , Guimarães', '227579113', '1985-02-28', 'F', '921164443'),
+('Ana Frades', 'Avenida Da Boa Vontade, 50, Lisboa', '215256356', '1999-09-09', 'F', '934447733'),
+('Sofia Pereira', 'Rua Dali, 10, Vila Real', '207206079', '2001-01-01', 'F', '933278903'),
+('André Matosinhos', 'Rua Além, 36, Matosinhos', '204009990', '2000-01-01', 'M', '962552660');
 
 
 Select * FROM WineDB.Pessoa
@@ -531,6 +540,7 @@ SELECT * FROM WineDB.Terreno
 
 
 -- acho q isto de ter estante, n_caixas, e assim n faz sentido fds
+--CONCORDO
 INSERT INTO WineDB.Armazem(ID, Localizacao, Nome, ID_Adega, Estante, Num_Caixas, Num_GarrafasCaixa) VALUES
 ('ASA12', 'Avenida Principal, 12, S.J. Pesqueira', 'Vinhos Douro', '54W3T', 'SIM', 2, 2),
 ('2SA21', 'Rua de Cima, 45, Évora', 'Alentejo Armazem', '3H5O8', 'SIM', 2, 2),
@@ -538,4 +548,230 @@ INSERT INTO WineDB.Armazem(ID, Localizacao, Nome, ID_Adega, Estante, Num_Caixas,
 ('FFD33', 'Estrada Nacional 23, 45, Santa Comba Dão', 'Santa Vinhos Dão', 'A7V10', 'SIM', 2, 2),
 ('GRT43', 'Rua do Lago, 23, Vila Nova de Gaia', 'Caves Gaia', '0Y12Q', 'SIM', 2, 2);
 
+DELETE FROM WineDB.Armazem
+
 SELECT * FROM WineDB.Armazem
+
+--NAO WORKA PQ A PRIMARY É O ID_PRODUTO AINDA, MAS VAMOS TER O MESMO PROBLEMA QUANDO MUDARMOS A PRIMARY PARA ID
+INSERT INTO WineDB.Venda(ID, ID_Produto, Preco, IVA, NIF, Quantidade) VALUES
+('AAAAAA', 'AS3FR', 25.0, DEFAULT , '345612398', 2),
+('AAAAAA', 'SF231',20.0, DEFAULT , '345612398', 1),
+('AAAAAA', 'FGDF3', 35.50 , DEFAULT , '345612398', 1),
+('A1B2C3', 'G5325', 17.50, DEFAULT , '334712345', 1),
+('A1B2C3', '23F54', 15.25, DEFAULT , '334712345', 3),
+('BBB123', 'AR265', 5.0, DEFAULT , '276875341', 5),
+('BBB123', 'AFSF2', 10.50, DEFAULT , '276875341', 2),
+('BBB123', '76U6J', 50.0, DEFAULT , '276875341', 1),
+('BBB123', 'G5325', 17.50, DEFAULT , '276875341', 1),
+('BBB123', 'JGHJ5', 13.50, DEFAULT , '276875341', 1),
+('A1B555', 'G5325', 17.50, DEFAULT , '345612398', 1),
+('A1B555', 'FGDF3', 35.50, DEFAULT , '345612398', 1),
+('A5B222', 'B534F', 5.55, DEFAULT , '287649264', 10),
+('BABA25', 'AGTG2', 20.0, DEFAULT , '295748365', 2),
+('BABA25', 'A5433', 15.99, DEFAULT , '295748365', 2),
+('F0DA53', 'BN33F', 35.99, DEFAULT , '312876490', 3),
+('CA4UE1', 'BN33F', 35.99, DEFAULT , '376598467', 1),
+('F00053', 'JH5GT', 30.50, DEFAULT , '376598467', 1),
+('D4SSE1', 'ADE23', 15.99, DEFAULT , '245678345', 2),
+('ALEL14', 'AT34D', 9.99, DEFAULT , '239817654', 3);
+
+DELETE FROM WineDB.Venda
+
+SELECT * FROM WineDB.Venda
+
+
+-- NAO DEVIA TER ID, MAS SO NIF, Q JA É UM IDENTIFICADOR
+INSERT INTO WineDB.Cliente(NIF , ID) VALUES
+('345612398', 1),
+('334712345' , 2),
+('276875341' , 3),
+('287649264', 4),
+('295748365', 5),
+('312876490', 6),
+('376598467', 7),
+('245678345', 8),
+('239817654', 9);
+
+DELETE FROM WineDB.Cliente
+
+SELECT * FROM WineDB.Cliente
+
+--IBAN NAO TEM SO 16 NUMEROS MORCAO TEM 25 NUMEROS
+INSERT INTO WineDB.Funcionario(NIF , IBAN, NUM_SS, Data_Inicio_Atividade) VALUES
+('237489547' , 'PT85003506514866776619784', '52997233452' , '2001-12-25'),
+('233765487' , 'PT02003506519431633932716', '30342326822', '2010-05-13'),
+('257483675' , 'PT89003506514424823965114', '41232386822', '2015-05-13'),
+('374985902' , 'PT51003506512227616567972', '12345678900', '2013-11-22'),
+('237598309' , 'PT10003506511968949842841', '35362376822', '2020-01-03'),
+('235400888' , 'PT50003506512332944435963', '24750178211' ,'2021-06-01'),
+('236978309' , 'PT88003506513388963216308', '52907436612', '2005-06-11'),
+('236696379' , 'PT42003506515288816766635', '53087191043', '2017-01-31'),
+('237588123' , 'PT73003506512872757694420', '51015954322', '2016-02-28'),
+('255246336' , 'PT07003506514334729721152', '41643902866', '2015-12-03'),
+('237256978' , 'PT65003506511853321374904', '36232808562', '2011-10-13'),
+('234555999' , 'PT56003506512556514255258', '25366797712', '2019-05-12');
+
+DELETE FROM WineDB.Funcionario
+
+SELECT * FROM WineDB.Funcionario
+
+--NAO DEVIAM TER NUMFUNC, ESTE E O OPERADOR GAY
+--E DEVIAM TER COMO FOREIGN A ADEGA A Q ESTAO LIGADOS
+INSERT INTO WineDB.Gerente(NIF , Num_Func) VALUES
+('237489547' , '1'),
+('233765487' , '2'),
+('257483675' , '3'),
+('374985902' , '4');
+
+DELETE FROM WineDB.Gerente
+
+SELECT * FROM WineDB.Gerente
+
+INSERT INTO WineDB.OperadorAdega(NIF, Num_Func, ID_Adega) VALUES
+('237598309', '5' ,'6A3E4'),
+('235400888', '6' ,'6A3E4'),
+('236978309', '7' ,'54W3T'),
+('236696379', '8' ,'54W3T'),
+('237588123', '9' ,'03ED5'),
+('255246336', '10','03ED5'),
+('237256978', '11','6S4U3'),
+('234555999', '12','6S4U3');
+
+DELETE FROM WineDB.OperadorAdega
+
+SELECT * FROM WineDB.OperadorAdega
+
+INSERT INTO WineDB.OperadorAgricola(NIF) VALUES
+('227578689'),
+('266699979'),
+('227579113'),
+('215256356'),
+('207206079'),
+('204009990');
+
+
+DELETE FROM WineDB.OperadorAgricola
+
+SELECT * FROM WineDB.OperadorAgricola
+
+
+INSERT INTO WineDB.TipoTrabalho(NIF, Tipo_Trabalho) VALUES
+('227578689','Tratorista'),
+('266699979','Despejador de Baldes'),
+('227579113','Cortador de uvas'),
+('215256356','Cortador de uvas'),
+('207206079','Cortador de uvas'),
+('204009990','Cortador de uvas');
+
+
+DELETE FROM WineDB.TipoTrabalho
+
+SELECT * FROM WineDB.TipoTrabalho
+
+
+INSERT INTO WineDB.Armazenado(ID_Vinho, ID_Armazem) VALUES
+('AS3FR','ASA12'),
+('SF231','2SA21'),
+('FGDF3','DA221'),
+('GDDF3','FFD33'),
+('AG434','GRT43'),
+('GFH54','ASA12'),
+('H6G34','2SA21'),
+('G5325','DA221'),
+('A34R2','FFD33'),
+('23F54','GRT43'),
+('GTG45','ASA12'),
+('GTDT5','2SA21'),
+('HYD54','DA221'),
+('343SF','FFD33'),
+('ADE23','GRT43'),
+('AHYT3','ASA12'),
+('ADF34','2SA21'),
+('B534F','DA221'),
+('343F4','FFD33'),
+('FDS42','GRT43'),
+('GDF43','ASA12'),
+('AGTG2','2SA21'),
+('32DS2','DA221'),
+('ACVT4','FFD33'),
+('AFS32','GRT43'),
+('A323R','ASA12'),
+('AS323','2SA21'),
+('232SR','DA221'),
+('FSD23','FFD33'),
+('434FD','GRT43'),
+('AGFD3','ASA12'),
+('A234F','2SA21'),
+('A5433','DA221'),
+('FGD43','FFD33'),
+('AFSD3','GRT43'),
+('BN33F','ASA12'),
+('AR265','2SA21'),
+('AFSF2','DA221'),
+('FSD42','FFD33'),
+('GDH56','GRT43'),
+('76U6J','ASA12'),
+('JH5GT','2SA21'),
+('GFH54','DA221'),
+('AHJ56','FFD33'),
+('AJG56','GRT43'),
+('GHJ55','ASA12'),
+('JGHJ5','2SA21'),
+('HF345','DA221'),
+('FDE3D','FFD33'),
+('AT34D','GRT43'),
+('AS345','ASA12'),
+('AS34T','2SA21'),
+('A43RG','DA221');
+
+DELETE FROM WineDB.Armazenado
+
+SELECT * FROM WineDB.Armazenado
+
+INSERT INTO WineDB.TemProdutos(ID_Armazem, ID_Venda) VALUES
+('ASA12','AAAAAA'),
+('2SA21','A1B2C3'),
+('DA221','BBB123'),
+('FFD33','A1B555'),
+('GRT43','A5B222'),
+('ASA12','BABA25'),
+('2SA21','F0DA53'),
+('DA221','CA4UE1'),
+('FFD33','F00053'),
+('GRT43','D4SSE1'),
+('ASA12','ALEL14');
+
+DELETE FROM WineDB.TemProdutos
+
+SELECT * FROM WineDB.TemProdutos
+
+INSERT INTO WineDB.Compra(ID_Venda, NIF) VALUES
+('AAAAAA','345612398'),
+('A1B2C3','334712345'),
+('BBB123','276875341'),
+('A1B555','345612398'),
+('A5B222','287649264'),
+('BABA25','295748365'),
+('F0DA53','312876490'),
+('CA4UE1','376598467'),
+('F00053','376598467'),
+('D4SSE1','245678345'),
+('ALEL14','239817654');
+
+DELETE FROM WineDB.Compra
+
+SELECT * FROM WineDB.Compra
+
+INSERT INTO WineDB.Trabalha(ID, NIF) VALUES
+('237598309', '6A3E4'),
+('235400888', '54W3T'),
+('236978309', '03ED5'),
+('236696379', '6S4U3'),
+('237588123', '6A3E4'),
+('255246336', '54W3T'),
+('237256978', '03ED5'),
+('234555999', '6S4U3');
+
+DELETE FROM WineDB.Trabalha
+
+SELECT * FROM WineDB.Trabalha
