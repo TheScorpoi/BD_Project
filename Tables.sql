@@ -13,7 +13,7 @@ CREATE TABLE WineDB.Pessoa (
 	PRIMARY KEY (NIF)
 );
 GO
-DROP TABLE WineDB.Pessoa
+--DROP TABLE WineDB.Pessoa
 
 --ver tambem aquilo do cascade e dos alter e o crlh
 CREATE TABLE WineDB.Adega (
@@ -29,18 +29,18 @@ CREATE TABLE WineDB.Adega (
 	FOREIGN KEY (NIF_Func) REFERENCES WineDB.Gerente(NIF)
 );
 GO
-DROP TABLE WineDB.Adega
+--DROP TABLE WineDB.Adega
 
 CREATE TABLE WineDB.Cuba (
 	ID			INT				NOT NULL	UNIQUE,
-	ID_Adega	VARCHAR(5)		NOT NULL,
+	ID_Adega	VARCHAR(5)	NOT NULL,
 	Cap_Max		FLOAT			NOT NULL,
 
 	PRIMARY KEY (ID),
 	FOREIGN KEY(ID_Adega) REFERENCES WineDB.Adega(ID)
 );
 GO
-DROP TABLE WineDB.Cuba
+--DROP TABLE WineDB.Cuba
 
 CREATE TABLE WineDB.TipoCuba (
 	ID			INT				NOT NULL	UNIQUE,
@@ -50,31 +50,31 @@ CREATE TABLE WineDB.TipoCuba (
 	FOREIGN KEY (ID) REFERENCES WineDB.Cuba(ID)
 );
 GO
-DROP TABLE WineDB.TipoCuba
+--DROP TABLE WineDB.TipoCuba
 
 CREATE TABLE WineDB.Casta (
 	Nome		VARCHAR(128)	NOT NULL,
 	ID			INT				NOT NULL,
 
-	PRIMARY KEY (Nome),
+	PRIMARY KEY (ID),
 );
 GO
-DROP TABLE WineDB.Casta
+--DROP TABLE WineDB.Casta
 
 CREATE TABLE WineDB.Vinho (
 	ID			VARCHAR(5)		NOT NULL	UNIQUE,
 	ID_Cuba		INT				NOT NULL	UNIQUE,
 	Nome		VARCHAR(256)	NOT NULL,
 	DOC			VARCHAR(32),
-	Nome_Casta	VARCHAR(128)	NOT NULL,
+	ID_Casta	INT				NOT NULL,
 
-	PRIMARY KEY (ID, ID_cuba, Nome_Casta),
+	PRIMARY KEY (ID, ID_cuba, ID_Casta),
 	FOREIGN KEY (ID_Cuba) REFERENCES WineDB.Cuba(ID),
-	FOREIGN KEY (Nome_Casta) REFERENCES WineDB.Casta(Nome),
+	FOREIGN KEY (ID_Casta) REFERENCES WineDB.Casta(ID),
 
 );
 GO
-DROP TABLE WineDB.Vinho
+--DROP TABLE WineDB.Vinho
 
 CREATE TABLE WineDB.Terreno (
 	ID				VARCHAR(5)		NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE WineDB.Terreno (
 	FOREIGN KEY (ID_Adega) REFERENCES WineDB.Adega(ID),
 );
 GO
-DROP TABLE WineDB.Terreno
+--DROP TABLE WineDB.Terreno
 
 CREATE TABLE WineDB.Armazem (
 	ID					VARCHAR(5)		NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE WineDB.Armazem (
 	FOREIGN KEY (ID_Adega) REFERENCES WineDB.Adega(ID) 
 );
 GO
-DROP TABLE WineDB.Armazem
+--DROP TABLE WineDB.Armazem
 
 
 CREATE TABLE WineDB.Venda (
@@ -115,7 +115,7 @@ CREATE TABLE WineDB.Venda (
 	PRIMARY KEY(ID),
 );
 GO
-DROP TABLE WineDB.Venda
+--DROP TABLE WineDB.Venda
 
 CREATE TABLE WineDB.Cliente (
 	NIF				VARCHAR(9),
@@ -125,7 +125,7 @@ CREATE TABLE WineDB.Cliente (
 	FOREIGN KEY (NIF) REFERENCES WineDB.Pessoa(NIF)
 );
 GO
-DROP TABLE WineDB.Cliente
+--DROP TABLE WineDB.Cliente
 
 CREATE TABLE WineDB.Funcionario(
 	NIF						VARCHAR(9),
@@ -137,7 +137,7 @@ CREATE TABLE WineDB.Funcionario(
 	FOREIGN KEY (NIF) REFERENCES WineDB.Pessoa(NIF)
 );
 GO
-DROP TABLE WineDB.Funcionario
+--DROP TABLE WineDB.Funcionario
 
 CREATE TABLE WineDB.Gerente(
 	NIF			VARCHAR(9),
@@ -147,7 +147,7 @@ CREATE TABLE WineDB.Gerente(
 	FOREIGN KEY (NIF) REFERENCES WineDB.Pessoa(NIF),
 );
 GO
-DROP TABLE WineDB.Gerente
+--DROP TABLE WineDB.Gerente
 
 CREATE TABLE WineDB.OperadorAdega (
 	NIF			VARCHAR(9),
@@ -160,9 +160,8 @@ CREATE TABLE WineDB.OperadorAdega (
 
 );
 GO
-DROP TABLE WineDB.OperadorAdega
+--DROP TABLE WineDB.OperadorAdega
 
---mudar o nome para OperadorAgricola
 CREATE TABLE WineDB.OperadorAgricola(
 	NIF		VARCHAR(9), 
 
@@ -170,7 +169,7 @@ CREATE TABLE WineDB.OperadorAgricola(
 	FOREIGN KEY (NIF) REFERENCES WineDB.Pessoa(NIF),
 );
 GO
-DROP TABLE WineDB.OperadorAgricola
+--DROP TABLE WineDB.OperadorAgricola
 
 Create TABLE WineDB.TipoTrabalho(
 	NIF				VARCHAR(9),
@@ -180,7 +179,7 @@ Create TABLE WineDB.TipoTrabalho(
 	FOREIGN KEY (NIF) REFERENCES WineDB.OperadorAgricola(NIF),
 );
 GO
-DROP TABLE WineDB.TipoTrabalho
+--DROP TABLE WineDB.TipoTrabalho
 
 CREATE TABLE WineDB.Armazenado(
 	ID_Vinho				VARCHAR(5)		NOT NULL,
@@ -191,19 +190,7 @@ CREATE TABLE WineDB.Armazenado(
 	FOREIGN KEY (ID_Armazem) REFERENCES WineDB.Armazem(ID),
 );
 GO
-DROP TABLE WineDB.Armazenado
-
-CREATE TABLE WineDB.TemProdutos(
-	ID_Armazem		VARCHAR(5)		NOT NULL,
-	ID_Venda		VARCHAR(8)		NOT NULL,
-
-	PRIMARY KEY (ID_Armazem, ID_Venda),
-	FOREIGN KEY (ID_Armazem) REFERENCES WineDB.Armazem(ID),
-	FOREIGN KEY (ID_Venda) REFERENCES WineDB.Venda(ID)
-
-);
-GO
-DROP TABLE WineDB.TemProdutos
+--DROP TABLE WineDB.Armazenado
 
 CREATE TABLE WineDB.Compra (
 	ID_Venda		VARCHAR(8)		NOT NULL,
@@ -213,7 +200,7 @@ CREATE TABLE WineDB.Compra (
 	FOREIGN KEY (NIF) REFERENCES WineDB.Cliente(NIF),
 );
 GO
-DROP TABLE WineDB.Compra
+--DROP TABLE WineDB.Compra
 
 CREATE TABLE WineDB.Trabalha(
 	ID			VARCHAR(5)			NOT NULL,
@@ -224,19 +211,20 @@ CREATE TABLE WineDB.Trabalha(
 	FOREIGN KEY (NIF) REFERENCES WineDB.OperadorAgricola(NIF),
 );
 GO
-DROP TABLE WineDB.Trabalha
+--DROP TABLE WineDB.Trabalha
 
 
 --INSERT DATA IN THE TABLES
+--DEVIAM TER TODAS O MESMO NOME
 INSERT INTO WineDB.Adega(ID,Nome,Endereco,Cap_Max,Num_Cubas, NIF_Func) VALUES
 ('6A3E4','Solar Dona Maria','Rua de Cima, 234, Ervedosa do Douro',350000,38, '237489547'),
 ('54W3T','Casa dos Vinhos','Estrada Municipal 501, 12, Soutelo do Douro',1250000,80, '233765487'),
 ('03ED5','Boa Uva','Travessa da Laranja, 12, Anadia',250000,32, '257483675'),
 ('6S4U3','Adega La Rose','Estrada Nacional 10, 123, Azeitão',900000,75, '374985902');
 
-DELETE FROM WineDB.Adega 
-
 Select * FROM WineDB.Adega
+
+DELETE FROM WineDB.Adega 
 
 INSERT INTO WineDB.Pessoa(Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUES
 ('Alfredo Costa', 'Urbanização Chave, 23, Averio', '345612398', '1987-05-16', 'M', '92345876'),
@@ -267,65 +255,66 @@ INSERT INTO WineDB.Pessoa(Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUE
 ('Sofia Pereira', 'Rua Dali, 10, Vila Real', '207206079', '2001-01-01', 'F', '933278903'),
 ('André Matosinhos', 'Rua Além, 36, Matosinhos', '204009990', '2000-01-01', 'M', '962552660');
 
+
 Select * FROM WineDB.Pessoa
 
 DELETE FROM WineDB.Pessoa 
 
 
 INSERT INTO WineDB.Cuba(ID, ID_Adega, Cap_Max) VALUES
-(12452, '6A3E4', 30093),
-(23411, '6A3E4', 234231),
-(52143, '6A3E4', 234231),
-(47581, '6A3E4', 234231),
-(17543, '6A3E4', 234231),
-(54432, '6A3E4', 30234),
-(34234, '6A3E4', 30234),
-(43633, '6A3E4', 30234),
-(46423, '6A3E4', 30234),
-(16546, '6A3E4', 30234),
-(16453, '6A3E4', 30234),
-(16556, '6A3E4', 30234),
-(12342, '6A3E4', 30234),
-(15646, '6A3E4', 45632),
-(14564, '54W3T', 45632),
-(16565, '54W3T', 45632),
-(12131, '54W3T', 45632),
-(87665, '54W3T', 45632),
-(78665, '54W3T', 45632),
-(18666, '54W3T', 45632),
-(18768, '54W3T', 45632),
-(14243, '54W3T', 45632),
-(16464, '54W3T', 123432),
-(65435, '54W3T', 123432),
-(17544, '54W3T', 123432),
-(65543, '54W3T', 123432),
-(75467, '54W3T', 123432),
-(45645, '54W3T', 123432),
-(18767, '54W3T', 123432),
-(18735, '54W3T', 123432),
-(78567, '54W3T', 123432),
-(19876, '03ED5', 123432),
-(96755, '03ED5', 54564),
-(86565, '03ED5', 54564),
-(14574, '03ED5', 54564),
-(17576, '03ED5', 54564),
-(86785, '03ED5', 54564),
-(86865, '03ED5', 54564),
-(18755, '03ED5', 54564),
-(18626, '03ED5', 54564),
-(18656, '03ED5', 54564),
-(18655, '03ED5', 54564),
-(84565, '03ED5', 35352),
+(12452, '03ED5', 30093),
+(23411, '03ED5', 234231),
+(52143, '03ED5', 234231),
+(47581, '03ED5', 234231),
+(17543, '03ED5', 234231),
+(54432, '0S76B', 30234),
+(34234, '0S76B', 30234),
+(43633, '0S76B', 30234),
+(46423, '0S76B', 30234),
+(16546, '0S76B', 30234),
+(16453, '0S76B', 30234),
+(16556, '0Y12Q', 30234),
+(12342, '0Y12Q', 30234),
+(15646, '0Y12Q', 45632),
+(14564, '0Y12Q', 45632),
+(16565, '0Y12Q', 45632),
+(12131, '3H5O8', 45632),
+(87665, '3H5O8', 45632),
+(78665, '3H5O8', 45632),
+(18666, '3H5O8', 45632),
+(18768, '3H5O8', 45632),
+(14243, '3H5O8', 45632),
+(16464, '3H5O8', 123432),
+(65435, '42FG5', 123432),
+(17544, '42FG5', 123432),
+(65543, '42FG5', 123432),
+(75467, '42FG5', 123432),
+(45645, '42FG5', 123432),
+(18767, '42FG5', 123432),
+(18735, '42FG5', 123432),
+(78567, '42FG5', 123432),
+(19876, '54W3T', 123432),
+(96755, '54W3T', 54564),
+(86565, '54W3T', 54564),
+(14574, '60W7R', 54564),
+(17576, '6A3E4', 54564),
+(86785, '6A3E4', 54564),
+(86865, '6A3E4', 54564),
+(18755, '6A3E4', 54564),
+(18626, '6A3E4', 54564),
+(18656, '6A3E4', 54564),
+(18655, '6S4U3', 54564),
+(84565, '6S4U3', 35352),
 (15474, '6S4U3', 35352),
 (16586, '6S4U3', 35352),
 (32423, '6S4U3', 35352),
 (53455, '6S4U3', 35352),
-(15657, '6S4U3', 35352),
-(17657, '6S4U3', 35352),
-(19788, '6S4U3', 35352),
-(19877, '6S4U3', 35352),
-(67865, '6S4U3', 423423),
-(18687, '6S4U3', 423423);
+(15657, 'A7V10', 35352),
+(17657, 'A7V10', 35352),
+(19788, 'A7V10', 35352),
+(19877, 'A7V10', 35352),
+(67865, 'A7V10', 423423),
+(18687, 'A7V10', 423423);
 
 DELETE FROM WineDB.Cuba
 
@@ -444,105 +433,104 @@ INSERT INTO WineDB.Casta(Nome, ID) VALUES
 ('Mourisco de Trevões', 19788),
 ('Mourisco de Trevões', 19877),
 ('Mourisco de Trevões', 67865),
-('Mourisco de Trevões', 18687);
+('Mourisco de Trevões', 18687),
+('Mourisco de Trevões', 18888);
 
 Select * FROM WineDB.Casta
 
-DELETE FROM WineDB.Casta
-
-
 --tb n deu fds
-INSERT INTO WineDB.Vinho(ID, ID_Cuba, Nome, DOC, Nome_Casta) VALUES
-('AS3FR', 12452,'Vinho Velho', 'Douro', 'Touriga Franca'),
-('SF231', 23411,'Vinho Dão', 'DÃO', 'Touriga Nacional'),
-('FGDF3', 52143,'Vinho Alegre', 'Alenquer', 'Touriga Franca'),
-('GDDF3', 47581,'Vale Dona Maria', 'Douro', 'Touriga Franca'),
-('AG434', 17543,'Vinho Velho - 2017', 'Tejo', 'Touriga Franca'),
-('GFH54', 54432,'VZ', 'Douro', 'Gouveio Preto'),
-('H6G34', 34234,'VZ', 'Douro', 'Gouveio Preto'),
-('G5325', 43633,'Bajancas', 'Douro', 'Gouveio Preto'),
-('A34R2', 46423,'Bajancas', 'Tejo', 'Touriga Franca'),
-('23F54', 16546,'Bajancas', 'Alentejo', 'Gouveio Preto'),
-('GTG45', 16453,'Bajancas', 'Alenquer', 'Gouveio Preto'),
-('GTDT5', 16556,'Vallado`s', 'Douro', 'Touriga Franca'),
-('HYD54', 12342,'Vallado`s', 'Tejo', 'Touriga Franca'),
-('343SF', 15646,'Vallado`s', 'Dão', 'Touriga Franca'),
-('ADE23', 14564,'Vallado`s', 'Douro', 'Touriga Nacional'),
-('AHYT3', 16565,'Vallado`s', 'Douro', 'Touriga Nacional'),
-('ADF34', 12131,'Vinho Velho - 2017', 'Douro', 'Touriga Nacional'),
-('B534F', 87665,'Dona Doroteia', 'Douro', 'Touriga Nacional'),
-('343F4', 78665,'Dona Doroteia', 'Douro', 'Touriga Nacional'),
-('FDS42', 18666,'Dona Doroteia', 'Douro', 'Touriga Nacional'),
-('GDF43', 18768,'Dona Doroteia', 'Tejo', 'Touriga Franca'),
-('AGTG2', 14243,'Dona Doroteia', 'Douro', 'Mourisco de Trevões'),
-('32DS2', 16464,'Dona Doroteia', 'Douro', 'Mourisco de Trevões'),
-('ACVT4', 65435,'Dona Doroteia', 'Dão', 'Touriga Franca'),
-('AFS32', 17544,'Dona Doroteia', 'Douro', 'Touriga Franca'),
-('A323R', 65543,'Romaneira', 'Douro', 'Touriga Franca'),
-('AS323', 75467,'Romaneira', 'Douro', 'Touriga Franca'),
-('232SR', 45645,'Romaneira', 'Douro', 'Touriga Franca'),
-('FSD23', 18767,'Romaneira', 'Dão', 'Touriga Franca'),
-('434FD', 18735,'Romaneira', 'Douro', 'Rabigato Moreno'),
-('AGFD3', 78567,'Romaneira', 'Douro', 'Rabigato Moreno'),
-('A234F', 19876,'Romaneira', 'Douro', 'Rabigato Moreno'),
-('A5433', 96755,'Romaneira', 'Alentejo', 'Touriga Franca'),
-('FGD43', 86565,'Vinho Velho - 2017', 'Alentejo', 'Touriga Franca'),
-('AFSD3', 14574,'Vinho Velho - 2017', 'Tejo', 'Touriga Franca'),
-('BN33F', 17576,'Cidrô', 'Alenquer', 'Touriga Franca'),
-('AR265', 86785,'Cidrô', 'DOU', 'Touriga Franca'),
-('AFSF2', 86865,'Cidrô', 'Dão', 'Rabigato Moreno'),
-('FSD42', 18755,'Cidrô', 'Dão', 'Rabigato Moreno'),
-('GDH56', 18626,'Cidrô', 'Dão', 'Rabigato Moreno'),
-('76U6J', 18656,'Cidrô', 'Dão', 'Rabigato Moreno'),
-('JH5GT', 18655,'Aneto, Grande Reservax', 'Dão', 'Touriga Franca'),
-('GFH54', 84565,'Aneto, Grande Reservax', 'Dão', 'Touriga Franca'),
-('AHJ56', 15474,'Aneto, Grande Reservax', 'Douro', 'Touriga Nacional'),
-('AJG56', 16586,'Aneto, Grande Reservax', 'Douro', 'Touriga Nacional'),
-('GHJ55', 32423, 'Aciprestes', 'Alentejo', 'Mourisco de Trevões'),
-('JGHJ5', 53455, 'Aciprestes', 'Alentejo', 'Mourisco de Trevões'),
-('HF345', 15657, 'Aciprestes', 'Alentejo', 'Mourisco de Trevões'),
-('FDE3D', 17657, 'Aciprestes', 'Alentejo', 'Mourisco de Trevões'),
-('AT34D', 19788, 'Vesúvio', 'Dão', 'Touriga Nacional'),
-('AS345', 19877, 'Vesúvio', 'Dão', 'Touriga Nacional'),
-('AS34T', 67865, 'Vesúvio', 'Douro', 'Touriga Franca'),
-('A43RG', 18687, 'Vesúvio', 'Douro', 'Touriga Franca');
+INSERT INTO WineDB.Vinho(ID, ID_Cuba, Nome, DOC, ID_Casta) VALUES
+('AS3FR', 12452,'Vinho Velho', 'Douro', 12452),
+('SF231', 23411,'Vinho Dão', 'DÃO', 16556),
+('FGDF3', 52143,'Vinho Alegre', 'Alenquer', 23411),
+('GDDF3', 47581,'Vale Dona Maria', 'Douro',52143 ),
+('AG434', 17543,'Vinho Velho - 2017', 'Tejo',47581 ),
+('GFH54', 54432,'VZ', 'Douro', 19876),
+('H6G34', 34234,'VZ', 'Douro', 96755),
+('G5325', 43633,'Bajancas', 'Douro', 86565),
+('A34R2', 46423,'Bajancas', 'Tejo', 17543),
+('23F54', 16546,'Bajancas', 'Alentejo', 14574),
+('GTG45', 16453,'Bajancas', 'Alenquer', 17576),
+('GTDT5', 16556,'Vallado`s', 'Douro', 54432),
+('HYD54', 12342,'Vallado`s', 'Tejo', 34234),
+('343SF', 15646,'Vallado`s', 'Dão', 43633),
+('ADE23', 14564,'Vallado`s', 'Douro', 12342),
+('AHYT3', 16565,'Vallado`s', 'Douro', 15646),
+('ADF34', 12131,'Vinho Velho - 2017', 'Douro', 14564),
+('B534F', 87665,'Dona Doroteia', 'Douro', 16565),
+('343F4', 78665,'Dona Doroteia', 'Douro', 12131),
+('FDS42', 18666,'Dona Doroteia', 'Douro', 87665),
+('GDF43', 18768,'Dona Doroteia', 'Tejo', 46423),
+('AGTG2', 14243,'Dona Doroteia', 'Douro', 19788),
+('32DS2', 16464,'Dona Doroteia', 'Douro', 19877),
+('ACVT4', 65435,'Dona Doroteia', 'Dão', 16546),
+('AFS32', 17544,'Dona Doroteia', 'Douro', 16453),
+('A323R', 65543,'Romaneira', 'Douro', 67865),
+('AS323', 75467,'Romaneira', 'Douro', 18687),
+('232SR', 45645,'Romaneira', 'Douro', 18735),
+('FSD23', 18767,'Romaneira', 'Dão', 78567),
+('434FD', 18735,'Romaneira', 'Douro', 16464),
+('AGFD3', 78567,'Romaneira', 'Douro', 65435),
+('A234F', 19876,'Romaneira', 'Douro', 17544),
+('A5433', 96755,'Romaneira', 'Alentejo', 86785),
+('FGD43', 86565,'Vinho Velho - 2017', 'Alentejo', 86865),
+('AFSD3', 14574,'Vinho Velho - 2017', 'Tejo',18755),
+('BN33F', 17576,'Cidrô', 'Alenquer', 18626),
+('AR265', 86785,'Cidrô', 'DOU', 18655),
+('AFSF2', 86865,'Cidrô', 'Dão', 65543),
+('FSD42', 18755,'Cidrô', 'Dão', 75467),
+('GDH56', 18626,'Cidrô', 'Dão', 45645),
+('76U6J', 18656,'Cidrô', 'Dão', 18767),
+('JH5GT', 18655,'Aneto, Grande Reservax', 'Dão', 84565),
+('GKH54', 84565,'Aneto, Grande Reservax', 'Dão', 15474),
+('AHJ56', 15474,'Aneto, Grande Reservax', 'Douro', 78665),
+('AJG56', 16586,'Aneto, Grande Reservax', 'Douro', 18666),
+('GHJ55', 32423, 'Aciprestes', 'Alentejo', 32423),
+('JGHJ5', 53455, 'Aciprestes', 'Alentejo', 53455),
+('HF345', 15657, 'Aciprestes', 'Alentejo', 15657),
+('FDE3D', 17657, 'Aciprestes', 'Alentejo', 17657),
+('AT34D', 19788, 'Vesúvio', 'Dão', 18768),
+('AS345', 19877, 'Vesúvio', 'Dão', 14243),
+('AS34T', 67865, 'Vesúvio', 'Douro', 16586),
+('A43RG', 18687, 'Vesúvio', 'Douro', 18888);
 
 Select * FROM WineDB.Vinho
 
 INSERT INTO WineDB.Terreno(ID, Nome, Localizacao, Ano_Plantacao, Casta, Hectares, ID_Adega) VALUES
-('FDG32', 'Curtinho', 'Vale de Vila', '2012', 'Touriga Franca', 2.34, '6A3E4'),
+('FDG32', 'Curtinho', 'Vale de Vila', '2012', 'Touriga Franca', 2.34, '0S76B'),
 ('3DG43', 'Ervedeiro', 'Soutelo do Douro', '2015', 'Touriga Nacional', 5.40, '03ED5'),
-('FDG34', 'Sobreiro', 'Soutelo do Douro', '2011', 'Touriga Nacional', 80.64, '6A3E4'),
-('SDF34', 'Serra - Sul', 'Soutelo do Douro', '2007', 'Touriga Nacional', 56.78, '6A3E4'),
-('GTFD3', 'Poças de Cima', 'Soutelo do Douro', '2008', 'Touriga Nacional', 245.98, '6A3E4'),
+('FDG34', 'Sobreiro', 'Soutelo do Douro', '2011', 'Touriga Nacional', 80.64, '0Y12Q'),
+('SDF34', 'Serra - Sul', 'Soutelo do Douro', '2007', 'Touriga Nacional', 56.78, '3H5O8'),
+('GTFD3', 'Poças de Cima', 'Soutelo do Douro', '2008', 'Touriga Nacional', 245.98, '42FG5'),
 ('FGDF4', 'Fuseiro', 'Évora', '2018', 'Rabigato Moreno', 34.12, '54W3T'),
-('F5G54', 'Vale de Parada', 'Évora', '2019', 'Rabigato Moreno', 56.42, '54W3T'),
+('F5G54', 'Vale de Parada', 'Évora', '2019', 'Rabigato Moreno', 56.42, '60W7R'),
 ('GDGH7', 'Montijinho', 'Évora', '2016', 'Touriga Franca', 78.23, '6A3E4'),
 ('54Y32', 'Fundeira', 'Santa Comba Dão', '2015', 'Mourisco de Trevões', 30.34, '6S4U3'),
-('FY632', 'Sobreira', 'Santa Comba Dão', '2017', 'Mourisco de Trevões', 23.64, '54W3T'),
-('FDY56', 'Eucaliptal', 'Santa Comba Dão', '2018', 'Mourisco de Trevões', 32.74, '54W3T'),
+('FY632', 'Sobreira', 'Santa Comba Dão', '2017', 'Mourisco de Trevões', 23.64, 'A7V10'),
+('FDY56', 'Eucaliptal', 'Santa Comba Dão', '2018', 'Mourisco de Trevões', 32.74, '0S76B'),
 ('JHY32', 'Pinheira', 'Santa Comba Dão', '2018', 'Mourisco de Trevões', 12.88, '03ED5'),
-('5Y665', 'Ribeiro do Centro', 'Santa Comba Dão', '2019', 'Mourisco de Trevões', 2.15, '03ED5'),
-('F456G', 'Alijo de Cima', 'Ervedosa do Douro', '2020', 'Rabigato Moreno', 245.64, '03ED5'),
-('6YRG5', 'Ranhados', 'Ervedosa do Douro', '2012', 'Rabigato Moreno', 12.77, '03ED5'),
+('5Y665', 'Ribeiro do Centro', 'Santa Comba Dão', '2019', 'Mourisco de Trevões', 2.15, '0Y12Q'),
+('F456G', 'Alijo de Cima', 'Ervedosa do Douro', '2020', 'Rabigato Moreno', 245.64, '3H5O8'),
+('6YRG5', 'Ranhados', 'Ervedosa do Douro', '2012', 'Rabigato Moreno', 12.77, '42FG5'),
 ('YYHF5', 'Mouristo', 'Ervedosa do Douro', '2013', 'Rabigato Moreno', 67.79, '54W3T'),
-('MHFG5', 'Silveiro', 'Ervedosa do Douro', '2011', 'Rabigato Moreno', 123.45, '6S4U3'),
+('MHFG5', 'Silveiro', 'Ervedosa do Douro', '2011', 'Rabigato Moreno', 123.45, '60W7R'),
 ('NFGH5', 'Selvagem', 'Peso da Régua', '2010', 'Touriga Nacional', 23.56, '6A3E4'),
 ('D5445', 'Torneira', 'Peso da Régua', '2009', 'Touriga Nacional', 13.65, '6S4U3'),
-('FH5D3', 'Hortinhas', 'Peso da Régua', '2007', 'Touriga Nacional', 54.44, '6S4U3'),
-('EEFD4', 'Serra - Norte', 'Peso da Régua', '2014', 'Touriga Nacional', 56.44, '6S4U3');
+('FH5D3', 'Hortinhas', 'Peso da Régua', '2007', 'Touriga Nacional', 54.44, 'A7V10'),
+('EEFD4', 'Serra - Norte', 'Peso da Régua', '2014', 'Touriga Nacional', 56.44, 'A7V10');
 
 DELETE FROM WineDB.Terreno
 
 SELECT * FROM WineDB.Terreno
 
 
+-- acho q isto de ter estante, n_caixas, e assim n faz sentido fds
+--CONCORDO
 INSERT INTO WineDB.Armazem(ID, Localizacao, Nome, ID_Adega) VALUES
-('ASA12', 'Avenida Principal, 12, S.J. Pesqueira', 'Vinhos Douro', '6A3E4'),
-('2SA21', 'Rua de Cima, 45, Évora', 'Alentejo Armazem', '54W3T'),
-('DA221', 'Estrada Municipal 222, 23, Peso da Réguma', 'Peso dos Vinhos', '03ED5'),
-('FFD33', 'Estrada Nacional 23, 45, Santa Comba Dão', 'Santa Vinhos Dão', '6S4U3'),
-('GRT43', 'Rua do Lago, 23, Vila Nova de Gaia', 'Caves Gaia', '6A3E4');
+('ASA12', 'Avenida Principal, 12, S.J. Pesqueira', 'Vinhos Douro', '54W3T'),
+('DA221', 'Estrada Municipal 222, 23, Peso da Réguma', 'Peso dos Vinhos', '6A3E4'),
+('FFD33', 'Estrada Nacional 23, 45, Santa Comba Dão', 'Santa Vinhos Dão', '03ED5'),
+('GRT43', 'Rua do Lago, 23, Vila Nova de Gaia', 'Caves Gaia', '6S4U3');
 
 DELETE FROM WineDB.Armazem
 
@@ -579,8 +567,8 @@ SELECT * FROM WineDB.Venda
 -- NAO DEVIA TER ID, MAS SO NIF, Q JA É UM IDENTIFICADOR
 INSERT INTO WineDB.Cliente(NIF , ID) VALUES
 ('345612398', 1),
-('334712345', 2),
-('276875341', 3),
+('334712345' , 2),
+('276875341' , 3),
 ('287649264', 4),
 ('295748365', 5),
 ('312876490', 6),
@@ -594,24 +582,24 @@ SELECT * FROM WineDB.Cliente
 
 --IBAN NAO TEM SO 16 NUMEROS MORCAO TEM 25 NUMEROS
 INSERT INTO WineDB.Funcionario(NIF , IBAN, NUM_SS, Data_Inicio_Atividade) VALUES
-('237489547' , 'PT50003506514866776619784', '52997233452', '2001-12-25'),
-('233765487' , 'PT50003506519431633932716', '30342326822', '2010-05-13'),
-('257483675' , 'PT50003506514424823965114', '41232386822', '2015-05-13'),
-('374985902' , 'PT50003506512227616567972', '12345678900', '2013-11-22'),
-('237598309' , 'PT50003506511968949842841', '35362376822', '2020-01-03'),
-('235400888' , 'PT50003506512332944435963', '24750178211', '2021-06-01'),
-('236978309' , 'PT50003506513388963216308', '52907436612', '2005-06-11'),
-('236696379' , 'PT50003506515288816766635', '53087191043', '2017-01-31'),
-('237588123' , 'PT50003506512872757694420', '51015954322', '2016-02-28'),
-('255246336' , 'PT50003506514334729721152', '41643902866', '2015-12-03'),
-('237256978' , 'PT50003506511853321374904', '36232808562', '2011-10-13'),
-('234555999' , 'PT50003506512556514255258', '25366797712', '2019-05-12');
+('237489547' , 'PT85003506514866776619784', '52997233452' , '2001-12-25'),
+('233765487' , 'PT02003506519431633932716', '30342326822', '2010-05-13'),
+('257483675' , 'PT89003506514424823965114', '41232386822', '2015-05-13'),
+('374985902' , 'PT51003506512227616567972', '12345678900', '2013-11-22'),
+('237598309' , 'PT10003506511968949842841', '35362376822', '2020-01-03'),
+('235400888' , 'PT50003506512332944435963', '24750178211' ,'2021-06-01'),
+('236978309' , 'PT88003506513388963216308', '52907436612', '2005-06-11'),
+('236696379' , 'PT42003506515288816766635', '53087191043', '2017-01-31'),
+('237588123' , 'PT73003506512872757694420', '51015954322', '2016-02-28'),
+('255246336' , 'PT07003506514334729721152', '41643902866', '2015-12-03'),
+('237256978' , 'PT65003506511853321374904', '36232808562', '2011-10-13'),
+('234555999' , 'PT56003506512556514255258', '25366797712', '2019-05-12');
 
 DELETE FROM WineDB.Funcionario
 
 SELECT * FROM WineDB.Funcionario
 
---NAO DEVIAM TER NUMFUNC, ESTE E O OPERADOR GAY
+--NAO DEVIAM TER NUMFUNC, ESTE E O OPERADOR
 --E DEVIAM TER COMO FOREIGN A ADEGA A Q ESTAO LIGADOS
 INSERT INTO WineDB.Gerente(NIF , Num_Func) VALUES
 ('237489547' , '1'),
@@ -645,6 +633,7 @@ INSERT INTO WineDB.OperadorAgricola(NIF) VALUES
 ('207206079'),
 ('204009990');
 
+
 DELETE FROM WineDB.OperadorAgricola
 
 SELECT * FROM WineDB.OperadorAgricola
@@ -657,6 +646,7 @@ INSERT INTO WineDB.TipoTrabalho(NIF, Tipo_Trabalho) VALUES
 ('215256356','Cortador de uvas'),
 ('207206079','Cortador de uvas'),
 ('204009990','Cortador de uvas');
+
 
 DELETE FROM WineDB.TipoTrabalho
 
@@ -722,23 +712,6 @@ DELETE FROM WineDB.Armazenado
 
 SELECT * FROM WineDB.Armazenado
 
-INSERT INTO WineDB.TemProdutos(ID_Armazem, ID_Venda) VALUES
-('ASA12','AAAAAA'),
-('2SA21','A1B2C3'),
-('DA221','BBB123'),
-('FFD33','A1B555'),
-('GRT43','A5B222'),
-('ASA12','BABA25'),
-('2SA21','F0DA53'),
-('DA221','CA4UE1'),
-('FFD33','F00053'),
-('GRT43','D4SSE1'),
-('ASA12','ALEL14');
-
-DELETE FROM WineDB.TemProdutos
-
-SELECT * FROM WineDB.TemProdutos
-
 INSERT INTO WineDB.Compra(ID_Venda, NIF) VALUES
 ('AAAAAA','345612398'),
 ('A1B2C3','334712345'),
@@ -757,13 +730,14 @@ DELETE FROM WineDB.Compra
 SELECT * FROM WineDB.Compra
 
 INSERT INTO WineDB.Trabalha(ID, NIF) VALUES
-('FDG32', '227578689'),
-('3DG43', '266699979'),
-('FDG34', '227579113'),
-('SDF34', '215256356'),
-('GTFD3', '207206079'),
-('FGDF4', '204009990');
-
+('237598309', '6A3E4'),
+('235400888', '54W3T'),
+('236978309', '03ED5'),
+('236696379', '6S4U3'),
+('237588123', '6A3E4'),
+('255246336', '54W3T'),
+('237256978', '03ED5'),
+('234555999', '6S4U3');
 
 DELETE FROM WineDB.Trabalha
 
