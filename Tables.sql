@@ -255,6 +255,17 @@ INSERT INTO WineDB.Pessoa(Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUE
 ('Sofia Pereira', 'Rua Dali, 10, Vila Real', '207206079', '2001-01-01', 'F', '933278903'),
 ('André Matosinhos', 'Rua Além, 36, Matosinhos', '204009990', '2000-01-01', 'M', '962552660');
 
+INSERT INTO WineDB.Pessoa(Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUES
+('Carla Costa', 'Rua do Lado, 55, Felgueiras', '243119812', '1993-06-28', 'F', '912387615'),
+('Joaquim Pinto', 'Rua Sobreiro, 78, Sangalhos', '256783987', '1997-01-05', 'M', '932234876'),
+('Carlos Pinto', 'Rua Sobreiro, 78, Sangalhos', '256783988', '1997-01-05', 'M', '912475612'),
+('Miguel Tavares', 'Rua Daires, 19, Vale de Cambra', '298745164', '1999-08-09', 'M', '912465712'),
+('Jodiónisio Muachifi', 'Rua de Deus, 666, Paraíso', '267123876', '1995-09-11', 'M', '912345765'),
+('João Gomes', 'Rua dos Gatões, 12, Tomar', '276581234', '1965-03-19', 'M', '962561123'),
+('João Felisberto', 'Rua Vale Grande, 87, Albufeira', '298712621', '1987-11-29', 'M', '934876189'),
+('Rubén Castelhano', 'Rua de Portugal, 45, Olivença', '256473612', '1976-12-12', 'M', '916748345');
+
+UPDATE WineDB.Pessoa SET Telemovel = '923454876' WHERE Nome = 'Alfredo Costa'
 
 Select * FROM WineDB.Pessoa
 
