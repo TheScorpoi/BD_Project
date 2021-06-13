@@ -1,5 +1,5 @@
 --INSERT DATA IN THE TABLES
-INSERT INTO WineDB.Adega(ID,Nome,Endereco,Cap_Max,Num_Cubas, NIF_Func) VALUES
+INSERT INTO WineDB.Adega(ID,Nome,Endereco,Cap_Max,Num_Cubas, NIF_Gerente) VALUES
 ('6A3E4','Solar Dona Maria','Rua de Cima, 234, Ervedosa do Douro',350000,38, '237489547'),
 ('54W3T','Casa dos Vinhos','Estrada Municipal 501, 12, Soutelo do Douro',1250000,80, '233765487'),
 ('03ED5','Boa Uva','Travessa da Laranja, 12, Anadia',250000,32, '257483675'),
@@ -10,43 +10,43 @@ Select * FROM WineDB.Adega
 DELETE FROM WineDB.Adega 
 
 INSERT INTO WineDB.Pessoa(Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUES
-('Alfredo Costa', 'Urbanização Chave, 23, Averio', '345612398', '1987-05-16', 'M', '923454876'),
-('Alexandra Silva', 'Rua das Largadas, 45, Águeda', '334712345', '1998-06-29', 'F', '931256786'),
-('Pedro Figueiredo', 'Rua Fundo de Vila, 13, Trancoso', '276875341', '1997-06-19', 'M', '963426457'),
-('Eva Freixo', 'Avenida Batista Lemos, 66, Peso da Régua', '287649264', '1994-06-12', 'F', '913472345'),
-('Filipe Sobral', 'Travessa de Baixo, 48, Ermesinde', '295748365', '1991-07-14', 'M', '934512876'),
-('Andre Figueiredo', 'Avenida Dr. Lopes, 98, Évora', '312876490', '1989-06-18', 'M', '961298645'),
-('Daniel Sousa', 'Rua Vasco da Gama, 73, Lisboa', '376598467', '1993-05-11', 'M', '912876345'),
-('Tiago Costa', 'Rua da Avenida, 34, Leiria', '245678345', '1999-05-22', 'M', '962846581'),
-('Beatriz Augusto', 'Avenidade Principal, 38, Lamego', '239817654', '1998-03-12', 'F', '934562398'),
-('Anita Pinto', 'Rua Principal, 12, Mangualde', '237489547', '1976-01-11', 'F', '919873451'),
-('Miguel Silva', 'Estrada Municipal 23, 1, Guarda', '233765487', '1994-07-18', 'M', '967893541'),
-('Maria Trindade', 'Estrada Nacional 222, 56, Viseu', '257483675', '1989-03-01', 'F', '923456712'),
-('Inês Sequeira', 'Bairro das Laranjas, 87, Vila Real', '374985902', '1976-04-15', 'F', '961234512'),
-('Sofia Sousa', 'Bairro de Santiago, 51, Porto', '237598309', '1999-05-23', 'F', '934567123'),
-('Laurindo Vilas', 'Avenida Dessarges, 100, S.J.Pesqueira', '235400888', '2000-04-23', 'M', '961051386'),
-('Carla Setúbal', 'Rua Lisabon, 30, Porto', '236978309', '1960-10-13', 'F', '919898982'),
-('Luis Lopes', 'Urbanização Chavinha, 52, Aveiro', '236696379', '1975-06-27', 'M', '924468103'),
-('Mariana Rodriguez', 'Rua do Corvo, 33 , Setúbal', '237588123', '1995-07-28', 'F', '925562223'),
-('Marta Fradique', 'Rua de Biana, 50, Esposende', '255246336', '1988-08-04', 'F', '934427533'),
-('Joana Rafaela', 'Bairro de Nova Deli, 150, Porto', '237256978', '2001-01-03', 'F', '933458903'),
-('João Cruz', 'Rua da Laranjeira, 56, Faro', '234555999', '2002-02-15', 'M', '964554668'),
-('Luisa Setúbal', 'Rua Abon, 35, Funchal', '227578689', '1980-10-13', 'F', '915598982'),
-('Vitor Sanches', 'Rua dos Gatos, 13, Arouca', '266699979', '1985-04-27', 'M', '923468103'),
-('Raquel Silveira', 'Rua do Pássaro, 55 , Guimarães', '227579113', '1985-02-28', 'F', '921164443'),
-('Ana Frades', 'Avenida Da Boa Vontade, 50, Lisboa', '215256356', '1999-09-09', 'F', '934447733'),
-('Sofia Pereira', 'Rua Dali, 10, Vila Real', '207206079', '2001-01-01', 'F', '933278903'),
-('André Matosinhos', 'Rua Além, 36, Matosinhos', '204009990', '2000-01-01', 'M', '962552660'),
-('Carla Costa', 'Rua do Lado, 55, Felgueiras', '243119812', '1993-06-28', 'F', '912387615'),
-('Joaquim Pinto', 'Rua Sobreiro, 78, Sangalhos', '256783987', '1997-01-05', 'M', '932234876'),
-('Carlos Pinto', 'Rua Sobreiro, 78, Sangalhos', '256783988', '1997-01-05', 'M', '912475612'),
-('Miguel Tavares', 'Rua Daires, 19, Vale de Cambra', '298745164', '1999-08-09', 'M', '912465712'),
-('Jodiónisio Muachifi', 'Rua de Deus, 666, Paraíso', '267123876', '1995-09-11', 'M', '912345765'),
-('João Gomes', 'Rua dos Gatões, 12, Tomar', '276581234', '1965-03-19', 'M', '962561123'),
-('João Felisberto', 'Rua Vale Grande, 87, Albufeira', '298712621', '1987-11-29', 'M', '934876189'),
-('Rubén Castelhano', 'Rua de Portugal, 45, Olivença', '256473612', '1976-12-12', 'M', '916748345');
+('Alfredo Costa', 'Urbanização Chave, 23, Averio', 345612398, '1987-05-16', 'M', '923454876'),
+('Alexandra Silva', 'Rua das Largadas, 45, Águeda', 334712345, '1998-06-29', 'F', '931256786'),
+('Pedro Figueiredo', 'Rua Fundo de Vila, 13, Trancoso', 276875341, '1997-06-19', 'M', '963426457'),
+('Eva Freixo', 'Avenida Batista Lemos, 66, Peso da Régua', 287649264, '1994-06-12', 'F', '913472345'),
+('Filipe Sobral', 'Travessa de Baixo, 48, Ermesinde', 295748365, '1991-07-14', 'M', '934512876'),
+('Andre Figueiredo', 'Avenida Dr. Lopes, 98, Évora', 312876490, '1989-06-18', 'M', '961298645'),
+('Daniel Sousa', 'Rua Vasco da Gama, 73, Lisboa', 376598467, '1993-05-11', 'M', '912876345'),
+('Tiago Costa', 'Rua da Avenida, 34, Leiria', 245678345, '1999-05-22', 'M', '962846581'),
+('Beatriz Augusto', 'Avenidade Principal, 38, Lamego', 239817654, '1998-03-12', 'F', '934562398'),
+('Anita Pinto', 'Rua Principal, 12, Mangualde', 237489547, '1976-01-11', 'F', '919873451'),
+('Miguel Silva', 'Estrada Municipal 23, 1, Guarda', 233765487, '1994-07-18', 'M', '967893541'),
+('Maria Trindade', 'Estrada Nacional 222, 56, Viseu', 257483675, '1989-03-01', 'F', '923456712'),
+('Inês Sequeira', 'Bairro das Laranjas, 87, Vila Real', 374985902, '1976-04-15', 'F', '961234512'),
+('Sofia Sousa', 'Bairro de Santiago, 51, Porto', 237598309, '1999-05-23', 'F', '934567123'),
+('Laurindo Vilas', 'Avenida Dessarges, 100, S.J.Pesqueira', 235400888, '2000-04-23', 'M', '961051386'),
+('Carla Setúbal', 'Rua Lisabon, 30, Porto', 236978309, '1960-10-13', 'F', '919898982'),
+('Luis Lopes', 'Urbanização Chavinha, 52, Aveiro', 236696379, '1975-06-27', 'M', '924468103'),
+('Mariana Rodriguez', 'Rua do Corvo, 33 , Setúbal', 237588123, '1995-07-28', 'F', '925562223'),
+('Marta Fradique', 'Rua de Biana, 50, Esposende', 255246336, '1988-08-04', 'F', '934427533'),
+('Joana Rafaela', 'Bairro de Nova Deli, 150, Porto', 237256978, '2001-01-03', 'F', '933458903'),
+('João Cruz', 'Rua da Laranjeira, 56, Faro', 234555999, '2002-02-15', 'M', '964554668'),
+('Luisa Setúbal', 'Rua Abon, 35, Funchal', 227578689, '1980-10-13', 'F', '915598982'),
+('Vitor Sanches', 'Rua dos Gatos, 13, Arouca', 266699979, '1985-04-27', 'M', '923468103'),
+('Raquel Silveira', 'Rua do Pássaro, 55 , Guimarães', 227579113, '1985-02-28', 'F', '921164443'),
+('Ana Frades', 'Avenida Da Boa Vontade, 50, Lisboa', 215256356, '1999-09-09', 'F', '934447733'),
+('Sofia Pereira', 'Rua Dali, 10, Vila Real', 207206079, '2001-01-01', 'F', '933278903'),
+('André Matosinhos', 'Rua Além, 36, Matosinhos', 204009990, '2000-01-01', 'M', '962552660'),
+('Carla Costa', 'Rua do Lado, 55, Felgueiras', 243119812, '1993-06-28', 'F', '912387615'),
+('Joaquim Pinto', 'Rua Sobreiro, 78, Sangalhos', 256783987, '1997-01-05', 'M', '932234876'),
+('Carlos Pinto', 'Rua Sobreiro, 78, Sangalhos', 256783988, '1997-01-05', 'M', '912475612'),
+('Miguel Tavares', 'Rua Daires, 19, Vale de Cambra', 298745164, '1999-08-09', 'M', '912465712'),
+('Jodiónisio Muachifi', 'Rua de Deus, 666, Paraíso', 267123876, '1995-09-11', 'M', '912345765'),
+('João Gomes', 'Rua dos Gatões, 12, Tomar', 276581234, '1965-03-19', 'M', '962561123'),
+('João Felisberto', 'Rua Vale Grande, 87, Albufeira', 298712621, '1987-11-29', 'M', '934876189'),
+('Rubén Castelhano', 'Rua de Portugal, 45, Olivença', 256473612, '1976-12-12', 'M', '916748345');
 
-Select * FROM WineDB.Pessoa
+SELECT * FROM WineDB.Pessoa
 
 DELETE FROM WineDB.Pessoa 
 
@@ -110,7 +110,6 @@ DELETE FROM WineDB.Cuba
 
 SELECT * from WineDB.Cuba
 
-
 INSERT INTO WineDB.TipoCuba(ID, TipoCuba) VALUES
 (12452, 'Depósito Inox'),
 (23411, 'Depósito Inox'),
@@ -168,9 +167,8 @@ INSERT INTO WineDB.TipoCuba(ID, TipoCuba) VALUES
 
 DELETE FROM WineDB.TipoCuba
 
-select * from WineDB.TipoCuba
+SELECT * FROM WineDB.TipoCuba
 
---NAOD DEU PARA INSERIR, acho que o nome n pode ser primary pq repete tem de ser o ID depois mudar isso
 INSERT INTO WineDB.Casta(Nome, ID, Percentagem) VALUES
 ('Touriga Franca', 12452, 50.0),
 ('Touriga Franca', 23411, 30.0),
@@ -324,43 +322,41 @@ DELETE FROM WineDB.Armazem
 SELECT * FROM WineDB.Armazem
 
 INSERT INTO WineDB.Venda(ID_Produto, Preco, IVA, Quantidade, NIF_Cliente) VALUES
-('AS3FR', 25.0, DEFAULT , 2, '345612398'),
-('SF231',20.0, DEFAULT , 1, '345612398'),
-('FGDF3', 35.50 , DEFAULT , 1, '345612398'),
-('G5325', 17.50, DEFAULT , 1, '334712345'),
-('23F54', 15.25, DEFAULT , 3,'334712345' ),
-('AR265', 5.0, DEFAULT , 5,'334712345' ),
-('AFSF2', 10.50, DEFAULT , 2,'276875341'),
-('76U6J', 50.0, DEFAULT ,1, '276875341'),
-('G5325', 17.50, DEFAULT , 1,'287649264'),
-('JGHJ5', 13.50, DEFAULT , 1,'287649264'),
-('G5325', 17.50, DEFAULT , 1,'287649264'),
-('FGDF3', 35.50, DEFAULT , 1,'287649264'),
-('B534F', 5.55, DEFAULT , 10, '295748365'),
-('AGTG2', 20.0, DEFAULT , 2,'312876490'),
-('A5433', 15.99, DEFAULT , 2,'312876490'),
-('BN33F', 35.99, DEFAULT , 3,'376598467'),
-('BN33F', 35.99, DEFAULT , 1,'376598467'),
-('JH5GT', 30.50, DEFAULT , 1,'295748365'),
-('ADE23', 15.99, DEFAULT , 2,'245678345'),
-('AT34D', 9.99, DEFAULT , 3,'239817654' );
+('AS3FR', 25.0, DEFAULT , 2, 345612398),
+('SF231',20.0, DEFAULT , 1, 345612398),
+('FGDF3', 35.50 , DEFAULT , 1, 345612398),
+('G5325', 17.50, DEFAULT , 1, 334712345),
+('23F54', 15.25, DEFAULT , 3,334712345 ),
+('AR265', 5.0, DEFAULT , 5,334712345 ),
+('AFSF2', 10.50, DEFAULT , 2,276875341),
+('76U6J', 50.0, DEFAULT ,1, 276875341),
+('G5325', 17.50, DEFAULT , 1,287649264),
+('JGHJ5', 13.50, DEFAULT , 1,287649264),
+('G5325', 17.50, DEFAULT , 1,287649264),
+('FGDF3', 35.50, DEFAULT , 1,287649264),
+('B534F', 5.55, DEFAULT , 10, 295748365),
+('AGTG2', 20.0, DEFAULT , 2,312876490),
+('A5433', 15.99, DEFAULT , 2,312876490),
+('BN33F', 35.99, DEFAULT , 3,376598467),
+('BN33F', 35.99, DEFAULT , 1,376598467),
+('JH5GT', 30.50, DEFAULT , 1,295748365),
+('ADE23', 15.99, DEFAULT , 2,245678345),
+('AT34D', 9.99, DEFAULT , 3,239817654 );
 
 DELETE FROM WineDB.Venda
 
 SELECT * FROM WineDB.Venda
 
-
--- NAO DEVIA TER ID, MAS SO NIF, Q JA É UM IDENTIFICADOR
 INSERT INTO WineDB.Cliente(NIF) VALUES
-('345612398'),
-('334712345'),
-('276875341'),
-('287649264'),
-('295748365'),
-('312876490'),
-('376598467'),
-('245678345'),
-('239817654');
+(345612398),
+(334712345),
+(276875341),
+(287649264),
+(295748365),
+(312876490),
+(376598467),
+(245678345),
+(239817654);
 
 DELETE FROM WineDB.Cliente
 
@@ -368,63 +364,74 @@ SELECT * FROM WineDB.Cliente
 
 --IBAN NAO TEM SO 16 NUMEROS MORCAO TEM 25 NUMEROS
 INSERT INTO WineDB.Funcionario(NIF , IBAN, NUM_SS, Data_Inicio_Atividade) VALUES
-('237489547' , 'PT85003506514866776619784', '52997233452' , '2001-12-25'),
-('233765487' , 'PT02003506519431633932716', '30342326822', '2010-05-13'),
-('257483675' , 'PT89003506514424823965114', '41232386822', '2015-05-13'),
-('374985902' , 'PT51003506512227616567972', '12345678900', '2013-11-22'),
-('237598309' , 'PT10003506511968949842841', '35362376822', '2020-01-03'),
-('235400888' , 'PT50003506512332944435963', '24750178211' ,'2021-06-01'),
-('236978309' , 'PT88003506513388963216308', '52907436612', '2005-06-11'),
-('236696379' , 'PT42003506515288816766635', '53087191043', '2017-01-31'),
-('237588123' , 'PT73003506512872757694420', '51015954322', '2016-02-28'),
-('255246336' , 'PT07003506514334729721152', '41643902866', '2015-12-03'),
-('237256978' , 'PT65003506511853321374904', '36232808562', '2011-10-13'),
-('234555999' , 'PT56003506512556514255258', '25366797712', '2019-05-12');
+(237489547 , 'PT85003506514866776619784', 52997233, '2001-12-25'),
+(233765487 , 'PT02003506519431633932716', 30342326, '2010-05-13'),
+(257483675 , 'PT89003506514424823965114', 41232386, '2015-05-13'),
+(374985902 , 'PT51003506512227616567972', 12345678, '2013-11-22'),
+(237598309 , 'PT10003506511968949842841', 35362376, '2020-01-03'),
+(235400888 , 'PT50003506512332944435963', 24750178 ,'2021-06-01'),
+(236978309 , 'PT88003506513388963216308', 52907436, '2005-06-11'),
+(236696379 , 'PT42003506515288816766635', 53087191, '2017-01-31'),
+(237588123 , 'PT73003506512872757694420', 51015954, '2016-02-28'),
+(255246336 , 'PT07003506514334729721152', 41643902, '2015-12-03'),
+(237256978 , 'PT65003506511853321374904', 36232808, '2011-10-13'),
+(234555999 , 'PT56003506512556514255258', 25366797, '2019-05-12'),
+(227578689 , 'PT56003506512556514212345', 25364357, '2014-10-12'),
+(266699979 , 'PT56003506512551537485902', 25245667, '2013-10-11'),
+(227579113 , 'PT56003506512556514209876', 25357487, '2016-05-10'),
+(215256356 , 'PT56003506534251514255258', 25362345, '2018-10-09'),
+(207206079 , 'PT56003506657485514255258', 25361235, '2013-12-08'),
+(276581234 , 'PT56003506512556123456258', 25362389, '2011-01-07'),
+(256473612 , 'PT56003506512512345677258', 25366237, '2010-03-06'),
+(267123876 , 'PT56003501274893459348258', 25362153, '2009-05-05'),
+(298712621 , 'PT56003506512511111111258', 25361298, '2009-07-04'),
+(298745164 , 'PT56003506512556514000000', 25366123, '2014-08-03'),
+(243119812 , 'PT56003506512500000000000', 22346673, '2016-09-02'),
+(256783987 , 'PT56003506500000000000000', 25366434, '2013-10-01'),
+(256783988 , 'PT56003506000000000000001', 25366123, '2019-06-12');
 
 DELETE FROM WineDB.Funcionario
 
 SELECT * FROM WineDB.Funcionario
 
---NAO DEVIAM TER NUMFUNC, ESTE E O OPERADOR
---E DEVIAM TER COMO FOREIGN A ADEGA A Q ESTAO LIGADOS
 INSERT INTO WineDB.Gerente(NIF , Num_Func) VALUES
-('237489547' , '1'),
-('233765487' , '2'),
-('257483675' , '3'),
-('374985902' , '4');
+(237489547 , 1),
+(233765487 , 2),
+(257483675 , 3),
+(374985902 , 4);
 
 DELETE FROM WineDB.Gerente
 
 SELECT * FROM WineDB.Gerente
 
 INSERT INTO WineDB.OperadorAdega(NIF, Num_Func, ID_Adega) VALUES
-('237598309', '5' ,'6A3E4'),
-('235400888', '6' ,'6A3E4'),
-('236978309', '7' ,'54W3T'),
-('236696379', '8' ,'54W3T'),
-('237588123', '9' ,'03ED5'),
-('255246336', '10','03ED5'),
-('237256978', '11','6S4U3'),
-('234555999', '12','6S4U3');
+(237598309, 5 ,'6A3E4'),
+(235400888, 6 ,'6A3E4'),
+(236978309, 7 ,'54W3T'),
+(236696379, 8 ,'54W3T'),
+(237588123, 9 ,'03ED5'),
+(255246336, 10,'03ED5'),
+(237256978, 11,'6S4U3'),
+(234555999, 12,'6S4U3');
 
 DELETE FROM WineDB.OperadorAdega
 
 SELECT * FROM WineDB.OperadorAdega
 
-INSERT INTO WineDB.OperadorAgricola(NIF, ID_Terreno) VALUES
-('227578689', 'FDG32'),
-('266699979', '3DG43'),
-('227579113', 'FDG34'),
-('215256356', 'SDF34'),
-('207206079', 'GTFD3'),
-('276581234', 'FGDF4'),
-('256473612', 'F5G54'),
-('267123876', 'GDGH7'),
-('298712621', '54Y32'),
-('298745164', 'FY632'),
-('243119812', 'FDY56'),
-('256783987', 'JHY32'),
-('256783988', '5Y665');
+INSERT INTO WineDB.OperadorAgricola(NIF, Num_Func ,ID_Terreno) VALUES
+(227578689, 13,'FDG32'),
+(266699979, 14,'3DG43'),
+(227579113, 15,'FDG34'),
+(215256356, 16,'SDF34'),
+(207206079, 17,'GTFD3'),
+(276581234, 18,'FGDF4'),
+(256473612, 19,'F5G54'),
+(267123876, 20,'GDGH7'),
+(298712621, 21,'54Y32'),
+(298745164, 22,'FY632'),
+(243119812, 23,'FDY56'),
+(256783987, 24,'JHY32'),
+(256783988, 25,'5Y665');
 
 
 DELETE FROM WineDB.OperadorAgricola
@@ -433,19 +440,19 @@ SELECT * FROM WineDB.OperadorAgricola
 
 
 INSERT INTO WineDB.TipoTrabalho(NIF, Tipo_Trabalho) VALUES
-('227578689','Tratorista'),
-('266699979','Despejador de Baldes'),
-('256473612','Despejador de Baldes'),
-('227579113','Cortador de uvas'),
-('215256356','Cortador de uvas'),
-('207206079','Cortador de uvas'),
-('276581234','Cortador de uvas'),
-('267123876','Cortador de uvas'),
-('298712621','Cortador de uvas'),
-('256783988','Cortador de uvas'),
-('298745164','Cortador de uvas'),
-('243119812','Cortador de uvas'),
-('256783987','Cortador de uvas');
+(227578689,'Tratorista'),
+(266699979,'Despejador de Baldes'),
+(256473612,'Despejador de Baldes'),
+(227579113,'Cortador de uvas'),
+(215256356,'Cortador de uvas'),
+(207206079,'Cortador de uvas'),
+(276581234,'Cortador de uvas'),
+(267123876,'Cortador de uvas'),
+(298712621,'Cortador de uvas'),
+(256783988,'Cortador de uvas'),
+(298745164,'Cortador de uvas'),
+(243119812,'Cortador de uvas'),
+(256783987,'Cortador de uvas');
 
 DELETE FROM WineDB.TipoTrabalho
 
