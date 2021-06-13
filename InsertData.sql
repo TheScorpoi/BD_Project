@@ -50,7 +50,6 @@ SELECT * FROM WineDB.Pessoa
 
 DELETE FROM WineDB.Pessoa 
 
-
 INSERT INTO WineDB.Cuba(ID, ID_Adega, Cap_Max) VALUES
 (12452, '03ED5', 30093),
 (23411, '03ED5', 234231),
