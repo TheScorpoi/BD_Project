@@ -393,7 +393,7 @@ DELETE FROM WineDB.Funcionario
 
 SELECT * FROM WineDB.Funcionario
 
-INSERT INTO WineDB.Gerente(NIF , Num_Func) VALUES
+INSERT INTO WineDB.Gerente(NIF, Num_Func) VALUES
 (237489547 , 1),
 (233765487 , 2),
 (257483675 , 3),
