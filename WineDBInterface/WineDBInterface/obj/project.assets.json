@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterface\\WineDBInterface\\WineDBInterface.vbproj",
-      "projectName": "WineDBInterface",
-      "projectPath": "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterface\\WineDBInterface\\WineDBInterface.vbproj",
+      "projectUniqueName": "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterfaCe\\WineDBInterfaCe\\WineDBInterfaCe.csproj",
+      "projectName": "WineDBInterfaCe",
+      "projectPath": "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterfaCe\\WineDBInterfaCe\\WineDBInterfaCe.csproj",
       "packagesPath": "C:\\Users\\pedro\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterface\\WineDBInterface\\obj\\",
+      "outputPath": "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterfaCe\\WineDBInterfaCe\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pedro\\AppData\\Roaming\\NuGet\\NuGet.Config",
