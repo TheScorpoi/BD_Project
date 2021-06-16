@@ -225,7 +225,6 @@ INSERT INTO WineDB.Casta(Nome, ID, Percentagem) VALUES
 
 Select * FROM WineDB.Casta
 
---tb n deu fds
 INSERT INTO WineDB.Vinho(ID, ID_Cuba, Nome, DOC, ID_Casta) VALUES
 ('AS3FR', 12452,'Vinho Velho', 'Douro', 12452),
 ('SF231', 23411,'Vinho Dão', 'DÃO', 16556),

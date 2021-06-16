@@ -61,6 +61,33 @@ AS
 	END
 GO
 
+CREATE FUNCTION WineDB.checkIfCubaExists (@ID INT) RETURNS INT
+AS
+	BEGIN
+		DECLARE @counter INT
+		SELECT @counter = COUNT(*) FROM WineDB.Cuba WHERE ID = @ID
+		RETURN @counter
+	END
+GO
+
+CREATE FUNCTION WineDB.checkIfTerrenoExists (@ID VARCHAR(5)) RETURNS INT
+AS
+	BEGIN
+		DECLARE @counter INT
+		SELECT @counter = COUNT(*) FROM WineDB.Terreno WHERE ID = @ID
+		RETURN @counter
+	END
+GO
+
+CREATE FUNCTION WineDB.checkIfArmazemExists (@ID VARCHAR(5)) RETURNS INT
+AS
+	BEGIN
+		DECLARE @counter INT
+		SELECT @counter = COUNT(*) FROM WineDB.Armazem WHERE ID = @ID
+		RETURN @counter
+	END
+GO
+
 CREATE FUNCTION WineDB.getNIFFuncfromNum_Func(@Num_Func INT) RETURNS INT
 AS
 	BEGIN	

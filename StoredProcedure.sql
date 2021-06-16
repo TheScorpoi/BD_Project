@@ -191,7 +191,7 @@ AS
 				END
 			ELSE
 				RAISERROR ('O número de funcionário inserido já existe!', 16,1);
-	
+		
 	END
 GO
 
@@ -217,14 +217,16 @@ AS
 				BEGIN CATCH
 					Rollback TRAN
 					SELECT @erro = ERROR_MESSAGE(); 
-					SET @erro = 'Vinho não foi inserido, algum valor inserido incorretamento'
+					SET @erro = 'Vinho não foi inserido, algum valor inserido incorretamente'
 					RAISERROR (@erro, 16,1);
 				END CATCH
 			END
 	End
 GO
 
---EXEC WineDB.AdicionarVinho 'CCCCC', 12452, 'Vinho da Nossa Senhora', 'Douro' , 12452
+EXEC WineDB.AdicionarVinho 'CCCAC', 12452, 'Vinho da Nossa Senhora', 'Douro' , 12452
+
+SELECT * FROM WineDB.Vinho
 
 CREATE PROCEDURE WineDB.AdicionarAdega (@ID VARCHAR(5), @Nome VARCHAR(256), @Endereco VARCHAR(256), @Cap_Max INT, @Num_Cubas INT, @NIF_Gerente INT)
 AS
@@ -251,7 +253,7 @@ AS
 	End
 GO
 
---EXEC WineDB.AdicionarAdega 'CCCCC', 'Adeguinha', 'Rua do Sacramento, Setúbal', 300.0 , 30, 237489547
+EXEC WineDB.AdicionarAdega 'CCCCC', 'Adeguinha', 'Rua do Sacramento, Setúbal', 300.0 , 30, 237489547
 
 --CREATE PROCEDURE WineDB.Testinho(@Num_Func INT)
 --AS
@@ -268,3 +270,120 @@ GO
 --GO
 
 --EXEC WineDB.Testinho 13
+
+
+CREATE PROCEDURE WineDB.AdicionarCuba (@ID INT, @ID_Adega VARCHAR(5), @Cap_Max FLOAT)
+AS
+	BEGIN
+		DECLARE @count INT;
+		DECLARE @erro VARCHAR(100);
+		SET @count = (SELECT WineDB.checkIfCubaExists(@ID))
+		IF(@count>=1)
+			RAISERROR ('A Cuba introduzida já existe, não é possivel adicionar-la', 16,1);
+		ELSE
+			BEGIN
+				BEGIN TRY
+					BEGIN TRAN
+						INSERT INTO WineDB.Cuba(ID, ID_Adega, Cap_Max) VALUES (@ID, @ID_Adega, @Cap_Max);
+					COMMIT TRAN
+				END TRY
+				BEGIN CATCH
+					Rollback TRAN
+					SELECT @erro = ERROR_MESSAGE(); 
+					SET @erro = 'Não foi possivel adicionar a Cuba, algum valor inserido incorretamente'
+					RAISERROR (@erro, 16,1);
+				END CATCH
+			END
+	End
+GO
+
+EXEC WineDB.AdicionarCuba 77777, '03ED5', 25000
+
+Select * from WineDB.Cuba
+
+CREATE PROCEDURE WineDB.AdicionarTipoCuba (@ID INT, @TipoCuba VARCHAR(64))
+AS
+	BEGIN
+		DECLARE @count INT;
+		DECLARE @erro VARCHAR(100);
+		SET @count = (SELECT WineDB.checkIfCubaExists(@ID))
+		IF(@count = 0)
+			RAISERROR ('A Cuba em que pretende inserir o tipo não existe', 16,1);
+		ELSE
+			BEGIN
+				BEGIN TRY
+					BEGIN TRAN
+						INSERT INTO WineDB.TipoCuba(ID, TipoCuba) VALUES (@ID, @TipoCuba);
+					COMMIT TRAN
+				END TRY
+				BEGIN CATCH
+					Rollback TRAN
+					SELECT @erro = ERROR_MESSAGE(); 
+					SET @erro = 'Não foi possivel introduzir, ou porque já existe, ou algum dado estava incorreto'
+					RAISERROR (@erro, 16,1);
+				END CATCH
+			END
+	End
+GO
+
+EXEC WineDB.AdicionarTipoCuba 77777, 'Teste'
+
+Select * from WineDB.TipoCuba
+
+CREATE PROCEDURE WineDB.AdicionarTerreno (@ID VARCHAR(5), @Nome VARCHAR(256), @Localizacao VARCHAR(256), @Ano_Plantacao DATE, @ID_Casta INT, @Hectares FLOAT , @ID_Adega VARCHAR(5))
+AS
+	BEGIN
+		DECLARE @count INT;
+		DECLARE @erro VARCHAR(100);
+		SET @count = (SELECT WineDB.checkIfTerrenoExists(@ID))
+		IF(@count >= 1)
+			RAISERROR ('O Terreno que pretende inserir já existe', 16,1);
+		ELSE
+			BEGIN
+				BEGIN TRY
+					BEGIN TRAN
+						INSERT INTO WineDB.Terreno(ID, Nome, Localizacao, Ano_Plantacao, ID_Casta, Hectares, ID_Adega) VALUES (@ID, @Nome, @Localizacao, @Ano_Plantacao, @ID_Casta, @Hectares, @ID_Adega);
+					COMMIT TRAN
+				END TRY
+				BEGIN CATCH
+					Rollback TRAN
+					SELECT @erro = ERROR_MESSAGE(); 
+					SET @erro = 'Não foi possivel inserir o Terreno, algum dado foi passado de forma incorreta'
+					RAISERROR (@erro, 16,1);
+				END CATCH
+			END
+	End
+GO
+
+EXEC WineDB.AdicionarTerreno 'AAAAA', 'AAAA', 'AAAAA', '2012', 12452, 2.34, '03ED5'
+
+Select * from WineDB.Terreno
+
+CREATE PROCEDURE WineDB.AdicionarArmazem (@ID VARCHAR(5), @Localizacao VARCHAR(256), @Nome VARCHAR(256), @ID_Adega VARCHAR(5))
+AS
+	BEGIN
+		DECLARE @count INT;
+		DECLARE @erro VARCHAR(100);
+		SET @count = (SELECT WineDB.checkIfTerrenoExists(@ID))
+		IF(@count >= 1)
+			RAISERROR ('O Armazém que pretende inserir já existe', 16,1);
+		ELSE
+			BEGIN
+				BEGIN TRY
+					BEGIN TRAN
+						INSERT INTO WineDB.Armazem(ID, Localizacao, Nome, ID_Adega) VALUES (@ID, @Localizacao, @Nome, @ID_Adega);
+					COMMIT TRAN
+				END TRY
+				BEGIN CATCH
+					Rollback TRAN
+					SELECT @erro = ERROR_MESSAGE(); 
+					SET @erro = 'Não foi possivel inserir o Armazém, algum dado foi passado de forma incorreta'
+					RAISERROR (@erro, 16,1);
+				END CATCH
+			END
+	End
+GO
+
+EXEC WineDB.AdicionarArmazem 'ABAAA', 'AAAA', 'AAAAA', '03ED5'
+
+SELECT * FROM WineDB.Armazem
