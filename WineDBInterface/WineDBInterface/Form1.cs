@@ -14,7 +14,10 @@ namespace WineDBInterfaCe
 {
     public partial class Form1 : Form
     {
-        private SqlConnection cnn;
+        public SqlConnection cnn;
+        public bool gerente = false;
+
+
 
         public Form1()
         {
@@ -41,15 +44,12 @@ namespace WineDBInterfaCe
                     {
                         cnn.Open();
                     }
-
                 }
                 catch (SqlException e)
                 {
                     MessageBox.Show("FAILED TO OPEN CONNECTION TO DATABASE DUE TO THE FOLLOWING ERROR \r\n" + e.Message, "Connection Test", MessageBoxButtons.OK);
                     return false;
                 }
-
-
                 return cnn.State == ConnectionState.Open;
             }
             return false;
@@ -59,25 +59,31 @@ namespace WineDBInterfaCe
         {
             cnn = getConnection();
             verifyConnection();
-            DialogResult userfeedback;
+            //DialogResult userfeedback;
             bool repeat = true;
+
             while (repeat)
             {
                 if (cnn == null || cnn.State != ConnectionState.Open)
                 {
-                    userfeedback = MessageBox.Show("Could not connect to DB. Do tou want to retry?", "ERROR", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
-                    repeat = (userfeedback == DialogResult.Retry);
-                    if (userfeedback == DialogResult.Cancel)
-                        this.Close();
+                    //userfeedback = MessageBox.Show("Could not connect to DB. Do tou want to retry?", "ERROR", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                    //repeat = (userfeedback == DialogResult.Retry);
                     verifyConnection();
                 }
                 else
                 {
                     repeat = false;
                 }
-
             }
-            //getStats();
+        }
+
+        private void login(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "" ||textBox2.Text == "")
+            {
+                MessageBox.Show("Campos utilizador ou Senha estão vazios");
+                return;
+            }
         }
     }
 }

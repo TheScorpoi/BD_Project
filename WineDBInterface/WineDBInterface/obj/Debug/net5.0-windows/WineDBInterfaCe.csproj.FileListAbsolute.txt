@@ -23,3 +23,4 @@ C:\Users\pedro\OneDrive\Ambiente de Trabalho\UA\2º Ano\2º Semestre\BD\Prática
 C:\Users\pedro\OneDrive\Ambiente de Trabalho\UA\2º Ano\2º Semestre\BD\Prática\BD_Project\WineDBInterfaCe\WineDBInterfaCe\obj\Debug\net5.0-windows\ref\WineDBInterfaCe.dll
 C:\Users\pedro\OneDrive\Ambiente de Trabalho\UA\2º Ano\2º Semestre\BD\Prática\BD_Project\WineDBInterfaCe\WineDBInterfaCe\obj\Debug\net5.0-windows\WineDBInterfaCe.pdb
 C:\Users\pedro\OneDrive\Ambiente de Trabalho\UA\2º Ano\2º Semestre\BD\Prática\BD_Project\WineDBInterfaCe\WineDBInterfaCe\obj\Debug\net5.0-windows\WineDBInterfaCe.genruntimeconfig.cache
+C:\Users\pedro\OneDrive\Ambiente de Trabalho\UA\2º Ano\2º Semestre\BD\Prática\BD_Project\WineDBInterfaCe\WineDBInterfaCe\obj\Debug\net5.0-windows\WineDBInterfaCe.Properties.Resources.resources
