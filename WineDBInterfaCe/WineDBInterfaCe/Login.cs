@@ -12,14 +12,12 @@ using System.Windows.Forms;
 
 namespace WineDBInterfaCe
 {
-    public partial class Form1 : Form
+    public partial class Login : Form
     {
-        public SqlConnection cnn;
+        public static SqlConnection cnn; //global variable to be accessed from everywhere
         public bool gerente = false;
 
-
-
-        public Form1()
+        public Login()
         {
             InitializeComponent();
         }
@@ -55,7 +53,34 @@ namespace WineDBInterfaCe
             return false;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void getStats()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.Adega", cnn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            String count = reader["Count"].ToString();
+            //statAdega.Text = count;
+            MessageBox.Show(count);
+            reader.Close();
+
+            cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.Armazem", cnn);
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            count = reader["Count"].ToString();
+            //statArmazem.Text = count;
+            MessageBox.Show(count);
+            reader.Close();
+
+            cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.Vinho", cnn);
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            count = reader["Count"].ToString();
+            //statVinho.Text = count;
+            MessageBox.Show(count);
+            reader.Close();
+        }
+
+            private void Form1_Load(object sender, EventArgs e)
         {
             cnn = getConnection();
             verifyConnection();
@@ -75,6 +100,7 @@ namespace WineDBInterfaCe
                     repeat = false;
                 }
             }
+            getStats();
         }
 
         private void login(object sender, EventArgs e)

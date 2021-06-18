@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterfaCe\\WineDBInterfaCe\\WineDBInterfaCe.csproj": {}
+    "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterface\\WineDBInterfaCe\\WineDBInterfaCe.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterfaCe\\WineDBInterfaCe\\WineDBInterfaCe.csproj": {
+    "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterface\\WineDBInterfaCe\\WineDBInterfaCe.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterfaCe\\WineDBInterfaCe\\WineDBInterfaCe.csproj",
+        "projectUniqueName": "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterface\\WineDBInterfaCe\\WineDBInterfaCe.csproj",
         "projectName": "WineDBInterfaCe",
-        "projectPath": "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterfaCe\\WineDBInterfaCe\\WineDBInterfaCe.csproj",
+        "projectPath": "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterface\\WineDBInterfaCe\\WineDBInterfaCe.csproj",
         "packagesPath": "C:\\Users\\pedro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterfaCe\\WineDBInterfaCe\\obj\\",
+        "outputPath": "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterface\\WineDBInterfaCe\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pedro\\AppData\\Roaming\\NuGet\\NuGet.Config",

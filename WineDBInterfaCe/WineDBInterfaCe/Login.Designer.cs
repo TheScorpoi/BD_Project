@@ -1,7 +1,7 @@
 ﻿
 namespace WineDBInterfaCe
 {
-    partial class Form1
+    partial class Login
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,7 +29,7 @@ namespace WineDBInterfaCe
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -52,7 +52,7 @@ namespace WineDBInterfaCe
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(277, 27);
             this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            //this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // pictureBox1
             // 
@@ -70,7 +70,7 @@ namespace WineDBInterfaCe
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(277, 27);
             this.textBox2.TabIndex = 2;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            //this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label1
             // 
@@ -98,7 +98,7 @@ namespace WineDBInterfaCe
             this.button1.TabIndex = 5;
             this.button1.Text = "LogIn";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            //this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 

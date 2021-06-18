@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/KF4IjFw+6SbbZrY5IM+h7dCBfQNs8RXtAwfutxh/FuA1yGat7DBf31GWdg7xMN2CiT7tzmxn7pX4zTe5u/yug==",
+  "dgSpecHash": "dkjA52CLjTW71FFHNCy15A5FMka4cuAkKyy8Mq4pMPf9hE9SozLn6HMkBN5nyKoK1RjeTcbKUAuB50n3x7Xt/Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterfaCe\\WineDBInterfaCe\\WineDBInterfaCe.csproj",
+  "projectFilePath": "C:\\Users\\pedro\\OneDrive\\Ambiente de Trabalho\\UA\\2º Ano\\2º Semestre\\BD\\Prática\\BD_Project\\WineDBInterface\\WineDBInterfaCe\\WineDBInterfaCe.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pedro\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\pedro\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
