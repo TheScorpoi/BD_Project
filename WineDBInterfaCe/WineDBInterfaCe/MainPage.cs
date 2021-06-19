@@ -20,8 +20,14 @@ namespace WineDBInterfaCe
 
         private void MainPage_Load(object sender, EventArgs e)
         {
-            //SqlCommand cmd = new SqlCommand("SELECT COUNT(NMec) AS N FROM vw_Docentes", cnn);
 
+        }
+
+        private void panel1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            //Adega t = new Adega(cnn, this);
+            //t.ShowDialog();
         }
     }
 }

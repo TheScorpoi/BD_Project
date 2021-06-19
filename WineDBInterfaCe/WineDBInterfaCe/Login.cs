@@ -60,7 +60,7 @@ namespace WineDBInterfaCe
             reader.Read();
             String count = reader["Count"].ToString();
             //statAdega.Text = count;
-            MessageBox.Show(count);
+            //MessageBox.Show(count);
             reader.Close();
 
             cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.Armazem", cnn);
@@ -68,7 +68,7 @@ namespace WineDBInterfaCe
             reader.Read();
             count = reader["Count"].ToString();
             //statArmazem.Text = count;
-            MessageBox.Show(count);
+            //MessageBox.Show(count);
             reader.Close();
 
             cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.Vinho", cnn);
@@ -76,7 +76,7 @@ namespace WineDBInterfaCe
             reader.Read();
             count = reader["Count"].ToString();
             //statVinho.Text = count;
-            MessageBox.Show(count);
+            //MessageBox.Show(count);
             reader.Close();
         }
 
