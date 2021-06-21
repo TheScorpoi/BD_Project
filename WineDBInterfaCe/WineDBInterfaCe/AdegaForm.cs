@@ -17,9 +17,9 @@ namespace WineDBInterfaCe
         DataTable dt;
         SqlDataAdapter da;
         DataSet ds;
-        SqlConnection conn = new SqlConnection("data source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p5g8; uid = p5g8; password = AAaa1234");
+        SqlConnection cnn = new SqlConnection("data source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p5g8; uid = p5g8; password = AAaa1234");
 
-        public AdegaForm()
+        public AdegaForm(SqlConnection cnn, Form f)
         {
             InitializeComponent();
         }
@@ -34,11 +34,11 @@ namespace WineDBInterfaCe
             listAdegas.Columns.Add("Endereço");
             listAdegas.Columns.Add("Capacidade Máxima");
             listAdegas.Columns.Add("Número de Cubas");
-            listAdegas.Columns.Add("NIF do Ger");
+            listAdegas.Columns.Add("NIF do Ger"); 
 
             listAdegas.View = View.Details;
 
-            cmd = new SqlCommand("SELECT * FROM WineDB.Adega", conn);
+            cmd = new SqlCommand("SELECT * FROM WineDB.Adega", cnn);
 
             da = new SqlDataAdapter(cmd);
             ds = new DataSet();
@@ -56,5 +56,26 @@ namespace WineDBInterfaCe
                 listAdegas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[5].ToString());
             }
         }
+       
+
+        
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NifGerenteLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonVoltar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MainPage terreno = new MainPage();
+            terreno.ShowDialog();
+        }
+
     }
 }

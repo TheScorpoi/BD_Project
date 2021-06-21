@@ -22,6 +22,7 @@ namespace WineDBInterfaCe
             InitializeComponent();
         }
 
+        /*
         private SqlConnection getConnection()
         {
             return new SqlConnection("data source = tcp:mednat.ieeta.pt\\SQLSERVER,8101; Initial Catalog = p5g8; uid = p5g8; password = AAaa1234");
@@ -111,6 +112,7 @@ namespace WineDBInterfaCe
                 return;
             }
         }
+        */
     }
 }
 
