@@ -39,6 +39,8 @@ namespace WineDBInterfaCe
             this.ID_Adega = new System.Windows.Forms.ColumnHeader();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.atualizarbutton = new System.Windows.Forms.Button();
+            this.inserirButton = new System.Windows.Forms.Button();
             this.textBoxIdADEGA = new System.Windows.Forms.TextBox();
             this.textBoxHECTARES = new System.Windows.Forms.TextBox();
             this.textBoxIdCASTA = new System.Windows.Forms.TextBox();
@@ -53,7 +55,7 @@ namespace WineDBInterfaCe
             this.textBoxENDERECO = new System.Windows.Forms.TextBox();
             this.textBoxNOME = new System.Windows.Forms.TextBox();
             this.textBoxID = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.apagarbutton = new System.Windows.Forms.Button();
             this.buttonVoltar = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBoxPesquisa = new System.Windows.Forms.TextBox();
@@ -129,6 +131,8 @@ namespace WineDBInterfaCe
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.atualizarbutton);
+            this.panel1.Controls.Add(this.inserirButton);
             this.panel1.Controls.Add(this.textBoxIdADEGA);
             this.panel1.Controls.Add(this.textBoxHECTARES);
             this.panel1.Controls.Add(this.textBoxIdCASTA);
@@ -143,11 +147,30 @@ namespace WineDBInterfaCe
             this.panel1.Controls.Add(this.textBoxENDERECO);
             this.panel1.Controls.Add(this.textBoxNOME);
             this.panel1.Controls.Add(this.textBoxID);
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.apagarbutton);
             this.panel1.Location = new System.Drawing.Point(54, 359);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1010, 178);
             this.panel1.TabIndex = 4;
+            // 
+            // atualizarbutton
+            // 
+            this.atualizarbutton.Location = new System.Drawing.Point(847, 84);
+            this.atualizarbutton.Name = "atualizarbutton";
+            this.atualizarbutton.Size = new System.Drawing.Size(94, 29);
+            this.atualizarbutton.TabIndex = 20;
+            this.atualizarbutton.Text = "Atualizar";
+            this.atualizarbutton.UseVisualStyleBackColor = true;
+            // 
+            // inserirButton
+            // 
+            this.inserirButton.Location = new System.Drawing.Point(847, 39);
+            this.inserirButton.Name = "inserirButton";
+            this.inserirButton.Size = new System.Drawing.Size(94, 29);
+            this.inserirButton.TabIndex = 19;
+            this.inserirButton.Text = "Inserir Terreno";
+            this.inserirButton.UseVisualStyleBackColor = true;
+            this.inserirButton.Click += new System.EventHandler(this.inserirButton_Click);
             // 
             // textBoxIdADEGA
             // 
@@ -261,14 +284,15 @@ namespace WineDBInterfaCe
             this.textBoxID.Size = new System.Drawing.Size(233, 27);
             this.textBoxID.TabIndex = 1;
             // 
-            // button2
+            // apagarbutton
             // 
-            this.button2.Location = new System.Drawing.Point(847, 125);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 29);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Inserir Adega";
-            this.button2.UseVisualStyleBackColor = true;
+            this.apagarbutton.Location = new System.Drawing.Point(847, 125);
+            this.apagarbutton.Name = "apagarbutton";
+            this.apagarbutton.Size = new System.Drawing.Size(94, 29);
+            this.apagarbutton.TabIndex = 0;
+            this.apagarbutton.Text = "Apagar Adega";
+            this.apagarbutton.UseVisualStyleBackColor = true;
+            this.apagarbutton.Click += new System.EventHandler(this.apagarbutton_Click);
             // 
             // buttonVoltar
             // 
@@ -357,7 +381,7 @@ namespace WineDBInterfaCe
         private System.Windows.Forms.TextBox textBoxENDERECO;
         private System.Windows.Forms.TextBox textBoxNOME;
         private System.Windows.Forms.TextBox textBoxID;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button apagarbutton;
         private System.Windows.Forms.TextBox textBoxIdADEGA;
         private System.Windows.Forms.TextBox textBoxHECTARES;
         private System.Windows.Forms.TextBox textBoxIdCASTA;
@@ -376,5 +400,7 @@ namespace WineDBInterfaCe
         private System.Windows.Forms.ColumnHeader ID_Casta;
         private System.Windows.Forms.ColumnHeader Hectares;
         private System.Windows.Forms.ColumnHeader ID_Adega;
+        private System.Windows.Forms.Button atualizarbutton;
+        private System.Windows.Forms.Button inserirButton;
     }
 }

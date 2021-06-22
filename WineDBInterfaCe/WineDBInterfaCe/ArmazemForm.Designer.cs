@@ -36,6 +36,8 @@ namespace WineDBInterfaCe
             this.Adega = new System.Windows.Forms.ColumnHeader();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.atualizarbutton = new System.Windows.Forms.Button();
+            this.Apagarbutton = new System.Windows.Forms.Button();
             this.IDAdegaLabel = new System.Windows.Forms.Label();
             this.enderecoLabel = new System.Windows.Forms.Label();
             this.nomeLabel = new System.Windows.Forms.Label();
@@ -44,7 +46,7 @@ namespace WineDBInterfaCe
             this.textBoxENDERECO = new System.Windows.Forms.TextBox();
             this.textBoxNOME = new System.Windows.Forms.TextBox();
             this.textBoxID = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.inserirButton = new System.Windows.Forms.Button();
             this.buttonVoltar = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBoxPesquisa = new System.Windows.Forms.TextBox();
@@ -102,6 +104,8 @@ namespace WineDBInterfaCe
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.atualizarbutton);
+            this.panel1.Controls.Add(this.Apagarbutton);
             this.panel1.Controls.Add(this.IDAdegaLabel);
             this.panel1.Controls.Add(this.enderecoLabel);
             this.panel1.Controls.Add(this.nomeLabel);
@@ -110,11 +114,30 @@ namespace WineDBInterfaCe
             this.panel1.Controls.Add(this.textBoxENDERECO);
             this.panel1.Controls.Add(this.textBoxNOME);
             this.panel1.Controls.Add(this.textBoxID);
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.inserirButton);
             this.panel1.Location = new System.Drawing.Point(32, 342);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1010, 178);
             this.panel1.TabIndex = 3;
+            // 
+            // atualizarbutton
+            // 
+            this.atualizarbutton.Location = new System.Drawing.Point(868, 74);
+            this.atualizarbutton.Name = "atualizarbutton";
+            this.atualizarbutton.Size = new System.Drawing.Size(94, 29);
+            this.atualizarbutton.TabIndex = 11;
+            this.atualizarbutton.Text = "Atualizar";
+            this.atualizarbutton.UseVisualStyleBackColor = true;
+            // 
+            // Apagarbutton
+            // 
+            this.Apagarbutton.Location = new System.Drawing.Point(868, 121);
+            this.Apagarbutton.Name = "Apagarbutton";
+            this.Apagarbutton.Size = new System.Drawing.Size(94, 29);
+            this.Apagarbutton.TabIndex = 13;
+            this.Apagarbutton.Text = "Apagar";
+            this.Apagarbutton.UseVisualStyleBackColor = true;
+            this.Apagarbutton.Click += new System.EventHandler(this.Apagarbutton_Click);
             // 
             // IDAdegaLabel
             // 
@@ -180,14 +203,15 @@ namespace WineDBInterfaCe
             this.textBoxID.Size = new System.Drawing.Size(233, 27);
             this.textBoxID.TabIndex = 1;
             // 
-            // button2
+            // inserirButton
             // 
-            this.button2.Location = new System.Drawing.Point(847, 125);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 29);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Inserir Adega";
-            this.button2.UseVisualStyleBackColor = true;
+            this.inserirButton.Location = new System.Drawing.Point(868, 29);
+            this.inserirButton.Name = "inserirButton";
+            this.inserirButton.Size = new System.Drawing.Size(94, 29);
+            this.inserirButton.TabIndex = 0;
+            this.inserirButton.Text = "Inserir Adega";
+            this.inserirButton.UseVisualStyleBackColor = true;
+            this.inserirButton.Click += new System.EventHandler(this.button2_Click);
             // 
             // buttonVoltar
             // 
@@ -273,7 +297,7 @@ namespace WineDBInterfaCe
         private System.Windows.Forms.TextBox textBoxENDERECO;
         private System.Windows.Forms.TextBox textBoxNOME;
         private System.Windows.Forms.TextBox textBoxID;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button inserirButton;
         private System.Windows.Forms.Button buttonVoltar;
         private System.Windows.Forms.ColumnHeader ID;
         private System.Windows.Forms.ColumnHeader Localizacao;
@@ -283,5 +307,7 @@ namespace WineDBInterfaCe
         private System.Windows.Forms.TextBox textBoxPesquisa;
         private System.Windows.Forms.Label countArmazem;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button atualizarbutton;
+        private System.Windows.Forms.Button Apagarbutton;
     }
 }

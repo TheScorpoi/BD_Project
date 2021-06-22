@@ -14,7 +14,7 @@ namespace WineDBInterfaCe
 {
     public partial class ArmazemForm : Form
     {
-        private SqlConnection cnn; 
+        SqlConnection cnn; 
         SqlCommand cmd;
         DataTable dt;
         SqlDataAdapter da;
@@ -41,6 +41,7 @@ namespace WineDBInterfaCe
 
         private void armazemLoad()
         {
+            listArmazem.Items.Clear();
             listArmazem.View = View.Details;
 
             cmd = new SqlCommand("SELECT A.ID, A.Localizacao, A.Nome, AD.Nome FROM WineDB.Armazem AS A JOIN WineDB.Adega AS AD ON A.ID_Adega = AD.ID", cnn);
@@ -179,6 +180,60 @@ namespace WineDBInterfaCe
         private void textBoxPesquisa_TextChanged(object sender, EventArgs e)
         {
             pesquisar();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //https://csharp-station.com/Tutorial/AdoDotNet/Lesson07
+            SqlDataReader rdr = null;
+
+            string id = textBoxID.Text;
+            string endereco = textBoxENDERECO.Text;
+            string nome = textBoxNOME.Text;
+            string adegaAssociado = textBoxAdega.Text;
+            try
+            {
+                SqlCommand command = new SqlCommand("WineDB.AdicionarArmazem", cnn);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add(new SqlParameter("@ID", id));
+                command.Parameters.Add(new SqlParameter("@Localizacao", endereco));
+                command.Parameters.Add(new SqlParameter("@Nome", nome));
+                command.Parameters.Add(new SqlParameter("@ID_Adega", adegaAssociado));
+
+                rdr = command.ExecuteReader();
+            } catch
+            {
+
+                textBoxID.Text = "";
+                textBoxAdega.Text = "";
+                textBoxENDERECO.Text = "";
+                textBoxNOME.Text = "";
+                MessageBox.Show("Algum dado passado de forma incorreta");
+            }
+
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+
+            armazemLoad();
+        }
+
+        private void Apagarbutton_Click(object sender, EventArgs e)
+        {
+            string id = textBoxID.Text;
+
+            if (id == "")
+            {
+                MessageBox.Show("Armazem não foi selecionado corretamente");
+            }
+
+            SqlCommand command = new SqlCommand("DELETE FROM WineDB.Armazem WHERE ID = '" + id + "'", cnn);
+            command.ExecuteNonQuery();
+
+            //to refrsh
+            armazemLoad();
         }
     }
 }

@@ -36,6 +36,22 @@ namespace WineDBInterfaCe
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.buttonVoltar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxAdega = new System.Windows.Forms.TextBox();
+            this.textBoxTerreno = new System.Windows.Forms.TextBox();
+            this.textBoxNunFunc = new System.Windows.Forms.TextBox();
+            this.textBoxInicioAtiv = new System.Windows.Forms.TextBox();
+            this.textBoxSS = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxIBAN = new System.Windows.Forms.TextBox();
+            this.atualizarbutton = new System.Windows.Forms.Button();
+            this.inserirButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.telemovelLabel = new System.Windows.Forms.Label();
             this.GeneroLabel = new System.Windows.Forms.Label();
             this.dataNascLabel = new System.Windows.Forms.Label();
@@ -127,6 +143,22 @@ namespace WineDBInterfaCe
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.textBoxAdega);
+            this.panel1.Controls.Add(this.textBoxTerreno);
+            this.panel1.Controls.Add(this.textBoxNunFunc);
+            this.panel1.Controls.Add(this.textBoxInicioAtiv);
+            this.panel1.Controls.Add(this.textBoxSS);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.textBoxIBAN);
+            this.panel1.Controls.Add(this.atualizarbutton);
+            this.panel1.Controls.Add(this.inserirButton);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.comboBox2);
             this.panel1.Controls.Add(this.telemovelLabel);
             this.panel1.Controls.Add(this.GeneroLabel);
             this.panel1.Controls.Add(this.dataNascLabel);
@@ -145,10 +177,148 @@ namespace WineDBInterfaCe
             this.panel1.Size = new System.Drawing.Size(1010, 178);
             this.panel1.TabIndex = 13;
             // 
+            // textBoxAdega
+            // 
+            this.textBoxAdega.Location = new System.Drawing.Point(768, 148);
+            this.textBoxAdega.Name = "textBoxAdega";
+            this.textBoxAdega.Size = new System.Drawing.Size(125, 27);
+            this.textBoxAdega.TabIndex = 28;
+            // 
+            // textBoxTerreno
+            // 
+            this.textBoxTerreno.Location = new System.Drawing.Point(768, 115);
+            this.textBoxTerreno.Name = "textBoxTerreno";
+            this.textBoxTerreno.Size = new System.Drawing.Size(125, 27);
+            this.textBoxTerreno.TabIndex = 27;
+            // 
+            // textBoxNunFunc
+            // 
+            this.textBoxNunFunc.Location = new System.Drawing.Point(766, 81);
+            this.textBoxNunFunc.Name = "textBoxNunFunc";
+            this.textBoxNunFunc.Size = new System.Drawing.Size(125, 27);
+            this.textBoxNunFunc.TabIndex = 26;
+            // 
+            // textBoxInicioAtiv
+            // 
+            this.textBoxInicioAtiv.Location = new System.Drawing.Point(767, 46);
+            this.textBoxInicioAtiv.Name = "textBoxInicioAtiv";
+            this.textBoxInicioAtiv.Size = new System.Drawing.Size(125, 27);
+            this.textBoxInicioAtiv.TabIndex = 25;
+            // 
+            // textBoxSS
+            // 
+            this.textBoxSS.Location = new System.Drawing.Point(766, 13);
+            this.textBoxSS.Name = "textBoxSS";
+            this.textBoxSS.Size = new System.Drawing.Size(125, 27);
+            this.textBoxSS.TabIndex = 24;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(684, 145);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(75, 20);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "ID Adega:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(681, 115);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(81, 20);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "ID Terreno:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(699, 84);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(63, 20);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Nº Func:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(681, 57);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(78, 20);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Inicio Ativ:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(710, 20);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 20);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Nº SS:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(349, 137);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 20);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "IBAN:";
+            // 
+            // textBoxIBAN
+            // 
+            this.textBoxIBAN.Location = new System.Drawing.Point(421, 134);
+            this.textBoxIBAN.Name = "textBoxIBAN";
+            this.textBoxIBAN.Size = new System.Drawing.Size(233, 27);
+            this.textBoxIBAN.TabIndex = 17;
+            // 
+            // atualizarbutton
+            // 
+            this.atualizarbutton.Location = new System.Drawing.Point(898, 79);
+            this.atualizarbutton.Name = "atualizarbutton";
+            this.atualizarbutton.Size = new System.Drawing.Size(94, 29);
+            this.atualizarbutton.TabIndex = 16;
+            this.atualizarbutton.Text = "Atualizar";
+            this.atualizarbutton.UseVisualStyleBackColor = true;
+            // 
+            // inserirButton
+            // 
+            this.inserirButton.Location = new System.Drawing.Point(898, 34);
+            this.inserirButton.Name = "inserirButton";
+            this.inserirButton.Size = new System.Drawing.Size(94, 29);
+            this.inserirButton.TabIndex = 15;
+            this.inserirButton.Text = "Inserir Adega";
+            this.inserirButton.UseVisualStyleBackColor = true;
+            this.inserirButton.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(331, 92);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(77, 20);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Categoria:";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Pessoa",
+            "Op. Agricola",
+            "Op. Adega",
+            "Gerente",
+            "Cliente"});
+            this.comboBox2.Location = new System.Drawing.Point(421, 92);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(233, 28);
+            this.comboBox2.TabIndex = 13;
+            // 
             // telemovelLabel
             // 
             this.telemovelLabel.AutoSize = true;
-            this.telemovelLabel.Location = new System.Drawing.Point(478, 115);
+            this.telemovelLabel.Location = new System.Drawing.Point(331, 54);
             this.telemovelLabel.Name = "telemovelLabel";
             this.telemovelLabel.Size = new System.Drawing.Size(84, 20);
             this.telemovelLabel.TabIndex = 12;
@@ -157,7 +327,7 @@ namespace WineDBInterfaCe
             // GeneroLabel
             // 
             this.GeneroLabel.AutoSize = true;
-            this.GeneroLabel.Location = new System.Drawing.Point(502, 72);
+            this.GeneroLabel.Location = new System.Drawing.Point(13, 134);
             this.GeneroLabel.Name = "GeneroLabel";
             this.GeneroLabel.Size = new System.Drawing.Size(60, 20);
             this.GeneroLabel.TabIndex = 11;
@@ -166,7 +336,7 @@ namespace WineDBInterfaCe
             // dataNascLabel
             // 
             this.dataNascLabel.AutoSize = true;
-            this.dataNascLabel.Location = new System.Drawing.Point(435, 18);
+            this.dataNascLabel.Location = new System.Drawing.Point(287, 20);
             this.dataNascLabel.Name = "dataNascLabel";
             this.dataNascLabel.Size = new System.Drawing.Size(127, 20);
             this.dataNascLabel.TabIndex = 10;
@@ -175,7 +345,7 @@ namespace WineDBInterfaCe
             // NIFLabel
             // 
             this.NIFLabel.AutoSize = true;
-            this.NIFLabel.Location = new System.Drawing.Point(124, 118);
+            this.NIFLabel.Location = new System.Drawing.Point(20, 99);
             this.NIFLabel.Name = "NIFLabel";
             this.NIFLabel.Size = new System.Drawing.Size(34, 20);
             this.NIFLabel.TabIndex = 9;
@@ -184,7 +354,7 @@ namespace WineDBInterfaCe
             // moradaLabel
             // 
             this.moradaLabel.AutoSize = true;
-            this.moradaLabel.Location = new System.Drawing.Point(90, 73);
+            this.moradaLabel.Location = new System.Drawing.Point(5, 62);
             this.moradaLabel.Name = "moradaLabel";
             this.moradaLabel.Size = new System.Drawing.Size(68, 20);
             this.moradaLabel.TabIndex = 8;
@@ -193,7 +363,7 @@ namespace WineDBInterfaCe
             // idLabel
             // 
             this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(105, 22);
+            this.idLabel.Location = new System.Drawing.Point(20, 21);
             this.idLabel.Name = "idLabel";
             this.idLabel.Size = new System.Drawing.Size(53, 20);
             this.idLabel.TabIndex = 7;
@@ -201,54 +371,55 @@ namespace WineDBInterfaCe
             // 
             // textBoxTelemovel
             // 
-            this.textBoxTelemovel.Location = new System.Drawing.Point(568, 115);
+            this.textBoxTelemovel.Location = new System.Drawing.Point(421, 54);
             this.textBoxTelemovel.Name = "textBoxTelemovel";
-            this.textBoxTelemovel.Size = new System.Drawing.Size(209, 27);
+            this.textBoxTelemovel.Size = new System.Drawing.Size(233, 27);
             this.textBoxTelemovel.TabIndex = 6;
             // 
             // textBoxNIF
             // 
-            this.textBoxNIF.Location = new System.Drawing.Point(164, 115);
+            this.textBoxNIF.Location = new System.Drawing.Point(79, 99);
             this.textBoxNIF.Name = "textBoxNIF";
-            this.textBoxNIF.Size = new System.Drawing.Size(233, 27);
+            this.textBoxNIF.Size = new System.Drawing.Size(197, 27);
             this.textBoxNIF.TabIndex = 5;
             // 
             // textBoxGenero
             // 
-            this.textBoxGenero.Location = new System.Drawing.Point(568, 69);
+            this.textBoxGenero.Location = new System.Drawing.Point(79, 138);
             this.textBoxGenero.Name = "textBoxGenero";
-            this.textBoxGenero.Size = new System.Drawing.Size(209, 27);
+            this.textBoxGenero.Size = new System.Drawing.Size(197, 27);
             this.textBoxGenero.TabIndex = 4;
             // 
             // textBoxMorada
             // 
-            this.textBoxMorada.Location = new System.Drawing.Point(164, 73);
+            this.textBoxMorada.Location = new System.Drawing.Point(79, 55);
             this.textBoxMorada.Name = "textBoxMorada";
-            this.textBoxMorada.Size = new System.Drawing.Size(233, 27);
+            this.textBoxMorada.Size = new System.Drawing.Size(197, 27);
             this.textBoxMorada.TabIndex = 3;
             // 
             // textBoxDataNasc
             // 
-            this.textBoxDataNasc.Location = new System.Drawing.Point(568, 18);
+            this.textBoxDataNasc.Location = new System.Drawing.Point(421, 21);
             this.textBoxDataNasc.Name = "textBoxDataNasc";
-            this.textBoxDataNasc.Size = new System.Drawing.Size(209, 27);
+            this.textBoxDataNasc.Size = new System.Drawing.Size(233, 27);
             this.textBoxDataNasc.TabIndex = 2;
             // 
             // textBoxNome
             // 
-            this.textBoxNome.Location = new System.Drawing.Point(164, 22);
+            this.textBoxNome.Location = new System.Drawing.Point(79, 18);
             this.textBoxNome.Name = "textBoxNome";
-            this.textBoxNome.Size = new System.Drawing.Size(233, 27);
+            this.textBoxNome.Size = new System.Drawing.Size(197, 27);
             this.textBoxNome.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(847, 125);
+            this.button1.Location = new System.Drawing.Point(898, 124);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(94, 29);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Inserir Adega";
+            this.button1.Text = "Apagar Pessoa";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Apagarbutton_Click);
             // 
             // listPessoas
             // 
@@ -316,7 +487,6 @@ namespace WineDBInterfaCe
             this.opAgriButton.TabIndex = 21;
             this.opAgriButton.Text = "Op Agricolas";
             this.opAgriButton.UseVisualStyleBackColor = true;
-            this.opAgriButton.Click += new System.EventHandler(this.button3_Click);
             // 
             // opAdegaButton
             // 
@@ -406,5 +576,21 @@ namespace WineDBInterfaCe
         private System.Windows.Forms.Button opAdegaButton;
         private System.Windows.Forms.Button gerenteButton;
         private System.Windows.Forms.Button clienteButton;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button atualizarbutton;
+        private System.Windows.Forms.Button inserirButton;
+        private System.Windows.Forms.TextBox textBoxAdega;
+        private System.Windows.Forms.TextBox textBoxTerreno;
+        private System.Windows.Forms.TextBox textBoxNunFunc;
+        private System.Windows.Forms.TextBox textBoxInicioAtiv;
+        private System.Windows.Forms.TextBox textBoxSS;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBoxIBAN;
     }
 }

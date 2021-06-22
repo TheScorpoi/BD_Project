@@ -15,6 +15,7 @@ namespace WineDBInterfaCe
     {
 
         SqlCommand cmd;
+        SqlCommand command;
         DataTable dt;
         SqlDataAdapter da;
         DataSet ds;
@@ -36,7 +37,7 @@ namespace WineDBInterfaCe
 
         private void populate(String nome, String morada, String nif, String data_nasc, String genero, String telemovel)
         {
-            listPessoas.Items.Add(new ListViewItem(new[] {nome, morada, nif, data_nasc, genero, telemovel}));
+            listPessoas.Items.Add(new ListViewItem(new[] { nome, morada, nif, data_nasc, genero, telemovel }));
         }
 
         public void pesquisar()
@@ -128,7 +129,7 @@ namespace WineDBInterfaCe
         {
             //https://www.youtube.com/watch?v=JXwZQo4KW40&t=296s
 
-
+            listPessoas.Items.Clear();
             listPessoas.View = View.Details;
 
             cmd = new SqlCommand("SELECT * FROM WineDB.Pessoa", cnn);
@@ -197,9 +198,172 @@ namespace WineDBInterfaCe
             comboBox1.Text = "";
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
+            //https://csharp-station.com/Tutorial/AdoDotNet/Lesson07
+            SqlDataReader rdr = null;
 
+            string nome = textBoxNome.Text;
+            string morada = textBoxMorada.Text;
+            int nif = Int32.Parse(textBoxNIF.Text);
+            string data_nasc = textBoxDataNasc.Text;
+            string genero = textBoxGenero.Text;
+            string telemovel = textBoxTelemovel.Text;
+            string iban = textBoxIBAN.Text;
+            int ss;
+            string inicio_ativ = textBoxInicioAtiv.Text;
+            int nFunc;
+            string adega = textBoxAdega.Text;
+            string terreno = textBoxTerreno.Text;
+
+            string cat = comboBox2.Text;
+            string categoria = "";
+            try
+            {
+                switch (cat)
+                {
+                    case "Pessoa":
+                        categoria = "Pessoa";
+                        command = new SqlCommand("WineDB.Adicionar" + categoria, cnn);
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.Add(new SqlParameter("@Nome", nome));
+                        command.Parameters.Add(new SqlParameter("@Morada", morada));
+                        command.Parameters.Add(new SqlParameter("@NIF", nif));
+                        command.Parameters.Add(new SqlParameter("@Data_Nasc", data_nasc));
+                        command.Parameters.Add(new SqlParameter("@Genero", genero));
+                        command.Parameters.Add(new SqlParameter("@Telemovel", telemovel));
+
+                        rdr = command.ExecuteReader();
+
+                        break;
+
+                    case "Op. Agricola":
+                        categoria = "OperadorAgricola";
+                        ss = Int32.Parse(textBoxSS.Text);
+                        nFunc = Int32.Parse(textBoxNunFunc.Text);
+
+                        command = new SqlCommand("WineDB.Adicionar" + categoria, cnn);
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.Add(new SqlParameter("@Nome", nome));
+                        command.Parameters.Add(new SqlParameter("@Morada", morada));
+                        command.Parameters.Add(new SqlParameter("@NIF", nif));
+                        command.Parameters.Add(new SqlParameter("@Data_Nasc", data_nasc));
+                        command.Parameters.Add(new SqlParameter("@Genero", genero));
+                        command.Parameters.Add(new SqlParameter("@Telemovel", telemovel));
+                        command.Parameters.Add(new SqlParameter("@IBAN", iban));
+                        command.Parameters.Add(new SqlParameter("@Num_SS", ss));
+                        command.Parameters.Add(new SqlParameter("@Data_Inicio_Atividade", inicio_ativ));
+                        command.Parameters.Add(new SqlParameter("@Num_Func", nFunc));
+                        command.Parameters.Add(new SqlParameter("@ID_Terreno", terreno));
+
+                        rdr = command.ExecuteReader();
+                        break;
+                    case "Op. Adega":
+                        categoria = "OperadorAdega";
+
+                        ss = Int32.Parse(textBoxSS.Text);
+                        nFunc = Int32.Parse(textBoxNunFunc.Text);
+                        
+                        command = new SqlCommand("WineDB.Adicionar" + categoria, cnn);
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.Add(new SqlParameter("@Nome", nome));
+                        command.Parameters.Add(new SqlParameter("@Morada", morada));
+                        command.Parameters.Add(new SqlParameter("@NIF", nif));
+                        command.Parameters.Add(new SqlParameter("@Data_Nasc", data_nasc));
+                        command.Parameters.Add(new SqlParameter("@Genero", genero));
+                        command.Parameters.Add(new SqlParameter("@Telemovel", telemovel));
+                        command.Parameters.Add(new SqlParameter("@IBAN", iban));
+                        command.Parameters.Add(new SqlParameter("@Num_SS", ss));
+                        command.Parameters.Add(new SqlParameter("@Data_Inicio_Atividade", inicio_ativ));
+                        command.Parameters.Add(new SqlParameter("@Num_Func", nFunc));
+                        command.Parameters.Add(new SqlParameter("@ID_Adega", adega));
+
+                        rdr = command.ExecuteReader();
+                        break;
+                    case "Gerente":
+                        categoria = "Gerente";
+
+                        ss = Int32.Parse(textBoxSS.Text);
+                        nFunc = Int32.Parse(textBoxNunFunc.Text);
+
+                        command = new SqlCommand("WineDB.Adicionar" + categoria, cnn);
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.Add(new SqlParameter("@Nome", nome));
+                        command.Parameters.Add(new SqlParameter("@Morada", morada));
+                        command.Parameters.Add(new SqlParameter("@NIF", nif));
+                        command.Parameters.Add(new SqlParameter("@Data_Nasc", data_nasc));
+                        command.Parameters.Add(new SqlParameter("@Genero", genero));
+                        command.Parameters.Add(new SqlParameter("@Telemovel", telemovel));
+                        command.Parameters.Add(new SqlParameter("@IBAN", iban));
+                        command.Parameters.Add(new SqlParameter("@Num_SS", ss));
+                        command.Parameters.Add(new SqlParameter("@Data_Inicio_Atividade", inicio_ativ));
+                        command.Parameters.Add(new SqlParameter("@Num_Func", nFunc));
+
+                        rdr = command.ExecuteReader();
+                        break;
+                    case "Cliente":
+                        categoria = "Cliente";
+                        command = new SqlCommand("WineDB.Adicionar" + categoria, cnn);
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.Add(new SqlParameter("@Nome", nome));
+                        command.Parameters.Add(new SqlParameter("@Morada", morada));
+                        command.Parameters.Add(new SqlParameter("@NIF", nif));
+                        command.Parameters.Add(new SqlParameter("@Data_Nasc", data_nasc));
+                        command.Parameters.Add(new SqlParameter("@Genero", genero));
+                        command.Parameters.Add(new SqlParameter("@Telemovel", telemovel));
+
+                        rdr = command.ExecuteReader();
+
+                        break;
+                }
+            }
+            catch
+            {
+
+                textBoxNome.Text = "";
+                textBoxMorada.Text = "";
+                textBoxTerreno.Text = "";
+                textBoxNIF.Text = "";
+                textBoxTelemovel.Text = "";
+                textBoxAdega.Text = "";
+                textBoxDataNasc.Text = "";
+                textBoxInicioAtiv.Text = "";
+                textBoxNunFunc.Text = "";
+                textBoxSS.Text = "";
+
+
+                MessageBox.Show("Algum dado passado de forma incorreta");
+            }
+
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+
+            loadInicial();
         }
+
+        private void Apagarbutton_Click(object sender, EventArgs e)
+        {
+            string nif = textBoxNIF.Text;
+
+            if (nif == "")
+            {
+                MessageBox.Show("Pessoa não foi selecionada corretamente");
+            }
+
+            SqlCommand command = new SqlCommand("DELETE FROM WineDB.Pessoa WHERE NIF = '" + nif + "'", cnn);
+            command.ExecuteNonQuery();
+
+            //to refrsh
+            loadInicial();
+        }
+
+
     }
 }

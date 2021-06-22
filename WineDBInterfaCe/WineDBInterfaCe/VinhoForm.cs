@@ -40,6 +40,7 @@ namespace WineDBInterfaCe
 
         private void vinhoLoad()
         {
+            listVinho.Items.Clear();
             listVinho.View = View.Details;
 
             cmd = new SqlCommand("SELECT V.ID, V.ID_Cuba, V.Nome, V.DOC, C.Nome FROM WineDB.Vinho AS V JOIN WineDB.Casta AS C ON V.ID_Casta = C.ID", cnn);
@@ -183,6 +184,65 @@ namespace WineDBInterfaCe
             }
 
             this.listVinho.Sort();
+        }
+
+        private void inserir_Click(object sender, EventArgs e)
+        {
+            //https://csharp-station.com/Tutorial/AdoDotNet/Lesson07
+            SqlDataReader rdr = null;
+
+            string id = textBoxID.Text;
+            int id_cuba = Int32.Parse(textBoxIDCuba.Text);
+            string nome = textBoxNome.Text;
+            string doc = textBoxDOC.Text;
+            int id_casta = Int32.Parse(textBoxIDCasta.Text);
+
+            try
+            {
+                SqlCommand command = new SqlCommand("WineDB.AdicionarVinho", cnn);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add(new SqlParameter("@ID", id));
+                command.Parameters.Add(new SqlParameter("@ID_Cuba", id_cuba));
+                command.Parameters.Add(new SqlParameter("@Nome", nome));
+                command.Parameters.Add(new SqlParameter("@DOC", doc));
+                command.Parameters.Add(new SqlParameter("@ID_Casta", id_casta));
+
+                rdr = command.ExecuteReader();
+            }
+            catch
+            {
+
+                textBoxID.Text = "";
+                textBoxIDCuba.Text = "";
+                textBoxNome.Text = "";
+                textBoxDOC.Text = "";
+                textBoxIDCasta.Text = "";
+                MessageBox.Show("Algum dado passado de forma incorreta");
+            }
+
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+
+            vinhoLoad();
+        }
+
+        private void Apagarbutton_Click(object sender, EventArgs e)
+        {
+            string id = textBoxID.Text;
+
+            if (id == "")
+            {
+                MessageBox.Show("Armazem não foi selecionado corretamente");
+            }
+
+            SqlCommand command = new SqlCommand("DELETE FROM WineDB.Vinho WHERE ID = '" + id + "'", cnn);
+            command.ExecuteNonQuery();
+
+            //to refrsh
+            vinhoLoad();
         }
     }
 }

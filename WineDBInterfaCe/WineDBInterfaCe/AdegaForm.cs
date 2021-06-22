@@ -134,7 +134,7 @@ namespace WineDBInterfaCe
         {
             //https://www.youtube.com/watch?v=JXwZQo4KW40&t=296s
 
-
+            listAdegas.Items.Clear();
             listAdegas.View = View.Details;
 
             cmd = new SqlCommand("SELECT A.ID, A.Nome, A.Endereco, A.Cap_Max, A.Num_Cubas, P.Nome FROM WineDB.Adega AS A JOIN WineDB.Pessoa AS P ON A.NIF_Gerente = P.NIF", cnn);
@@ -199,6 +199,66 @@ namespace WineDBInterfaCe
             this.listAdegas.Sort();
         }
 
+        private void inserirButton_Click(object sender, EventArgs e)
+        {
+            //https://csharp-station.com/Tutorial/AdoDotNet/Lesson07
+            SqlDataReader rdr = null;
+
+            string id = textBoxID.Text;
+            string endereco = textBoxENDERECO.Text;
+            string nome = textBoxNOME.Text;
+            int cap_max = Int32.Parse(textBoxCAPMAX.Text);
+            int num_cubas = Int32.Parse(textBoxNCUBAS.Text);
+            int nif_gerente = Int32.Parse(textBoxNIFGERENTE.Text);
+            try
+            {
+                SqlCommand command = new SqlCommand("WineDB.AdicionarAdega", cnn);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add(new SqlParameter("@ID", id));
+                command.Parameters.Add(new SqlParameter("@Nome", nome));
+                command.Parameters.Add(new SqlParameter("@Endereco", endereco));
+                command.Parameters.Add(new SqlParameter("@Cap_Max", cap_max));
+                command.Parameters.Add(new SqlParameter("@Num_Cubas", num_cubas));
+                command.Parameters.Add(new SqlParameter("@NIF_Gerente", nif_gerente));
+
+                rdr = command.ExecuteReader();
+            }
+            catch
+            {
+
+                textBoxID.Text = "";
+                textBoxENDERECO.Text = "";
+                textBoxNOME.Text = "";
+                textBoxCAPMAX.Text = "";
+                textBoxNCUBAS.Text = "";
+                textBoxNIFGERENTE.Text = "";
+                MessageBox.Show("Algum dado passado de forma incorreta");
+            }
+
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+
+            loadInicial();
+        }
+        
+        private void apagarButton_Click(object sender, EventArgs e)
+        {
+            string id = textBoxID.Text;
+
+            if (id == "")
+            {
+                MessageBox.Show("Adega não foi selecionada corretamente");
+            }
+
+            SqlCommand command = new SqlCommand("DELETE FROM WineDB.Adega WHERE ID = '" + id + "'", cnn);
+            command.ExecuteNonQuery();
+
+            //to refrsh
+            loadInicial();
+        }
 
     }
 }

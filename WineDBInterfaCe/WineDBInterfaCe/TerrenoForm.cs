@@ -34,7 +34,8 @@ namespace WineDBInterfaCe
         }
 
         private void terrenoLoad()
-        {   
+        {
+            listTerreno.Items.Clear();
             listTerreno.View = View.Details;
 
             cmd = new SqlCommand("SELECT T.ID, T.Nome, T.Localizacao, T.Ano_plantacao, C.Nome, T.Hectares, T.ID_Adega FROM WineDB.Terreno AS T JOIN WineDB.Casta AS C ON T.ID_CASTA = C.ID", cnn);
@@ -197,5 +198,73 @@ namespace WineDBInterfaCe
         {
             pesquisar();
         }
+
+        private void inserirButton_Click(object sender, EventArgs e)
+        {
+            //https://csharp-station.com/Tutorial/AdoDotNet/Lesson07
+            SqlDataReader rdr = null;
+
+            string id = textBoxID.Text;
+            string nome = textBoxNOME.Text;
+            string endereco = textBoxENDERECO.Text;
+            string ano_plantacao = textBoxAnoPlantacao.Text;
+            int id_casta = Int32.Parse(textBoxIdCASTA.Text);
+            float hect = float.Parse(textBoxHECTARES.Text);
+            string id_adega = textBoxIdADEGA.Text;
+
+            try
+            {
+                SqlCommand command = new SqlCommand("WineDB.AdicionarTerreno", cnn);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add(new SqlParameter("@ID", id));
+                command.Parameters.Add(new SqlParameter("@Nome", nome));
+                command.Parameters.Add(new SqlParameter("@Localizacao", endereco));
+                command.Parameters.Add(new SqlParameter("@Ano_plantancao", ano_plantacao));
+                command.Parameters.Add(new SqlParameter("@ID_Casta", id_casta));
+                command.Parameters.Add(new SqlParameter("@Hectares", hect));
+                command.Parameters.Add(new SqlParameter("@ID_Adega", id_adega));
+
+                rdr = command.ExecuteReader();
+            }
+            catch
+            {
+
+                textBoxID.Text = "";
+                textBoxENDERECO.Text = "";
+                textBoxNOME.Text = "";
+                textBoxAnoPlantacao.Text = "";
+                textBoxIdCASTA.Text = "";
+                textBoxHECTARES.Text = "";
+                textBoxIdADEGA.Text = "";
+                MessageBox.Show("Algum dado passado de forma incorreta");
+            }
+
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+
+            terrenoLoad();
+        }
+
+        private void apagarbutton_Click(object sender, EventArgs e)
+        {
+            string id = textBoxID.Text;
+
+            if (id == "")
+            {
+                MessageBox.Show("Terreno não foi selecionado corretamente");
+            }
+
+            SqlCommand command = new SqlCommand("DELETE FROM WineDB.Terreno WHERE ID = '" + id + "'", cnn);
+            command.ExecuteNonQuery();
+
+            //to refrsh
+            terrenoLoad();
+        }
+
+
     }
 }
+
