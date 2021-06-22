@@ -1,64 +1,204 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace WineDBInterfaCe
 {
-    class Pessoa
+    public partial class Pessoa : Form
     {
-        private String _nome, _morada, _genero, _telemovel;
-        private int _NIF;
-        private DateTime _data_nascimento;
+
+        SqlCommand cmd;
+        DataTable dt;
+        SqlDataAdapter da;
+        DataSet ds;
+        SqlConnection cnn;
+        SqlDataAdapter adapter;
+        readonly DataTable dataTable = new DataTable();
+        ListViewColumnSorter lvwColumnSorter;
 
 
-        public Pessoa ()
+        public Pessoa(SqlConnection cnn, Form f)
         {
+            this.cnn = cnn;
+            InitializeComponent();
+            loadInicial();
+
+            lvwColumnSorter = new ListViewColumnSorter();
+            this.listPessoas.ListViewItemSorter = (System.Collections.IComparer)lvwColumnSorter;
         }
 
-        public String nome
+        private void populate(String nome, String morada, String nif, String data_nasc, String genero, String telemovel)
         {
-            get { return this._nome; }
-            set { this._nome = value; }
+            listPessoas.Items.Add(new ListViewItem(new[] {nome, morada, nif, data_nasc, genero, telemovel}));
         }
 
-        public String morada
+        public void pesquisar()
         {
-            get { return this._morada; }
-            set { this._morada = value; }
+            String atributo = comboBox1.Text;
+            String pesquisaText = textBoxPesquisa.Text;
+            String filter = "";
+
+            switch (atributo)
+            {
+                case "Nome":
+                    filter = "Nome";
+                    break;
+                case "Morada":
+                    filter = "Morada";
+                    break;
+                case "NIF":
+                    filter = "NIF";
+                    break;
+                case "Data de Nascimento":
+                    filter = "Data_Nasc";
+                    break;
+                case "Género":
+                    filter = "Genero";
+                    break;
+                case "Nº Telemóvel":
+                    filter = "Telemovel";
+                    break;
+
+            }
+
+
+            listPessoas.Items.Clear();
+            cmd = new SqlCommand("SELECT * FROM WineDB.Pessoa WHERE " + filter + " LIKE '%" + pesquisaText + "%'", cnn);
+            try
+            {
+                adapter = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                adapter.Fill(ds, "tablePessoaSearch");
+
+                dt = ds.Tables["tablePessoaSearch"];
+
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    populate(row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString());
+                }
+                dt.Rows.Clear();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+
+            }
+
         }
 
-        public String genero
+        void listPessoas_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            get { return this._genero; }
-            set { this._genero = value; }
+            try
+            {
+                if (e.IsSelected)
+                {
+                    string nome = listPessoas.SelectedItems[0].SubItems[0].Text;
+                    string morada = listPessoas.SelectedItems[0].SubItems[1].Text;
+                    string nif = listPessoas.SelectedItems[0].SubItems[2].Text;
+                    string data_nasc = listPessoas.SelectedItems[0].SubItems[3].Text;
+                    string genero = listPessoas.SelectedItems[0].SubItems[4].Text;
+                    string telemovel = listPessoas.SelectedItems[0].SubItems[5].Text;
+
+                    textBoxNome.Text = nome;
+                    textBoxMorada.Text = morada;
+                    textBoxNIF.Text = nif;
+                    textBoxDataNasc.Text = data_nasc;
+                    textBoxGenero.Text = genero;
+                    textBoxTelemovel.Text = telemovel;
+
+                    //MessageBox.Show("PESSOA " + nome + "\n\nID: " + id + "\nEndereço: " + endereco + "\nCapacidade Máxima: " + cap_max + " (litros)\nNº Cubas: " + nCubas + "\nNome Gerente: " + nifGerente + "\n");
+                }
+
+            }
+            catch (ArgumentOutOfRangeException t)
+            {
+                MessageBox.Show(t.Message);
+            }
         }
 
-        public String telemovel
+        public void loadInicial()
         {
-            get { return this._telemovel; }
-            set { this._genero = value; }
+            //https://www.youtube.com/watch?v=JXwZQo4KW40&t=296s
+
+
+            listPessoas.View = View.Details;
+
+            cmd = new SqlCommand("SELECT * FROM WineDB.Pessoa", cnn);
+
+            da = new SqlDataAdapter(cmd);
+            ds = new DataSet();
+            da.Fill(ds, "tablePessoa");
+
+            dt = ds.Tables["tablePessoa"];
+
+            for (int i = 0; i <= dt.Rows.Count - 1; i++)
+            {
+                listPessoas.Items.Add(dt.Rows[i].ItemArray[0].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[1].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[2].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[3].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[4].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[5].ToString());
+            }
+            contadorPessoas();
         }
 
-        public int NIF
+        private void buttonVoltar_Click(object sender, EventArgs e)
         {
-            get { return this._NIF; }
-            set { this._NIF = value; }
+            this.Hide();
+            MainPage mainPage = new MainPage();
+            mainPage.ShowDialog();
         }
 
-        public DateTime data_nascimento
+        private void contadorPessoas()
         {
-            get { return this._data_nascimento; }
-            set { this._data_nascimento = value; }
+            int count = listPessoas.Items.Count;
+            countPessoas.Text = count.ToString();
         }
 
-        override
-        public String ToString()
+        private void listPessoas_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            StringBuilder sb = new StringBuilder(_nome + " " + _NIF);
-            return sb.ToString();
+            if (e.Column == lvwColumnSorter.SortColumn)
+            {
+                if (lvwColumnSorter.Order == System.Windows.Forms.SortOrder.Ascending)
+                {
+                    lvwColumnSorter.Order = System.Windows.Forms.SortOrder.Descending;
+                }
+                else
+                {
+                    lvwColumnSorter.Order = System.Windows.Forms.SortOrder.Ascending;
+                }
+            }
+            else
+            {
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = System.Windows.Forms.SortOrder.Ascending;
+            }
+
+            this.listPessoas.Sort();
+        }
+
+        private void textBoxPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            pesquisar();
+        }
+
+        private void Limpar_Click(object sender, EventArgs e)
+        {
+            textBoxPesquisa.Text = "";
+            comboBox1.Text = "";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
 
         }
     }

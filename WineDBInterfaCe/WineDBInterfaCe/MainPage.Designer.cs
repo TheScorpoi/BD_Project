@@ -41,10 +41,14 @@ namespace WineDBInterfaCe
             this.Vinhos = new System.Windows.Forms.Panel();
             this.statVinhosLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.statPessoaLabel = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.Adega.SuspendLayout();
             this.Armazens.SuspendLayout();
             this.Terrenos.SuspendLayout();
             this.Vinhos.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Adega
@@ -159,11 +163,40 @@ namespace WineDBInterfaCe
             this.label4.TabIndex = 0;
             this.label4.Text = "Vinhos";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.statPessoaLabel);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Location = new System.Drawing.Point(56, 322);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(137, 125);
+            this.panel1.TabIndex = 4;
+            this.panel1.Click += new System.EventHandler(this.PessoasForm_Click);
+            // 
+            // statPessoaLabel
+            // 
+            this.statPessoaLabel.AutoSize = true;
+            this.statPessoaLabel.Location = new System.Drawing.Point(57, 37);
+            this.statPessoaLabel.Name = "statPessoaLabel";
+            this.statPessoaLabel.Size = new System.Drawing.Size(31, 20);
+            this.statPessoaLabel.TabIndex = 1;
+            this.statPessoaLabel.Text = "OO";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(42, 77);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 20);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Pessoas";
+            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(953, 537);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.Vinhos);
             this.Controls.Add(this.Terrenos);
             this.Controls.Add(this.Armazens);
@@ -179,6 +212,8 @@ namespace WineDBInterfaCe
             this.Terrenos.PerformLayout();
             this.Vinhos.ResumeLayout(false);
             this.Vinhos.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -197,5 +232,8 @@ namespace WineDBInterfaCe
         private System.Windows.Forms.Label statArmazemLabel;
         private System.Windows.Forms.Label statTerrenosLabel;
         private System.Windows.Forms.Label statVinhosLabel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label statPessoaLabel;
+        private System.Windows.Forms.Label label5;
     }
 }

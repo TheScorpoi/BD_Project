@@ -30,6 +30,13 @@ namespace WineDBInterfaCe
         private void InitializeComponent()
         {
             this.listTerreno = new System.Windows.Forms.ListView();
+            this.ID = new System.Windows.Forms.ColumnHeader();
+            this.Nome = new System.Windows.Forms.ColumnHeader();
+            this.Localizacao = new System.Windows.Forms.ColumnHeader();
+            this.Ano_plantacao = new System.Windows.Forms.ColumnHeader();
+            this.ID_Casta = new System.Windows.Forms.ColumnHeader();
+            this.Hectares = new System.Windows.Forms.ColumnHeader();
+            this.ID_Adega = new System.Windows.Forms.ColumnHeader();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBoxIdADEGA = new System.Windows.Forms.TextBox();
@@ -48,25 +55,75 @@ namespace WineDBInterfaCe
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.buttonVoltar = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBoxPesquisa = new System.Windows.Forms.TextBox();
+            this.countTerrenos = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listTerreno
             // 
+            this.listTerreno.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ID,
+            this.Nome,
+            this.Localizacao,
+            this.Ano_plantacao,
+            this.ID_Casta,
+            this.Hectares,
+            this.ID_Adega});
             this.listTerreno.HideSelection = false;
             this.listTerreno.Location = new System.Drawing.Point(54, 71);
             this.listTerreno.Name = "listTerreno";
             this.listTerreno.Size = new System.Drawing.Size(1010, 236);
             this.listTerreno.TabIndex = 0;
             this.listTerreno.UseCompatibleStateImageBehavior = false;
+            this.listTerreno.View = System.Windows.Forms.View.Details;
+            this.listTerreno.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listTerreno_ColumnClick);
+            this.listTerreno.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listTerreno_ItemSelectionChanged);
+            // 
+            // ID
+            // 
+            this.ID.Text = "ID";
+            this.ID.Width = 75;
+            // 
+            // Nome
+            // 
+            this.Nome.Text = "Nome";
+            this.Nome.Width = 150;
+            // 
+            // Localizacao
+            // 
+            this.Localizacao.Text = "Localização";
+            this.Localizacao.Width = 200;
+            // 
+            // Ano_plantacao
+            // 
+            this.Ano_plantacao.Text = "Ano de Plantação";
+            this.Ano_plantacao.Width = 150;
+            // 
+            // ID_Casta
+            // 
+            this.ID_Casta.Text = "Casta";
+            this.ID_Casta.Width = 150;
+            // 
+            // Hectares
+            // 
+            this.Hectares.Text = "Hectares";
+            this.Hectares.Width = 100;
+            // 
+            // ID_Adega
+            // 
+            this.ID_Adega.Text = "Adega";
+            this.ID_Adega.Width = 125;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(961, 26);
+            this.button1.Location = new System.Drawing.Point(970, 22);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(94, 29);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Search";
+            this.button1.Text = "Limpar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -223,20 +280,67 @@ namespace WineDBInterfaCe
             this.buttonVoltar.UseVisualStyleBackColor = true;
             this.buttonVoltar.Click += new System.EventHandler(this.buttonVoltar_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "ID",
+            "Nome",
+            "Localização",
+            "Ano de Plantação",
+            "ID de Casta",
+            "Hectares",
+            "ID da Adega"});
+            this.comboBox1.Location = new System.Drawing.Point(571, 24);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(173, 28);
+            this.comboBox1.TabIndex = 6;
+            // 
+            // textBoxPesquisa
+            // 
+            this.textBoxPesquisa.Location = new System.Drawing.Point(776, 24);
+            this.textBoxPesquisa.Name = "textBoxPesquisa";
+            this.textBoxPesquisa.Size = new System.Drawing.Size(158, 27);
+            this.textBoxPesquisa.TabIndex = 7;
+            this.textBoxPesquisa.TextChanged += new System.EventHandler(this.textBoxPesquisa_TextChanged);
+            // 
+            // countTerrenos
+            // 
+            this.countTerrenos.AutoSize = true;
+            this.countTerrenos.Location = new System.Drawing.Point(380, 26);
+            this.countTerrenos.Name = "countTerrenos";
+            this.countTerrenos.Size = new System.Drawing.Size(31, 20);
+            this.countTerrenos.TabIndex = 8;
+            this.countTerrenos.Text = "OO";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(203, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(171, 20);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Quantidade de Terrenos:";
+            // 
             // TerrenoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1092, 568);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.countTerrenos);
+            this.Controls.Add(this.textBoxPesquisa);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.buttonVoltar);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listTerreno);
-            this.Name = "WineDB - Terrenos";
+            this.Name = "TerrenoForm";
             this.Text = "WineDB - Terrenos";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -261,5 +365,16 @@ namespace WineDBInterfaCe
         private System.Windows.Forms.Label Hectareslabel;
         private System.Windows.Forms.Label IDCastaLabel;
         private System.Windows.Forms.Button buttonVoltar;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBoxPesquisa;
+        private System.Windows.Forms.Label countTerrenos;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ColumnHeader ID;
+        private System.Windows.Forms.ColumnHeader Nome;
+        private System.Windows.Forms.ColumnHeader Localizacao;
+        private System.Windows.Forms.ColumnHeader Ano_plantacao;
+        private System.Windows.Forms.ColumnHeader ID_Casta;
+        private System.Windows.Forms.ColumnHeader Hectares;
+        private System.Windows.Forms.ColumnHeader ID_Adega;
     }
 }

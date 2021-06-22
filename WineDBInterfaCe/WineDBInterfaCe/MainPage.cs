@@ -84,6 +84,14 @@ namespace WineDBInterfaCe
             statVinhosLabel.Text = count;
             //MessageBox.Show(count);
             reader.Close();
+
+            cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.Pessoa", cnn);
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            count = reader["Count"].ToString();
+            statPessoaLabel.Text = count;
+            //MessageBox.Show(count);
+            reader.Close();
         }
 
         private void MainPage_Load(object sender, EventArgs e)
@@ -136,5 +144,12 @@ namespace WineDBInterfaCe
             vinho.ShowDialog();
         }
 
+
+        private void PessoasForm_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Pessoa pessoa = new Pessoa(cnn, this);
+            pessoa.ShowDialog();
+        }
     }
 }

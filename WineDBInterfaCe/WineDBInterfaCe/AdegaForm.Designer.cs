@@ -30,7 +30,12 @@ namespace WineDBInterfaCe
         private void InitializeComponent()
         {
             this.listAdegas = new System.Windows.Forms.ListView();
-            this.button1Adega = new System.Windows.Forms.Button();
+            this.ID = new System.Windows.Forms.ColumnHeader();
+            this.Nome = new System.Windows.Forms.ColumnHeader();
+            this.Endereço = new System.Windows.Forms.ColumnHeader();
+            this.Cap_Max = new System.Windows.Forms.ColumnHeader();
+            this.Num_Cubas = new System.Windows.Forms.ColumnHeader();
+            this.NomeGerente = new System.Windows.Forms.ColumnHeader();
             this.panel1 = new System.Windows.Forms.Panel();
             this.NifGerenteLabel = new System.Windows.Forms.Label();
             this.numCubasLabel = new System.Windows.Forms.Label();
@@ -46,27 +51,62 @@ namespace WineDBInterfaCe
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonVoltar = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBoxPesquisa = new System.Windows.Forms.TextBox();
+            this.Limpar = new System.Windows.Forms.Button();
+            this.countAdegas = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listAdegas
             // 
+            this.listAdegas.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ID,
+            this.Nome,
+            this.Endereço,
+            this.Cap_Max,
+            this.Num_Cubas,
+            this.NomeGerente});
             this.listAdegas.HideSelection = false;
-            this.listAdegas.Location = new System.Drawing.Point(56, 76);
+            this.listAdegas.Location = new System.Drawing.Point(56, 78);
             this.listAdegas.Name = "listAdegas";
             this.listAdegas.Size = new System.Drawing.Size(1010, 243);
             this.listAdegas.TabIndex = 0;
             this.listAdegas.UseCompatibleStateImageBehavior = false;
+            this.listAdegas.View = System.Windows.Forms.View.Details;
+            this.listAdegas.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listAdegas_ColumnClick);
+            this.listAdegas.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listAdegas_ItemSelectionChanged);
             // 
-            // button1Adega
+            // ID
             // 
-            this.button1Adega.Location = new System.Drawing.Point(949, 27);
-            this.button1Adega.Name = "button1Adega";
-            this.button1Adega.Size = new System.Drawing.Size(94, 29);
-            this.button1Adega.TabIndex = 1;
-            this.button1Adega.Text = "Get Data";
-            this.button1Adega.UseVisualStyleBackColor = true;
-            this.button1Adega.Click += new System.EventHandler(this.button1Adega_Click);
+            this.ID.Text = "ID";
+            this.ID.Width = 75;
+            // 
+            // Nome
+            // 
+            this.Nome.Text = "Nome";
+            this.Nome.Width = 150;
+            // 
+            // Endereço
+            // 
+            this.Endereço.Text = "Endereco";
+            this.Endereço.Width = 325;
+            // 
+            // Cap_Max
+            // 
+            this.Cap_Max.Text = "Capacidade Máxima";
+            this.Cap_Max.Width = 150;
+            // 
+            // Num_Cubas
+            // 
+            this.Num_Cubas.Text = "Numero Cubas";
+            this.Num_Cubas.Width = 150;
+            // 
+            // NomeGerente
+            // 
+            this.NomeGerente.Text = "Nome do Gerente";
+            this.NomeGerente.Width = 150;
             // 
             // panel1
             // 
@@ -96,7 +136,6 @@ namespace WineDBInterfaCe
             this.NifGerenteLabel.Size = new System.Drawing.Size(94, 20);
             this.NifGerenteLabel.TabIndex = 12;
             this.NifGerenteLabel.Text = "NIF Gerente: ";
-            this.NifGerenteLabel.Click += new System.EventHandler(this.NifGerenteLabel_Click);
             // 
             // numCubasLabel
             // 
@@ -163,7 +202,6 @@ namespace WineDBInterfaCe
             this.textBoxNCUBAS.Name = "textBoxNCUBAS";
             this.textBoxNCUBAS.Size = new System.Drawing.Size(209, 27);
             this.textBoxNCUBAS.TabIndex = 4;
-            this.textBoxNCUBAS.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // textBoxNOME
             // 
@@ -197,7 +235,7 @@ namespace WineDBInterfaCe
             // 
             // buttonVoltar
             // 
-            this.buttonVoltar.Location = new System.Drawing.Point(56, 27);
+            this.buttonVoltar.Location = new System.Drawing.Point(56, 29);
             this.buttonVoltar.Name = "buttonVoltar";
             this.buttonVoltar.Size = new System.Drawing.Size(94, 29);
             this.buttonVoltar.TabIndex = 6;
@@ -205,20 +243,76 @@ namespace WineDBInterfaCe
             this.buttonVoltar.UseVisualStyleBackColor = true;
             this.buttonVoltar.Click += new System.EventHandler(this.buttonVoltar_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "ID",
+            "Nome",
+            "Endereço",
+            "Cap Máxima",
+            "Nº Cubas",
+            "NIF Gerente"});
+            this.comboBox1.Location = new System.Drawing.Point(592, 29);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(151, 28);
+            this.comboBox1.TabIndex = 7;
+            // 
+            // textBoxPesquisa
+            // 
+            this.textBoxPesquisa.Location = new System.Drawing.Point(782, 29);
+            this.textBoxPesquisa.Name = "textBoxPesquisa";
+            this.textBoxPesquisa.Size = new System.Drawing.Size(165, 27);
+            this.textBoxPesquisa.TabIndex = 8;
+            this.textBoxPesquisa.TextChanged += new System.EventHandler(this.button1Adega_Click);
+            // 
+            // Limpar
+            // 
+            this.Limpar.Location = new System.Drawing.Point(989, 26);
+            this.Limpar.Name = "Limpar";
+            this.Limpar.Size = new System.Drawing.Size(94, 29);
+            this.Limpar.TabIndex = 9;
+            this.Limpar.Text = "Limpar";
+            this.Limpar.UseVisualStyleBackColor = true;
+            this.Limpar.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // countAdegas
+            // 
+            this.countAdegas.AutoSize = true;
+            this.countAdegas.Location = new System.Drawing.Point(394, 33);
+            this.countAdegas.Name = "countAdegas";
+            this.countAdegas.Size = new System.Drawing.Size(31, 20);
+            this.countAdegas.TabIndex = 10;
+            this.countAdegas.Text = "OO";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(243, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(145, 20);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Número de Adegas: ";
+            // 
             // AdegaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1133, 571);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.countAdegas);
+            this.Controls.Add(this.Limpar);
+            this.Controls.Add(this.textBoxPesquisa);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.buttonVoltar);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button1Adega);
             this.Controls.Add(this.listAdegas);
             this.Name = "AdegaForm";
             this.Text = "WineDB - Adegas";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -241,5 +335,16 @@ namespace WineDBInterfaCe
         private System.Windows.Forms.TextBox textBoxCAPMAX;
         private System.Windows.Forms.TextBox textBoxID;
         private System.Windows.Forms.Button buttonVoltar;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBoxPesquisa;
+        private System.Windows.Forms.Button Limpar;
+        private System.Windows.Forms.ColumnHeader ID;
+        private System.Windows.Forms.ColumnHeader Nome;
+        private System.Windows.Forms.ColumnHeader Endereço;
+        private System.Windows.Forms.ColumnHeader Cap_Max;
+        private System.Windows.Forms.ColumnHeader Num_Cubas;
+        private System.Windows.Forms.ColumnHeader NomeGerente;
+        private System.Windows.Forms.Label countAdegas;
+        private System.Windows.Forms.Label label1;
     }
 }

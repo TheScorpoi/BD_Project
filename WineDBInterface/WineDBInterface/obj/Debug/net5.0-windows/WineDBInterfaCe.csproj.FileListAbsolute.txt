@@ -29,3 +29,4 @@ C:\Users\pedro\OneDrive\Ambiente de Trabalho\UA\2º Ano\2º Semestre\BD\Prática
 C:\Users\pedro\OneDrive\Ambiente de Trabalho\UA\2º Ano\2º Semestre\BD\Prática\BD_Project\WineDBInterfaCe\WineDBInterfaCe\obj\Debug\net5.0-windows\WineDBInterfaCe.ArmazemForm.resources
 C:\Users\pedro\OneDrive\Ambiente de Trabalho\UA\2º Ano\2º Semestre\BD\Prática\BD_Project\WineDBInterfaCe\WineDBInterfaCe\obj\Debug\net5.0-windows\WineDBInterfaCe.TerrenoForm.resources
 C:\Users\pedro\OneDrive\Ambiente de Trabalho\UA\2º Ano\2º Semestre\BD\Prática\BD_Project\WineDBInterfaCe\WineDBInterfaCe\obj\Debug\net5.0-windows\WineDBInterfaCe.VinhoForm.resources
+C:\Users\pedro\OneDrive\Ambiente de Trabalho\UA\2º Ano\2º Semestre\BD\Prática\BD_Project\WineDBInterfaCe\WineDBInterfaCe\obj\Debug\net5.0-windows\WineDBInterfaCe.Pessoa.resources
