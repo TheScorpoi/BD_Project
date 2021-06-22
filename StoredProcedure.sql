@@ -3,34 +3,13 @@ GO
 ------------------
 CREATE PROCEDURE WineDB.AdicionarPessoa (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc DATE, @Genero VARCHAR(1), @Telemovel VARCHAR(9))
 AS
-BEGIN
-		DECLARE @count INT;
-		DECLARE @erro VARCHAR(100);
-		SET @count = (SELECT WineDB.checkIfNIFExists(@NIF))
-		IF(@count>=1)
-			RAISERROR ('O NIF introduzido já existe, não é possivel adicionar a Pessoa', 16,1);
-		ELSE
-			BEGIN
-				BEGIN TRY
-					BEGIN TRAN
-						INSERT INTO WineDB.Pessoa(Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUES (@Nome, @Morada, @NIF, @Data_Nasc, @Genero, @Telemovel);
-					COMMIT TRAN
-				END TRY
-				BEGIN CATCH
-					Rollback TRAN
-					SELECT @erro = ERROR_MESSAGE(); 
-					SET @erro = 'A Pessoa não foi inserida, algum valor inserido incorretamento'
-					RAISERROR (@erro, 16,1);
-				END CATCH
-			END
+	BEGIN
+		INSERT INTO WineDB.Pessoa(Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUES (@Nome, @Morada, @NIF, @Data_Nasc, @Genero, @Telemovel);
 	END
 GO
 
------------------ acho que isto é melhor numa UDF mas ver melhor isto
-CREATE PROCEDURE WineDB.VerTodosAsPessoas
-AS
-	SELECT * FROM WineDB.Pessoa
-GO
+EXEC WineDB.AdicionarPessoa 'ola garota', 'avenida das boas', 94263789, '2020-12-12', 'M', '965143566'
+DROP PROC WineDB.AdicionarPessoa 
 
 -----------------
 CREATE PROCEDURE WineDB.AdicionarCliente (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc DATE, @Genero VARCHAR(1), @Telemovel VARCHAR(9))
@@ -45,7 +24,7 @@ AS
 			BEGIN
 				BEGIN TRY
 					BEGIN TRAN
-								EXEC WineDB.AdicionarPessoa @Nome, @Morada, @NIF, @Data_Nasc, @Genero, @Telemovel;
+								INSERT INTO WineDB.Pessoa (Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUES (@Nome, @Morada, @NIF, @Data_Nasc, @Genero, @Telemovel);
 								INSERT INTO WineDB.Cliente (NIF) VALUES (@NIF)
 					COMMIT TRAN
 				END TRY
@@ -59,43 +38,32 @@ AS
 	End
 GO
 
---EXEC WineDB.AdicionarCliente 'ola', 'test', 12356, '2020-01-01', 'f', 987987987
+
+DROP PROCEDURE WineDB.AdicionarCliente
+
+EXEC WineDB.AdicionarCliente 'ola', 'test', 123561333, '2020-01-01', 'f', 987987987
 
 -----------------
 CREATE PROCEDURE WineDB.AdicionarFuncionario (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc DATE, @Genero VARCHAR(1), @Telemovel VARCHAR(9), @IBAN VARCHAR(25), @Num_SS INT, @Data_Inicio_Atividade DATE)
 AS
 	BEGIN
-		DECLARE @count INT;
-		DECLARE @erro VARCHAR(100);
-		SET @count = (SELECT WineDB.checkIfNIFExists(@NIF))
-		IF(@count>=1)
-			RAISERROR ('O NIF introduzido já existe, não é possível adicionar o Funcionario', 16,1);
-		ELSE
-			BEGIN
-				BEGIN TRY
-					BEGIN TRAN
-								EXEC WineDB.AdicionarPessoa @Nome, @Morada, @NIF, @Data_Nasc, @Genero, @Telemovel;
-								INSERT INTO WineDB.Funcionario(NIF , IBAN, NUM_SS, Data_Inicio_Atividade) VALUES (@NIF, @IBAN, @Num_SS, @Data_Inicio_Atividade)
-					COMMIT TRAN
-				END TRY
-				BEGIN CATCH
-					Rollback TRAN
-					SELECT @erro = ERROR_MESSAGE(); 
-					SET @erro =  'O Funcionario não foi inserido, algum valor inserido incorretamento'
-					RAISERROR (@erro, 16,1);
-				END CATCH
-			END
+		BEGIN TRAN
+			INSERT INTO WineDB.Pessoa(Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUES (@Nome, @Morada, @NIF, @Data_Nasc, @Genero, @Telemovel);
+			INSERT INTO WineDB.Funcionario(NIF , IBAN, NUM_SS, Data_Inicio_Atividade) VALUES (@NIF, @IBAN, @Num_SS, @Data_Inicio_Atividade)
+		COMMIT TRAN
 	End
 GO
+DROP PROCEDURE WineDB.AdicionarFuncionario
 
---EXEC WineDB.AdicionarFuncionario 'ola', 'test', 123516, '2020-01-01', 'f', 987987987, 'asd123', 111, '2020'
+
+SELECT * FROM WineDB.Pessoa;
+EXEC WineDB.AdicionarFuncionario 'ola', 'test', 121516111, '2020-01-01', 'f', 910987087, 'PT1425164758695847364758695', 11112111, '2020'
 
 CREATE PROCEDURE WineDB.AdicionarGerente (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc DATE, @Genero VARCHAR(1), @Telemovel VARCHAR(9), @IBAN VARCHAR(25), @Num_SS INT, @Data_Inicio_Atividade DATE, @Num_Func INT)
 AS
 	BEGIN
 		DECLARE @count INT;
 		DECLARE @erro VARCHAR(100);
-		DECLARE @Num_Funcionario INT;
 
 		SET @count = (SELECT WineDB.checkIfNIFExists(@NIF))
 		IF(@count>=1)
@@ -103,35 +71,33 @@ AS
 			RAISERROR ('O NIF introduzido já existe, não é possível adicionar o Gerente', 16,1);
 		ELSE
 		--fazer tambem a verificacao pelo numero de funcionario
-			SET @Num_Funcionario = (SELECT WineDB.checkIfNum_FuncExists(@Num_Func))
-			IF(@Num_Funcionario IS NOT NULL)
-				BEGIN
-					BEGIN TRY
-						BEGIN TRAN
-									EXEC WineDB.AdicionarFuncionario @Nome, @Morada, @NIF, @Data_Nasc, @Genero, @Telemovel, @IBAN, @Num_SS, @Data_Inicio_Atividade;
-									INSERT INTO WineDB.Gerente(NIF, Num_Func) VALUES (@NIF, @Num_Func)
-						COMMIT TRAN
-					END TRY
-					BEGIN CATCH
-						Rollback TRAN
-						SELECT @erro = ERROR_MESSAGE(); 
-						SET @erro = 'O Gerente não foi inserido'
-						RAISERROR (@erro, 16,1);
-					END CATCH
-				END
-			ELSE
-				RAISERROR ('O número de funcionário inserido já existe!', 16,1);
+					BEGIN
+						BEGIN TRY
+							BEGIN TRAN
+										INSERT INTO WineDB.Pessoa (Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUES (@Nome, @Morada, @NIF, @Data_Nasc, @Genero, @Telemovel);
+										INSERT INTO WineDB.Funcionario(NIF, IBAN, Num_SS, Data_Inicio_Atividade )  VALUES (@NIF, @IBAN, @Num_SS, @Data_Inicio_Atividade);
+										INSERT INTO WineDB.Gerente(NIF, Num_Func) VALUES (@NIF, @Num_Func)
+							COMMIT TRAN
+						END TRY
+						BEGIN CATCH
+							Rollback TRAN
+							SELECT @erro = ERROR_MESSAGE(); 
+							SET @erro = 'O Gerente não foi inserido'
+							RAISERROR (@erro, 16,1);
+						END CATCH
+					END
 	End
 GO
+DROP PROCEDURE WineDB.AdicionarGerente
 
---EXEC WineDB.AdicionarGerente 'ola', 'test', 12135116, '2020-01-01', 'f', 987987987, 'asd123', 111, '2020', 90
+EXEC WineDB.AdicionarGerente 'ola', 'test', 121951465, '2020-01-01', 'f', 927117987, 'PT12345671765400043213251', 15022003, '2020-12-12', 88
+EXEC WineDB.AdicionarGerente 'ola', 'test', 124426165, '2020-01-01', 'f', 917955587, 'PT11145557865476543218851', 15229993, '2020-12-12', 88
 
 CREATE PROCEDURE WineDB.AdicionarOperadorAgricola (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc DATE, @Genero VARCHAR(1), @Telemovel VARCHAR(9), @IBAN VARCHAR(25), @Num_SS INT, @Data_Inicio_Atividade DATE, @Num_Func INT, @ID_Terreno VARCHAR(5))
 AS
 	BEGIN
 		DECLARE @count INT;
 		DECLARE @erro VARCHAR(100);
-		DECLARE @Num_Funcionario INT;
 
 		SET @count = (SELECT WineDB.checkIfNIFExists(@NIF))
 		IF(@count>=1)
@@ -139,12 +105,10 @@ AS
 			RAISERROR ('O NIF introduzido já existe, não é possível adicionar o Operador Agricola', 16,1);
 		ELSE
 		--fazer tambem a verificacao pelo numero de funcionario
-			SET @Num_Funcionario = (SELECT WineDB.checkIfNum_FuncExists(@Num_Func))
-			IF(@Num_Funcionario IS NOT NULL)
-				BEGIN
 					BEGIN TRY
 						BEGIN TRAN
-									EXEC WineDB.AdicionarFuncionario @Nome, @Morada, @NIF, @Data_Nasc, @Genero, @Telemovel, @IBAN, @Num_SS, @Data_Inicio_Atividade;
+									INSERT INTO WineDB.Pessoa (Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUES (@Nome, @Morada, @NIF, @Data_Nasc, @Genero, @Telemovel);
+									INSERT INTO WineDB.Funcionario (NIF, IBAN, Num_SS, Data_Inicio_Atividade) VALUES (@NIF, @IBAN, @Num_SS, @Data_Inicio_Atividade);
 									INSERT INTO WineDB.OperadorAgricola(NIF, Num_Func, ID_Terreno) VALUES (@NIF, @Num_Func, @ID_Terreno)
 						COMMIT TRAN
 					END TRY
@@ -154,18 +118,19 @@ AS
 						SET @erro = 'O Operador Agricola não foi inserido, algum valor inserido incorretamento'
 						RAISERROR (@erro, 16,1);
 					END CATCH
-				END
-			ELSE
-				RAISERROR ('O número de funcionário inserido já existe!', 16,1);
 	End
 GO
 
+DROP PROC WineDB.AdicionarOperadorAgricola
+EXEC WineDB.AdicionarOperadorAgricola 'ola', 'test', 121300165, '2020-01-01', 'f', 927957111, 'PT12345671761116543213251', 15000033, '2020-12-12', 161, 'GTFD3'
+
+EXEC WineDB.AdicionarOperadorAdega 'Maria Albertina', 'Lisboa', 000444344, '2001-12-12', 'M', '765839457', 'PT23456789098765432112345', 09815346, '2002-12-12', 25, '54W3T'
+SELECT * FROM WineDB.OperadorAdega
 CREATE PROCEDURE WineDB.AdicionarOperadorAdega (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc DATE, @Genero VARCHAR(1), @Telemovel VARCHAR(9), @IBAN VARCHAR(25), @Num_SS INT, @Data_Inicio_Atividade DATE, @Num_Func INT, @ID_Adega VARCHAR(5))
 AS
 	BEGIN
 		DECLARE @count INT;
 		DECLARE @erro VARCHAR(100);
-		DECLARE @Num_Funcionario INT;
 
 		SET @count = (SELECT WineDB.checkIfNIFExists(@NIF))
 		IF(@count>=1)
@@ -173,31 +138,26 @@ AS
 			RAISERROR ('O NIF introduzido já existe, não é possível adicionar o Operador Adega', 16,1);
 		ELSE
 		--fazer tambem a verificacao pelo numero de funcionario
-			SET @Num_Funcionario = (SELECT WineDB.checkIfNum_FuncExists(@Num_Func))
-			IF(@Num_Funcionario IS NOT NULL)
-				BEGIN
-					BEGIN TRY
-						BEGIN TRAN
-								EXEC WineDB.AdicionarFuncionario @Nome, @Morada, @NIF, @Data_Nasc, @Genero, @Telemovel, @IBAN, @Num_SS, @Data_Inicio_Atividade;
-								INSERT INTO WineDB.OperadorAdega(NIF, Num_Func, ID_Adega) VALUES (@NIF, @Num_Func, @ID_Adega)
-						COMMIT TRAN
-					END TRY
-					BEGIN CATCH
-						Rollback TRAN
-						SELECT @erro = ERROR_MESSAGE(); 
-						SET @erro = 'O Operador Adega não foi inserido, algum valor inserido incorretamento'
-						RAISERROR (@erro, 16,1);
-					END CATCH
-				END
-			ELSE
-				RAISERROR ('O número de funcionário inserido já existe!', 16,1);
+			BEGIN TRY
+				BEGIN TRAN
+						INSERT INTO WineDB.Pessoa (Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUES (@Nome, @Morada, @NIF, @Data_Nasc, @Genero, @Telemovel);
+						INSERT INTO WineDB.Funcionario (NIF, IBAN, Num_SS, Data_Inicio_Atividade) VALUES (@NIF, @IBAN, @Num_SS, @Data_Inicio_Atividade);
+						INSERT INTO WineDB.OperadorAdega(NIF, Num_Func, ID_Adega) VALUES (@NIF, @Num_Func, @ID_Adega)
+				COMMIT TRAN
+			END TRY
+			BEGIN CATCH
+				Rollback TRAN
+				SELECT @erro = ERROR_MESSAGE(); 
+				SET @erro = 'O Operador Adega não foi inserido, algum valor inserido incorretamento'
+				RAISERROR (@erro, 16,1);
+			END CATCH
 		
 	END
 GO
 
-EXEC WineDB.AdicionarOperadorAdega 'Maria Albertina', 'Lisboa', 123444344, '2001-12-12', 'M', '765839457', PT12345678909876543212345, 234567, '2002-12-12', 17, 'CCCCC'
+DROP Proc WineDB.AdicionarOperadorAdega
 
-SELECT * FROM WineDB.Funcionario
+SELECT * FROM WineDB.Adega
 
 CREATE PROCEDURE WineDB.AdicionarVinho (@ID VARCHAR(5), @ID_Cuba INT, @Nome VARCHAR(256), @DOC VARCHAR(32), @ID_Casta INT)
 AS
@@ -255,24 +215,7 @@ GO
 
 EXEC WineDB.AdicionarAdega 'CCCCC', 'Adeguinha', 'Rua do Sacramento, Setúbal', 300.0 , 30, 237489547
 
---CREATE PROCEDURE WineDB.Testinho(@Num_Func INT)
---AS
---	BEGIN
-
---	DECLARE @NUMERO INT
-
---	SET @NUMERO = (SELECT WineDB.Teste(@Num_Func))
-
---	IF @NUMERO = 227578689
---		SELECT * FROM WineDB.Adega
-
---	END
---GO
-
---EXEC WineDB.Testinho 13
-
-
-CREATE PROCEDURE WineDB.AdicionarCuba (@ID INT, @ID_Adega VARCHAR(5), @Cap_Max FLOAT)
+CREATE PROCEDURE WineDB.AdicionarCuba (@ID INT, @ID_Adega VARCHAR(5), @Cap_Max FLOAT, @TipoCuba VARCHAR(64))
 AS
 	BEGIN
 		DECLARE @count INT;
@@ -285,6 +228,7 @@ AS
 				BEGIN TRY
 					BEGIN TRAN
 						INSERT INTO WineDB.Cuba(ID, ID_Adega, Cap_Max) VALUES (@ID, @ID_Adega, @Cap_Max);
+						INSERT INTO WineDB.TipoCuba(ID, TipoCuba) VALUES (@ID, @TipoCuba);
 					COMMIT TRAN
 				END TRY
 				BEGIN CATCH
@@ -296,6 +240,8 @@ AS
 			END
 	End
 GO
+
+DROP PROC WineDB.AdicionarCuba ;
 
 EXEC WineDB.AdicionarCuba 77777, '03ED5', 25000
 
@@ -387,3 +333,38 @@ GO
 EXEC WineDB.AdicionarArmazem 'ABAAA', 'AAAA', 'AAAAA', '03ED5'
 
 SELECT * FROM WineDB.Armazem
+
+CREATE PROCEDURE WineDB.AdicionarVenda (@ID_Produto VARCHAR(5), @Preco FLOAT , @IVA INT = 23, @Quantidade INT, @NIF_Cliente INT)
+AS
+	BEGIN
+	
+		DECLARE @countVinho INT;
+		DECLARE @countNIF INT;
+		DECLARE @erro VARCHAR(100);
+		SET @countNIF = (SELECT WineDB.checkIfNIFExists(@NIF_Cliente))
+		SET @countVinho = (SELECT WineDB.checkIfWineExists(@ID_Produto))
+		IF (@countVinho < 1)
+			RAISERROR ('Não existe esse vinho em armazém.', 16,1);
+		ELSE IF (@countNIF < 1)
+			RAISERROR ('Não existe esse cliente na base de dados.', 16,1);
+		ELSE
+			BEGIN
+				BEGIN TRY
+					BEGIN TRAN
+						INSERT INTO WineDB.Venda(ID_Produto, Preco, IVA, Quantidade, NIF_Cliente) VALUES (@ID_Produto, @Preco, @IVA, @Quantidade, @NIF_Cliente);
+					COMMIT TRAN
+				END TRY
+				BEGIN CATCH
+					Rollback TRAN
+					SELECT @erro = ERROR_MESSAGE(); 
+					SET @erro = 'Não foi possivel inserir a venda, algum dado foi passado de forma incorreta'
+					RAISERROR (@erro, 16,1);
+				END CATCH
+			END
+	End
+GO
+DROP PROC WineDB.AdicionarVenda
+
+EXEC WineDB.AdicionarVenda 'H6G34', 88.5,DEFAULT ,3, 276875341
+
+SELECT * FROM WineDB.Venda
