@@ -478,6 +478,7 @@ namespace WineDBInterfaCe
             this.FuncButton.TabIndex = 20;
             this.FuncButton.Text = "Funcionários";
             this.FuncButton.UseVisualStyleBackColor = true;
+            this.FuncButton.Click += new System.EventHandler(this.FuncButton_Click);
             // 
             // opAgriButton
             // 

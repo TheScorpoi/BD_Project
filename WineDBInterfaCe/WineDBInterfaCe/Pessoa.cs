@@ -364,6 +364,21 @@ namespace WineDBInterfaCe
             loadInicial();
         }
 
+        private void FuncButton_Click(object sender, EventArgs e)
+        {
+            //listPessoas.Items.Clear();
+            //listPessoas.View = View.Details;
+            DataTable table = new DataTable();
 
+            cmd = new SqlCommand("WineDB.ViewOperadorAgricola", cnn);
+
+            //da = new SqlDataAdapter(cmd);
+            //ds = new DataSet();
+            //da.Fill(ds, "tablePessoa");
+
+            table.Load(cmd.ExecuteReader());
+
+
+        }
     }
 }

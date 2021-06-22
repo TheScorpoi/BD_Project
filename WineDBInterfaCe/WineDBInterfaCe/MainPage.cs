@@ -92,6 +92,30 @@ namespace WineDBInterfaCe
             statPessoaLabel.Text = count;
             //MessageBox.Show(count);
             reader.Close();
+
+            cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.Cuba", cnn);
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            count = reader["Count"].ToString();
+            statCubasLabel.Text = count;
+            //MessageBox.Show(count);
+            reader.Close();
+
+            cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.Pessoa", cnn);
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            count = reader["Count"].ToString();
+            statVendasLabel.Text = count;
+            //MessageBox.Show(count);
+            reader.Close();
+
+            cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.Cuba", cnn);
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            count = reader["Count"].ToString();
+            statCubasLabel.Text = count;
+            //MessageBox.Show(count);
+            reader.Close();
         }
 
         private void MainPage_Load(object sender, EventArgs e)
@@ -150,6 +174,20 @@ namespace WineDBInterfaCe
             this.Hide();
             Pessoa pessoa = new Pessoa(cnn, this);
             pessoa.ShowDialog();
+        }
+
+        private void CubaForm_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            CubaForm cuba = new CubaForm(cnn, this);
+            cuba.ShowDialog();
+        }
+
+        private void VendaForm_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            VendaForm venda = new VendaForm(cnn, this);
+            venda.ShowDialog();
         }
     }
 }

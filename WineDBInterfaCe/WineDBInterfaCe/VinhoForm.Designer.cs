@@ -38,6 +38,8 @@ namespace WineDBInterfaCe
             this.button1 = new System.Windows.Forms.Button();
             this.buttonVoltar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.atualizarbutton = new System.Windows.Forms.Button();
+            this.inserirButton = new System.Windows.Forms.Button();
             this.idCastaLabel = new System.Windows.Forms.Label();
             this.DOCLabel = new System.Windows.Forms.Label();
             this.nomeLabel = new System.Windows.Forms.Label();
@@ -53,8 +55,8 @@ namespace WineDBInterfaCe
             this.textBoxPesquisa = new System.Windows.Forms.TextBox();
             this.countVinhos = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.atualizarbutton = new System.Windows.Forms.Button();
-            this.inserirButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.maiorQuantidade = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +71,7 @@ namespace WineDBInterfaCe
             this.listVinho.HideSelection = false;
             this.listVinho.Location = new System.Drawing.Point(42, 67);
             this.listVinho.Name = "listVinho";
-            this.listVinho.Size = new System.Drawing.Size(989, 234);
+            this.listVinho.Size = new System.Drawing.Size(782, 234);
             this.listVinho.TabIndex = 0;
             this.listVinho.UseCompatibleStateImageBehavior = false;
             this.listVinho.View = System.Windows.Forms.View.Details;
@@ -140,6 +142,25 @@ namespace WineDBInterfaCe
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(989, 178);
             this.panel1.TabIndex = 7;
+            // 
+            // atualizarbutton
+            // 
+            this.atualizarbutton.Location = new System.Drawing.Point(847, 83);
+            this.atualizarbutton.Name = "atualizarbutton";
+            this.atualizarbutton.Size = new System.Drawing.Size(94, 29);
+            this.atualizarbutton.TabIndex = 13;
+            this.atualizarbutton.Text = "Atualizar";
+            this.atualizarbutton.UseVisualStyleBackColor = true;
+            // 
+            // inserirButton
+            // 
+            this.inserirButton.Location = new System.Drawing.Point(847, 38);
+            this.inserirButton.Name = "inserirButton";
+            this.inserirButton.Size = new System.Drawing.Size(94, 29);
+            this.inserirButton.TabIndex = 12;
+            this.inserirButton.Text = "Inserir Vinho";
+            this.inserirButton.UseVisualStyleBackColor = true;
+            this.inserirButton.Click += new System.EventHandler(this.inserir_Click);
             // 
             // idCastaLabel
             // 
@@ -271,30 +292,32 @@ namespace WineDBInterfaCe
             this.label2.TabIndex = 11;
             this.label2.Text = "Quantidade de Vinhos:";
             // 
-            // atualizarbutton
+            // label1
             // 
-            this.atualizarbutton.Location = new System.Drawing.Point(847, 83);
-            this.atualizarbutton.Name = "atualizarbutton";
-            this.atualizarbutton.Size = new System.Drawing.Size(94, 29);
-            this.atualizarbutton.TabIndex = 13;
-            this.atualizarbutton.Text = "Atualizar";
-            this.atualizarbutton.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(860, 122);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(153, 20);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Quantidade de Vinho:";
             // 
-            // inserirButton
+            // maiorQuantidade
             // 
-            this.inserirButton.Location = new System.Drawing.Point(847, 38);
-            this.inserirButton.Name = "inserirButton";
-            this.inserirButton.Size = new System.Drawing.Size(94, 29);
-            this.inserirButton.TabIndex = 12;
-            this.inserirButton.Text = "Inserir Vinho";
-            this.inserirButton.UseVisualStyleBackColor = true;
-            this.inserirButton.Click += new System.EventHandler(this.inserir_Click);
+            this.maiorQuantidade.AutoSize = true;
+            this.maiorQuantidade.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.maiorQuantidade.Location = new System.Drawing.Point(900, 163);
+            this.maiorQuantidade.Name = "maiorQuantidade";
+            this.maiorQuantidade.Size = new System.Drawing.Size(83, 54);
+            this.maiorQuantidade.TabIndex = 13;
+            this.maiorQuantidade.Text = "OO";
             // 
             // VinhoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 561);
+            this.Controls.Add(this.maiorQuantidade);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.countVinhos);
             this.Controls.Add(this.textBoxPesquisa);
@@ -340,5 +363,7 @@ namespace WineDBInterfaCe
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button atualizarbutton;
         private System.Windows.Forms.Button inserirButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label maiorQuantidade;
     }
 }

@@ -28,6 +28,7 @@ namespace WineDBInterfaCe
             this.cnn = cnn;
             InitializeComponent();
             vinhoLoad();
+            contadorMaiorQuantidade();
 
             lvwColumnSorter = new ListViewColumnSorter();
             this.listVinho.ListViewItemSorter = (System.Collections.IComparer)lvwColumnSorter;
@@ -244,5 +245,12 @@ namespace WineDBInterfaCe
             //to refrsh
             vinhoLoad();
         }
+
+        private void contadorMaiorQuantidade()
+        {
+            int count = listVinho.Items.Count;
+            maiorQuantidade.Text = count.ToString();
+        }
+
     }
 }
