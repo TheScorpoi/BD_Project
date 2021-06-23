@@ -1,5 +1,5 @@
 --INSERT PERSON IN PESSOATABLE -----------------------------------
-CREATE TRIGGER addPersona ON WineDB.Pessoa
+CREATE TRIGGER WineDB.addPersona ON WineDB.Pessoa
 AFTER INSERT, UPDATE
 AS
 	SET NOCOUNT ON;
@@ -40,7 +40,7 @@ GO
 INSERT INTO WineDB.Pessoa VALUES ('ola garota', 'Rua da jenovevia', 29748365, '2020', 'M', '999111222')
 
 --INSERT FUNCIONARIO ------------------------------------------------
-CREATE TRIGGER addFunc ON WineDB.Funcionario
+CREATE TRIGGER WineDB.addFunc ON WineDB.Funcionario
 AFTER INSERT, UPDATE
 AS
 	SET NOCOUNT ON;

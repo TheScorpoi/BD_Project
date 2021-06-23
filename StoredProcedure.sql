@@ -159,11 +159,13 @@ DROP Proc WineDB.AdicionarOperadorAdega
 
 SELECT * FROM WineDB.Adega
 
-CREATE PROCEDURE WineDB.AdicionarVinho (@ID VARCHAR(5), @ID_Cuba INT, @Nome VARCHAR(256), @DOC VARCHAR(32), @ID_Casta INT)
+CREATE PROCEDURE WineDB.AdicionarVinho (@ID VARCHAR(5), @ID_Cuba INT, @Nome VARCHAR(256), @DOC VARCHAR(32), @Nome_Casta varchar(128))
 AS
 	BEGIN
 		DECLARE @count INT;
 		DECLARE @erro VARCHAR(100);
+		DECLARE @id_Casta VARCHAR(5);
+		SET @id_Casta = (SELECT WineDB.getIDCastaFROMNome(@Nome_Casta))
 		SET @count = (SELECT WineDB.checkIfWineExists(@ID))
 		IF(@count>=1)
 			RAISERROR ('O vinho introduzido já existe, não é possível adicioná-lo', 16,1);
@@ -171,7 +173,7 @@ AS
 			BEGIN
 				BEGIN TRY
 					BEGIN TRAN
-								INSERT INTO WineDB.Vinho(ID, ID_Cuba, Nome, DOC, ID_Casta) VALUES (@ID, @ID_Cuba, @Nome, @DOC, @ID_Casta)
+								INSERT INTO WineDB.Vinho(ID, ID_Cuba, Nome, DOC, ID_Casta) VALUES (@ID, @ID_Cuba, @Nome, @DOC, @id_Casta)
 					COMMIT TRAN
 				END TRY
 				BEGIN CATCH
@@ -183,16 +185,21 @@ AS
 			END
 	End
 GO
+DROP PROC WineDB.AdicionarVinho
 
 EXEC WineDB.AdicionarVinho 'CCCAC', 12452, 'Vinho da Nossa Senhora', 'Douro' , 12452
 
 SELECT * FROM WineDB.Vinho
 
-CREATE PROCEDURE WineDB.AdicionarAdega (@ID VARCHAR(5), @Nome VARCHAR(256), @Endereco VARCHAR(256), @Cap_Max INT, @Num_Cubas INT, @NIF_Gerente INT)
+S
+
+CREATE PROCEDURE WineDB.AdicionarAdega (@ID VARCHAR(5), @Nome VARCHAR(256), @Endereco VARCHAR(256), @Cap_Max INT, @Num_Cubas INT, @NomeGerente VARCHAR(256))
 AS
 	BEGIN
 		DECLARE @count INT;
 		DECLARE @erro VARCHAR(100);
+		DECLARE @nif INT;
+		SET @nif = (SELECT WineDB.getNIFfromNome(@NomeGerente))
 		SET @count = (SELECT WineDB.checkIfAdegaExists(@ID))
 		IF(@count>=1)
 			RAISERROR ('A adega introduzida já existe, não é possível adicioná-la', 16,1);
@@ -200,7 +207,7 @@ AS
 			BEGIN
 				BEGIN TRY
 					BEGIN TRAN
-						INSERT INTO WineDB.Adega(ID, Nome, Endereco, Cap_Max, Num_Cubas, NIF_Gerente) VALUES (@ID, @Nome, @Endereco, @Cap_Max, @Num_Cubas, @NIF_Gerente)
+						INSERT INTO WineDB.Adega(ID, Nome, Endereco, Cap_Max, Num_Cubas, NIF_Gerente) VALUES (@ID, @Nome, @Endereco, @Cap_Max, @Num_Cubas, @nif)
 					COMMIT TRAN
 				END TRY
 				BEGIN CATCH
@@ -213,13 +220,25 @@ AS
 	End
 GO
 
+DROP PROC WineDB.AdicionarAdega
+
+SELECT * FROM WineDB.Pessoa Where NIF = 374985902
+
+DELETE FROM WineDB.Pessoa WHERE NIF = 124426165
+DELETE FROM WineDB.Funcionario WHERE NIF = 124426165
+DELETE FROM WineDB.Gerente WHERE NIF = 124426165
+DELETE FROM WineDB.OperadorAgricola WHERE NIF = 121300165
+DELETE FROM WineDB.OperadorAdega WHERE NIF = 123444344
+
 EXEC WineDB.AdicionarAdega 'CCCCC', 'Adeguinha', 'Rua do Sacramento, Setúbal', 300.0 , 30, 237489547
 
-CREATE PROCEDURE WineDB.AdicionarCuba (@ID INT, @ID_Adega VARCHAR(5), @Cap_Max FLOAT, @TipoCuba VARCHAR(64))
+CREATE PROCEDURE WineDB.AdicionarCuba (@ID INT, @Nome_Adega VARCHAR(256), @Cap_Max FLOAT, @TipoCuba VARCHAR(64))
 AS
 	BEGIN
 		DECLARE @count INT;
 		DECLARE @erro VARCHAR(100);
+		DECLARE @id_adega VARCHAR(5); 
+		SET @id_adega = (SELECT WineDB.getIDAdegaFROMNome(@Nome_Adega))
 		SET @count = (SELECT WineDB.checkIfCubaExists(@ID))
 		IF(@count>=1)
 			RAISERROR ('A Cuba introduzida já existe, não é possivel adicionar-la', 16,1);
@@ -227,7 +246,7 @@ AS
 			BEGIN
 				BEGIN TRY
 					BEGIN TRAN
-						INSERT INTO WineDB.Cuba(ID, ID_Adega, Cap_Max) VALUES (@ID, @ID_Adega, @Cap_Max);
+						INSERT INTO WineDB.Cuba(ID, ID_Adega, Cap_Max) VALUES (@ID, @id_adega, @Cap_Max);
 						INSERT INTO WineDB.TipoCuba(ID, TipoCuba) VALUES (@ID, @TipoCuba);
 					COMMIT TRAN
 				END TRY
@@ -241,9 +260,9 @@ AS
 	End
 GO
 
-DROP PROC WineDB.AdicionarCuba ;
+DROP PROC WineDB.AdicionarCuba
 
-EXEC WineDB.AdicionarCuba 77777, '03ED5', 25000
+EXEC WineDB.AdicionarCuba 00011, 'Boa Uva', 25000, 'Barril de Carvalho'
 
 Select * from WineDB.Cuba
 
@@ -276,23 +295,24 @@ EXEC WineDB.AdicionarTipoCuba 77777, 'Teste'
 
 Select * from WineDB.TipoCuba
 
-CREATE PROCEDURE WineDB.AdicionarTerreno (@ID VARCHAR(5), @Nome VARCHAR(256), @Localizacao VARCHAR(256), @Ano_Plantacao DATE, @ID_Casta INT, @Hectares FLOAT , @ID_Adega VARCHAR(5))
+CREATE PROCEDURE WineDB.AdicionarTerreno (@ID VARCHAR(5), @Nome VARCHAR(256), @Localizacao VARCHAR(256), @NomeCasta varchar(128), @Hectares FLOAT , @Nome_Adega VARCHAR(256))
 AS
 	BEGIN
 		DECLARE @count INT;
 		DECLARE @erro VARCHAR(100);
+		DECLARE @id_CASTA INT;
+		DECLARE @id_Adega VARCHAR(5);
+		SET @id_Adega = (SELECT WineDB.getIDAdegaFROMNome(@Nome_Adega))
+		SET @id_casta = (SELECT WineDB.getIDCastaFROMNome(@NomeCasta))
 		SET @count = (SELECT WineDB.checkIfTerrenoExists(@ID))
 		IF(@count >= 1)
 			RAISERROR ('O Terreno que pretende inserir já existe', 16,1);
 		ELSE
 			BEGIN
 				BEGIN TRY
-					BEGIN TRAN
-						INSERT INTO WineDB.Terreno(ID, Nome, Localizacao, Ano_Plantacao, ID_Casta, Hectares, ID_Adega) VALUES (@ID, @Nome, @Localizacao, @Ano_Plantacao, @ID_Casta, @Hectares, @ID_Adega);
-					COMMIT TRAN
+						INSERT INTO WineDB.Terreno(ID, Nome, Localizacao, ID_Casta, Hectares, ID_Adega) VALUES (@ID, @Nome, @Localizacao, @id_casta, @Hectares, @id_Adega);
 				END TRY
 				BEGIN CATCH
-					Rollback TRAN
 					SELECT @erro = ERROR_MESSAGE(); 
 					SET @erro = 'Não foi possivel inserir o Terreno, algum dado foi passado de forma incorreta'
 					RAISERROR (@erro, 16,1);
@@ -300,16 +320,19 @@ AS
 			END
 	End
 GO
+DROP PROC WineDB.AdicionarTerreno
 
-EXEC WineDB.AdicionarTerreno 'AAAAA', 'AAAA', 'AAAAA', '2012', 12452, 2.34, '03ED5'
+EXEC WineDB.AdicionarTerreno 'TEST2', 'OLA', 'RUA', '01/01/2000 00:00:00', 'Gouveio Preto', 2.34, 'Boa Uva'
 
 Select * from WineDB.Terreno
 
-CREATE PROCEDURE WineDB.AdicionarArmazem (@ID VARCHAR(5), @Localizacao VARCHAR(256), @Nome VARCHAR(256), @ID_Adega VARCHAR(5))
+CREATE PROCEDURE WineDB.AdicionarArmazem (@ID VARCHAR(5), @Localizacao VARCHAR(256), @Nome VARCHAR(256), @Nome_Adega VARCHAR(256))
 AS
 	BEGIN
 		DECLARE @count INT;
 		DECLARE @erro VARCHAR(100);
+		DECLARE @id_Adega VARCHAR(5);
+		SET @id_adega = (SELECT  WineDB.getIDAdegaFROMNome(@Nome_Adega))
 		SET @count = (SELECT WineDB.checkIfTerrenoExists(@ID))
 		IF(@count >= 1)
 			RAISERROR ('O Armazém que pretende inserir já existe', 16,1);
@@ -317,7 +340,7 @@ AS
 			BEGIN
 				BEGIN TRY
 					BEGIN TRAN
-						INSERT INTO WineDB.Armazem(ID, Localizacao, Nome, ID_Adega) VALUES (@ID, @Localizacao, @Nome, @ID_Adega);
+						INSERT INTO WineDB.Armazem(ID, Localizacao, Nome, ID_Adega) VALUES (@ID, @Localizacao, @Nome, @id_adega);
 					COMMIT TRAN
 				END TRY
 				BEGIN CATCH
@@ -330,18 +353,22 @@ AS
 	End
 GO
 
-EXEC WineDB.AdicionarArmazem 'ABAAA', 'AAAA', 'AAAAA', '03ED5'
+DROP PROC WineDB.AdicionarArmazem
+
+EXEC WineDB.AdicionarArmazem 'AAAAA', 'RUA DE CIMA', 'NOMINHO', 'Adega La Rose'
 
 SELECT * FROM WineDB.Armazem
 
-CREATE PROCEDURE WineDB.AdicionarVenda (@ID_Produto VARCHAR(5), @Preco FLOAT , @IVA INT = 23, @Quantidade INT, @NIF_Cliente INT)
+CREATE PROCEDURE WineDB.AdicionarVenda (@ID_Produto VARCHAR(5), @Preco FLOAT , @IVA INT = 23, @Quantidade INT, @Nome VARCHAR(256))
 AS
 	BEGIN
 	
 		DECLARE @countVinho INT;
+		DECLARE @nif INT;
 		DECLARE @countNIF INT;
 		DECLARE @erro VARCHAR(100);
-		SET @countNIF = (SELECT WineDB.checkIfNIFExists(@NIF_Cliente))
+		SET @nif = (SELECT WineDB.getNIFfromNome(@Nome))
+		SET @countNIF = (SELECT WineDB.checkIfNIFExists(@nif))
 		SET @countVinho = (SELECT WineDB.checkIfWineExists(@ID_Produto))
 		IF (@countVinho < 1)
 			RAISERROR ('Não existe esse vinho em armazém.', 16,1);
@@ -351,7 +378,7 @@ AS
 			BEGIN
 				BEGIN TRY
 					BEGIN TRAN
-						INSERT INTO WineDB.Venda(ID_Produto, Preco, IVA, Quantidade, NIF_Cliente) VALUES (@ID_Produto, @Preco, @IVA, @Quantidade, @NIF_Cliente);
+						INSERT INTO WineDB.Venda(ID_Produto, Preco, IVA, Quantidade, NIF_Cliente) VALUES (@ID_Produto, @Preco, @IVA, @Quantidade, @nif);
 					COMMIT TRAN
 				END TRY
 				BEGIN CATCH

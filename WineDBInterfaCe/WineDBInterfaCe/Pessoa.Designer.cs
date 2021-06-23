@@ -77,6 +77,7 @@ namespace WineDBInterfaCe
             this.opAdegaButton = new System.Windows.Forms.Button();
             this.gerenteButton = new System.Windows.Forms.Button();
             this.clienteButton = new System.Windows.Forms.Button();
+            this.pessoaButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -181,6 +182,7 @@ namespace WineDBInterfaCe
             // 
             this.textBoxAdega.Location = new System.Drawing.Point(768, 148);
             this.textBoxAdega.Name = "textBoxAdega";
+            this.textBoxAdega.PlaceholderText = "(Op. Adega)";
             this.textBoxAdega.Size = new System.Drawing.Size(125, 27);
             this.textBoxAdega.TabIndex = 28;
             // 
@@ -188,6 +190,7 @@ namespace WineDBInterfaCe
             // 
             this.textBoxTerreno.Location = new System.Drawing.Point(768, 115);
             this.textBoxTerreno.Name = "textBoxTerreno";
+            this.textBoxTerreno.PlaceholderText = "(Op. Agricola)";
             this.textBoxTerreno.Size = new System.Drawing.Size(125, 27);
             this.textBoxTerreno.TabIndex = 27;
             // 
@@ -195,6 +198,7 @@ namespace WineDBInterfaCe
             // 
             this.textBoxNunFunc.Location = new System.Drawing.Point(766, 81);
             this.textBoxNunFunc.Name = "textBoxNunFunc";
+            this.textBoxNunFunc.PlaceholderText = "(Op. Agr/Ade/Gerente)";
             this.textBoxNunFunc.Size = new System.Drawing.Size(125, 27);
             this.textBoxNunFunc.TabIndex = 26;
             // 
@@ -202,6 +206,7 @@ namespace WineDBInterfaCe
             // 
             this.textBoxInicioAtiv.Location = new System.Drawing.Point(767, 46);
             this.textBoxInicioAtiv.Name = "textBoxInicioAtiv";
+            this.textBoxInicioAtiv.PlaceholderText = "(Funcionário)";
             this.textBoxInicioAtiv.Size = new System.Drawing.Size(125, 27);
             this.textBoxInicioAtiv.TabIndex = 25;
             // 
@@ -209,6 +214,7 @@ namespace WineDBInterfaCe
             // 
             this.textBoxSS.Location = new System.Drawing.Point(766, 13);
             this.textBoxSS.Name = "textBoxSS";
+            this.textBoxSS.PlaceholderText = "(Funcionário)";
             this.textBoxSS.Size = new System.Drawing.Size(125, 27);
             this.textBoxSS.TabIndex = 24;
             // 
@@ -270,8 +276,10 @@ namespace WineDBInterfaCe
             // 
             this.textBoxIBAN.Location = new System.Drawing.Point(421, 134);
             this.textBoxIBAN.Name = "textBoxIBAN";
+            this.textBoxIBAN.PlaceholderText = "(Funcionario)";
             this.textBoxIBAN.Size = new System.Drawing.Size(233, 27);
             this.textBoxIBAN.TabIndex = 17;
+            this.textBoxIBAN.Tag = "";
             // 
             // atualizarbutton
             // 
@@ -488,6 +496,7 @@ namespace WineDBInterfaCe
             this.opAgriButton.TabIndex = 21;
             this.opAgriButton.Text = "Op Agricolas";
             this.opAgriButton.UseVisualStyleBackColor = true;
+            this.opAgriButton.Click += new System.EventHandler(this.opAgriButton_Click);
             // 
             // opAdegaButton
             // 
@@ -497,6 +506,7 @@ namespace WineDBInterfaCe
             this.opAdegaButton.TabIndex = 22;
             this.opAdegaButton.Text = "Op. Adegas";
             this.opAdegaButton.UseVisualStyleBackColor = true;
+            this.opAdegaButton.Click += new System.EventHandler(this.opAdegaButton_Click);
             // 
             // gerenteButton
             // 
@@ -506,6 +516,7 @@ namespace WineDBInterfaCe
             this.gerenteButton.TabIndex = 23;
             this.gerenteButton.Text = "Gerentes";
             this.gerenteButton.UseVisualStyleBackColor = true;
+            this.gerenteButton.Click += new System.EventHandler(this.gerenteButton_Click);
             // 
             // clienteButton
             // 
@@ -515,12 +526,24 @@ namespace WineDBInterfaCe
             this.clienteButton.TabIndex = 24;
             this.clienteButton.Text = "Clientes";
             this.clienteButton.UseVisualStyleBackColor = true;
+            this.clienteButton.Click += new System.EventHandler(this.clienteButton_Click);
+            // 
+            // pessoaButton
+            // 
+            this.pessoaButton.Location = new System.Drawing.Point(631, 88);
+            this.pessoaButton.Name = "pessoaButton";
+            this.pessoaButton.Size = new System.Drawing.Size(94, 29);
+            this.pessoaButton.TabIndex = 25;
+            this.pessoaButton.Text = "Pessoas";
+            this.pessoaButton.UseVisualStyleBackColor = true;
+            this.pessoaButton.Click += new System.EventHandler(this.pessoaButton_Click);
             // 
             // Pessoa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1078, 577);
+            this.Controls.Add(this.pessoaButton);
             this.Controls.Add(this.clienteButton);
             this.Controls.Add(this.gerenteButton);
             this.Controls.Add(this.opAdegaButton);
@@ -593,5 +616,6 @@ namespace WineDBInterfaCe
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxIBAN;
+        private System.Windows.Forms.Button pessoaButton;
     }
 }

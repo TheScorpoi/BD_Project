@@ -127,15 +127,31 @@ AS
 	END
 GO
 
---CREATE FUNCTION WineDB.Teste(@Numero INT) RETURNS INT
---AS
-	--BEGIN
-		--DECLARE @numerozinho INT
 
-			--SET @numerozinho = (SELECT NIF FROM WineDB.OperadorAgricola WHERE Num_Func = @Numero)
+CREATE FUNCTION WineDB.getNIFfromNome (@Nome VARCHAR(256)) RETURNS INT
+AS
+	BEGIN
+		DECLARE @nif INT
+		SELECT @nif = NIF FROM WineDB.Pessoa WHERE Nome = @nome
+		RETURN @nif
+	END
+GO
 
-		--RETURN @numerozinho
-	--END
---GO
+CREATE FUNCTION WineDB.getIDAdegaFROMNome(@Nome VARCHAR(256)) RETURNS VARCHAR(5)
+AS
+	BEGIN
+		DECLARE @id VARCHAR(5)
+		SELECT @id = ID FROM WineDB.Adega WHERE Nome = @Nome
+		RETURN @id
+	END
+GO
 
-SELECT NIF FROM WineDB.OperadorAgricola WHERE Num_Func = 13
+CREATE FUNCTION WineDB.getIDCastaFROMNome(@Nome VARCHAR(256)) RETURNS INT
+AS
+	BEGIN
+		DECLARE @id INT
+		SELECT @id = ID FROM WineDB.Casta WHERE Nome = @Nome
+		RETURN @id
+	END
+GO
+

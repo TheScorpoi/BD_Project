@@ -22,3 +22,11 @@ JOIN WineDB.Adega AS A ON A.NIF_Gerente = G.NIF
 CREATE VIEW WineDB.ViewCliente AS
 SELECT P.Nome, P.Morada, P.NIF, P.Data_Nasc, P.Genero, P.Telemovel
 FROM WineDB.Pessoa AS P JOIN WineDB.Cliente AS C ON P.NIF = C.NIF 
+
+CREATE VIEW WineDB.ViewPessoa AS
+SELECT * FROM WineDB.Pessoa
+
+CREATE VIEW WineDB.ViewFuncionarios AS
+SELECT P.Nome, P.Morada, P.NIF, P.Data_Nasc, P.Genero, P.Telemovel, F.IBAN, F.Num_SS, F.Data_Inicio_Atividade
+FROM WineDB.Funcionario AS F
+JOIN WineDB.Pessoa AS P ON F.NIF = P.NIF

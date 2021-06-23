@@ -23,6 +23,7 @@ namespace WineDBInterfaCe
         SqlDataAdapter adapter;
         readonly DataTable dataTable = new DataTable();
         ListViewColumnSorter lvwColumnSorter;
+        String tipoPessoa = "Pessoa";
 
 
         public Pessoa(SqlConnection cnn, Form f)
@@ -101,20 +102,125 @@ namespace WineDBInterfaCe
             {
                 if (e.IsSelected)
                 {
+
                     string nome = listPessoas.SelectedItems[0].SubItems[0].Text;
                     string morada = listPessoas.SelectedItems[0].SubItems[1].Text;
                     string nif = listPessoas.SelectedItems[0].SubItems[2].Text;
                     string data_nasc = listPessoas.SelectedItems[0].SubItems[3].Text;
                     string genero = listPessoas.SelectedItems[0].SubItems[4].Text;
                     string telemovel = listPessoas.SelectedItems[0].SubItems[5].Text;
+                    string iban;
+                    string num_ss;
+                    string inicio_ativ;
+                    string num_func;
+                    string nome_Adega;
+                    string nome_terreno;
 
-                    textBoxNome.Text = nome;
-                    textBoxMorada.Text = morada;
-                    textBoxNIF.Text = nif;
-                    textBoxDataNasc.Text = data_nasc;
-                    textBoxGenero.Text = genero;
-                    textBoxTelemovel.Text = telemovel;
 
+                    switch (tipoPessoa)
+                    {
+                        case "OpAdega":
+                            
+                            iban = listPessoas.SelectedItems[0].SubItems[6].Text;
+                            num_ss = listPessoas.SelectedItems[0].SubItems[7].Text;
+                            inicio_ativ = listPessoas.SelectedItems[0].SubItems[8].Text;
+                            num_func = listPessoas.SelectedItems[0].SubItems[9].Text;
+                            nome_Adega = listPessoas.SelectedItems[0].SubItems[10].Text;
+
+                            textBoxNome.Text = nome;
+                            textBoxMorada.Text = morada;
+                            textBoxNIF.Text = nif;
+                            textBoxDataNasc.Text = data_nasc;
+                            textBoxGenero.Text = genero;
+                            textBoxTelemovel.Text = telemovel;
+                            textBoxIBAN.Text = iban;
+                            textBoxSS.Text = num_ss;
+                            textBoxInicioAtiv.Text = inicio_ativ;
+                            textBoxNunFunc.Text = num_func;
+                            textBoxAdega.Text = nome_Adega;
+                            textBoxTerreno.Text = "";
+                            comboBox2.Text = "Op. Adega";
+                            break;
+
+                        case "OpAgricola":
+
+                            iban = listPessoas.SelectedItems[0].SubItems[6].Text;
+                            num_ss = listPessoas.SelectedItems[0].SubItems[7].Text;
+                            inicio_ativ = listPessoas.SelectedItems[0].SubItems[8].Text;
+                            num_func = listPessoas.SelectedItems[0].SubItems[9].Text;
+                            nome_terreno = listPessoas.SelectedItems[0].SubItems[10].Text;
+
+
+
+                            textBoxNome.Text = nome;
+                            textBoxMorada.Text = morada;
+                            textBoxNIF.Text = nif;
+                            textBoxDataNasc.Text = data_nasc;
+                            textBoxGenero.Text = genero;
+                            textBoxTelemovel.Text = telemovel;
+                            textBoxIBAN.Text = iban;
+                            textBoxSS.Text = num_ss;
+                            textBoxInicioAtiv.Text = inicio_ativ;
+                            textBoxNunFunc.Text = num_func;
+                            textBoxTerreno.Text = nome_terreno;
+                            textBoxAdega.Text = "";
+                            comboBox2.Text = "Op. Agricola";
+                            break;
+
+                        case "Gerente":
+
+                            iban = listPessoas.SelectedItems[0].SubItems[6].Text;
+                            num_ss = listPessoas.SelectedItems[0].SubItems[7].Text;
+                            inicio_ativ = listPessoas.SelectedItems[0].SubItems[8].Text;
+                            num_func = listPessoas.SelectedItems[0].SubItems[9].Text;
+                            nome_terreno = listPessoas.SelectedItems[0].SubItems[10].Text;
+
+
+
+                            textBoxNome.Text = nome;
+                            textBoxMorada.Text = morada;
+                            textBoxNIF.Text = nif;
+                            textBoxDataNasc.Text = data_nasc;
+                            textBoxGenero.Text = genero;
+                            textBoxTelemovel.Text = telemovel;
+                            textBoxIBAN.Text = iban;
+                            textBoxSS.Text = num_ss;
+                            textBoxInicioAtiv.Text = inicio_ativ;
+                            textBoxNunFunc.Text = num_func;
+                            textBoxAdega.Text = nome_terreno;
+                            comboBox2.Text = "Gerente";
+                            break;
+                        case "Cliente":
+                            textBoxNome.Text = nome;
+                            textBoxMorada.Text = morada;
+                            textBoxNIF.Text = nif;
+                            textBoxDataNasc.Text = data_nasc;
+                            textBoxGenero.Text = genero;
+                            textBoxTelemovel.Text = telemovel;
+                            comboBox2.Text = "Cliente";
+                            textBoxIBAN.Text = "";
+                            textBoxInicioAtiv.Text = "";
+                            textBoxNunFunc.Text = "";
+                            textBoxTerreno.Text = "";
+                            textBoxAdega.Text = "";
+                            textBoxSS.Text = "";
+                            break;
+                        default:
+                            textBoxNome.Text = nome;
+                            textBoxMorada.Text = morada;
+                            textBoxNIF.Text = nif;
+                            textBoxDataNasc.Text = data_nasc;
+                            textBoxGenero.Text = genero;
+                            textBoxTelemovel.Text = telemovel;
+                            comboBox2.Text = "Pessoa";
+                            textBoxIBAN.Text = "";
+                            textBoxInicioAtiv.Text = "";
+                            textBoxNunFunc.Text = "";
+                            textBoxTerreno.Text = "";
+                            textBoxAdega.Text = "";
+                            textBoxSS.Text = "";
+                            break;
+                    }
                     //MessageBox.Show("PESSOA " + nome + "\n\nID: " + id + "\nEndereço: " + endereco + "\nCapacidade Máxima: " + cap_max + " (litros)\nNº Cubas: " + nCubas + "\nNome Gerente: " + nifGerente + "\n");
                 }
 
@@ -265,7 +371,7 @@ namespace WineDBInterfaCe
 
                         ss = Int32.Parse(textBoxSS.Text);
                         nFunc = Int32.Parse(textBoxNunFunc.Text);
-                        
+
                         command = new SqlCommand("WineDB.Adicionar" + categoria, cnn);
                         command.CommandType = CommandType.StoredProcedure;
 
@@ -336,7 +442,6 @@ namespace WineDBInterfaCe
                 textBoxNunFunc.Text = "";
                 textBoxSS.Text = "";
 
-
                 MessageBox.Show("Algum dado passado de forma incorreta");
             }
 
@@ -366,19 +471,175 @@ namespace WineDBInterfaCe
 
         private void FuncButton_Click(object sender, EventArgs e)
         {
-            //listPessoas.Items.Clear();
-            //listPessoas.View = View.Details;
+            tipoPessoa = "Func";
+            listPessoas.Items.Clear();
+            listPessoas.View = View.Details;
             DataTable table = new DataTable();
 
-            cmd = new SqlCommand("WineDB.ViewOperadorAgricola", cnn);
+            cmd = new SqlCommand("SELECT * FROM WineDB.ViewFuncionarios", cnn);
 
-            //da = new SqlDataAdapter(cmd);
-            //ds = new DataSet();
-            //da.Fill(ds, "tablePessoa");
+            da = new SqlDataAdapter(cmd);
+            ds = new DataSet();
+            da.Fill(ds, "tablePessoa");
 
-            table.Load(cmd.ExecuteReader());
+            dt = ds.Tables["tablePessoa"];
+
+            for (int i = 0; i <= dt.Rows.Count - 1; i++)
+            {
+                listPessoas.Items.Add(dt.Rows[i].ItemArray[0].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[1].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[2].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[3].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[4].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[5].ToString());
+            }
 
 
+        }
+
+        private void opAgriButton_Click(object sender, EventArgs e)
+        {
+            tipoPessoa = "OpAgricola";
+            listPessoas.Items.Clear();
+            listPessoas.View = View.Details;
+            DataTable table = new DataTable();
+
+            cmd = new SqlCommand("SELECT * FROM WineDB.ViewOperadorAgricola", cnn);
+
+            da = new SqlDataAdapter(cmd);
+            ds = new DataSet();
+            da.Fill(ds, "tablePessoa");
+
+            dt = ds.Tables["tablePessoa"];
+
+            for (int i = 0; i <= dt.Rows.Count - 1; i++)
+            {
+                listPessoas.Items.Add(dt.Rows[i].ItemArray[0].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[1].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[2].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[3].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[4].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[5].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[6].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[7].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[8].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[9].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[10].ToString());
+            }
+        }
+
+        private void opAdegaButton_Click(object sender, EventArgs e)
+        {
+            tipoPessoa = "OpAdega";
+            listPessoas.Items.Clear();
+            listPessoas.View = View.Details;
+            DataTable table = new DataTable();
+
+            cmd = new SqlCommand("SELECT * FROM WineDB.ViewOperadorAdega", cnn);
+
+            da = new SqlDataAdapter(cmd);
+            ds = new DataSet();
+            da.Fill(ds, "tablePessoa");
+
+            dt = ds.Tables["tablePessoa"];
+
+            for (int i = 0; i <= dt.Rows.Count - 1; i++)
+            {
+                listPessoas.Items.Add(dt.Rows[i].ItemArray[0].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[1].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[2].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[3].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[4].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[5].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[6].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[7].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[8].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[9].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[10].ToString());
+            }
+        }
+
+        private void gerenteButton_Click(object sender, EventArgs e)
+        {
+            tipoPessoa = "Gerente";
+            listPessoas.Items.Clear();
+            listPessoas.View = View.Details;
+            DataTable table = new DataTable();
+
+            cmd = new SqlCommand("SELECT * FROM WineDB.ViewGerente", cnn);
+
+            da = new SqlDataAdapter(cmd);
+            ds = new DataSet();
+            da.Fill(ds, "tablePessoa");
+
+            dt = ds.Tables["tablePessoa"];
+
+            for (int i = 0; i <= dt.Rows.Count - 1; i++)
+            {
+                listPessoas.Items.Add(dt.Rows[i].ItemArray[0].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[1].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[2].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[3].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[4].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[5].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[6].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[7].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[8].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[9].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[10].ToString());
+            }
+        }
+
+        private void clienteButton_Click(object sender, EventArgs e)
+        {
+            tipoPessoa = "Cliente";
+            listPessoas.Items.Clear();
+            listPessoas.View = View.Details;
+            DataTable table = new DataTable();
+
+            cmd = new SqlCommand("SELECT * FROM WineDB.ViewCliente", cnn);
+
+            da = new SqlDataAdapter(cmd);
+            ds = new DataSet();
+            da.Fill(ds, "tablePessoa");
+
+            dt = ds.Tables["tablePessoa"];
+
+            for (int i = 0; i <= dt.Rows.Count - 1; i++)
+            {
+                listPessoas.Items.Add(dt.Rows[i].ItemArray[0].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[1].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[2].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[3].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[4].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[5].ToString());
+            }
+        }
+
+        private void pessoaButton_Click(object sender, EventArgs e)
+        {
+            tipoPessoa = "Pessoa";
+            listPessoas.Items.Clear();
+            listPessoas.View = View.Details;
+            DataTable table = new DataTable();
+
+            cmd = new SqlCommand("SELECT * FROM WineDB.ViewPessoa", cnn);
+
+            da = new SqlDataAdapter(cmd);
+            ds = new DataSet();
+            da.Fill(ds, "tablePessoa");
+
+            dt = ds.Tables["tablePessoa"];
+
+            for (int i = 0; i <= dt.Rows.Count - 1; i++)
+            {
+                listPessoas.Items.Add(dt.Rows[i].ItemArray[0].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[1].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[2].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[3].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[4].ToString());
+                listPessoas.Items[i].SubItems.Add(dt.Rows[i].ItemArray[5].ToString());
+            }
         }
     }
 }
