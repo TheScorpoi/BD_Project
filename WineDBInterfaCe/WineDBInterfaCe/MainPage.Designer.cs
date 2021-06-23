@@ -248,6 +248,7 @@ namespace WineDBInterfaCe
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(139, 125);
             this.panel3.TabIndex = 6;
+            this.panel3.Click += new System.EventHandler(this.VendaForm_Click);
             // 
             // statVendasLabel
             // 

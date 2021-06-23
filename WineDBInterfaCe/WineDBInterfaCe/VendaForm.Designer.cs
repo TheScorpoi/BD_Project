@@ -30,28 +30,34 @@ namespace WineDBInterfaCe
         private void InitializeComponent()
         {
             this.label2 = new System.Windows.Forms.Label();
-            this.countArmazem = new System.Windows.Forms.Label();
+            this.countVenda = new System.Windows.Forms.Label();
             this.textBoxPesquisa = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.buttonVoltar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxCliente = new System.Windows.Forms.TextBox();
+            this.textBoxQuantidade = new System.Windows.Forms.TextBox();
+            this.clienteLabel = new System.Windows.Forms.Label();
+            this.quantidadeLabel = new System.Windows.Forms.Label();
             this.atualizarbutton = new System.Windows.Forms.Button();
             this.Apagarbutton = new System.Windows.Forms.Button();
-            this.IDAdegaLabel = new System.Windows.Forms.Label();
-            this.enderecoLabel = new System.Windows.Forms.Label();
-            this.nomeLabel = new System.Windows.Forms.Label();
+            this.precoLabel = new System.Windows.Forms.Label();
+            this.produtoLabel = new System.Windows.Forms.Label();
+            this.IVALabel = new System.Windows.Forms.Label();
             this.idLabel = new System.Windows.Forms.Label();
-            this.textBoxAdega = new System.Windows.Forms.TextBox();
-            this.textBoxENDERECO = new System.Windows.Forms.TextBox();
-            this.textBoxNOME = new System.Windows.Forms.TextBox();
+            this.textBoxPreco = new System.Windows.Forms.TextBox();
+            this.textBoxProduto = new System.Windows.Forms.TextBox();
+            this.textBoxIVA = new System.Windows.Forms.TextBox();
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.inserirButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.listArmazem = new System.Windows.Forms.ListView();
-            this.ID = new System.Windows.Forms.ColumnHeader();
-            this.Localizacao = new System.Windows.Forms.ColumnHeader();
-            this.Nome = new System.Windows.Forms.ColumnHeader();
-            this.Adega = new System.Windows.Forms.ColumnHeader();
+            this.listVenda = new System.Windows.Forms.ListView();
+            this.ID_Venda = new System.Windows.Forms.ColumnHeader();
+            this.Produto = new System.Windows.Forms.ColumnHeader();
+            this.Preco = new System.Windows.Forms.ColumnHeader();
+            this.IVA = new System.Windows.Forms.ColumnHeader();
+            this.Quantidade = new System.Windows.Forms.ColumnHeader();
+            this.Cliente = new System.Windows.Forms.ColumnHeader();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,18 +66,18 @@ namespace WineDBInterfaCe
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(254, 51);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 20);
+            this.label2.Size = new System.Drawing.Size(101, 20);
             this.label2.TabIndex = 18;
-            this.label2.Text = "Nº de Armazens:";
+            this.label2.Text = "Nº de Vendas:";
             // 
-            // countArmazem
+            // countVenda
             // 
-            this.countArmazem.AutoSize = true;
-            this.countArmazem.Location = new System.Drawing.Point(379, 53);
-            this.countArmazem.Name = "countArmazem";
-            this.countArmazem.Size = new System.Drawing.Size(31, 20);
-            this.countArmazem.TabIndex = 17;
-            this.countArmazem.Text = "OO";
+            this.countVenda.AutoSize = true;
+            this.countVenda.Location = new System.Drawing.Point(379, 53);
+            this.countVenda.Name = "countVenda";
+            this.countVenda.Size = new System.Drawing.Size(31, 20);
+            this.countVenda.TabIndex = 17;
+            this.countVenda.Text = "OO";
             // 
             // textBoxPesquisa
             // 
@@ -79,12 +85,13 @@ namespace WineDBInterfaCe
             this.textBoxPesquisa.Name = "textBoxPesquisa";
             this.textBoxPesquisa.Size = new System.Drawing.Size(163, 27);
             this.textBoxPesquisa.TabIndex = 16;
+            this.textBoxPesquisa.TextChanged += new System.EventHandler(this.textBoxPesquisa_TextChanged);
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "ID",
+            "ID da Venda",
             "Localização",
             "Nome",
             "Adega"});
@@ -101,24 +108,61 @@ namespace WineDBInterfaCe
             this.buttonVoltar.TabIndex = 14;
             this.buttonVoltar.Text = "Voltar";
             this.buttonVoltar.UseVisualStyleBackColor = true;
+            this.buttonVoltar.Click += new System.EventHandler(this.buttonVoltar_Click);
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.textBoxCliente);
+            this.panel1.Controls.Add(this.textBoxQuantidade);
+            this.panel1.Controls.Add(this.clienteLabel);
+            this.panel1.Controls.Add(this.quantidadeLabel);
             this.panel1.Controls.Add(this.atualizarbutton);
             this.panel1.Controls.Add(this.Apagarbutton);
-            this.panel1.Controls.Add(this.IDAdegaLabel);
-            this.panel1.Controls.Add(this.enderecoLabel);
-            this.panel1.Controls.Add(this.nomeLabel);
+            this.panel1.Controls.Add(this.precoLabel);
+            this.panel1.Controls.Add(this.produtoLabel);
+            this.panel1.Controls.Add(this.IVALabel);
             this.panel1.Controls.Add(this.idLabel);
-            this.panel1.Controls.Add(this.textBoxAdega);
-            this.panel1.Controls.Add(this.textBoxENDERECO);
-            this.panel1.Controls.Add(this.textBoxNOME);
+            this.panel1.Controls.Add(this.textBoxPreco);
+            this.panel1.Controls.Add(this.textBoxProduto);
+            this.panel1.Controls.Add(this.textBoxIVA);
             this.panel1.Controls.Add(this.textBoxID);
             this.panel1.Controls.Add(this.inserirButton);
             this.panel1.Location = new System.Drawing.Point(43, 361);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1010, 178);
             this.panel1.TabIndex = 13;
+            // 
+            // textBoxCliente
+            // 
+            this.textBoxCliente.Location = new System.Drawing.Point(545, 123);
+            this.textBoxCliente.Name = "textBoxCliente";
+            this.textBoxCliente.Size = new System.Drawing.Size(233, 27);
+            this.textBoxCliente.TabIndex = 17;
+            // 
+            // textBoxQuantidade
+            // 
+            this.textBoxQuantidade.Location = new System.Drawing.Point(164, 121);
+            this.textBoxQuantidade.Name = "textBoxQuantidade";
+            this.textBoxQuantidade.Size = new System.Drawing.Size(233, 27);
+            this.textBoxQuantidade.TabIndex = 16;
+            // 
+            // clienteLabel
+            // 
+            this.clienteLabel.AutoSize = true;
+            this.clienteLabel.Location = new System.Drawing.Point(445, 124);
+            this.clienteLabel.Name = "clienteLabel";
+            this.clienteLabel.Size = new System.Drawing.Size(62, 20);
+            this.clienteLabel.TabIndex = 15;
+            this.clienteLabel.Text = "Cliente: ";
+            // 
+            // quantidadeLabel
+            // 
+            this.quantidadeLabel.AutoSize = true;
+            this.quantidadeLabel.Location = new System.Drawing.Point(66, 121);
+            this.quantidadeLabel.Name = "quantidadeLabel";
+            this.quantidadeLabel.Size = new System.Drawing.Size(90, 20);
+            this.quantidadeLabel.TabIndex = 14;
+            this.quantidadeLabel.Text = "Quantidade:";
             // 
             // atualizarbutton
             // 
@@ -137,63 +181,64 @@ namespace WineDBInterfaCe
             this.Apagarbutton.TabIndex = 13;
             this.Apagarbutton.Text = "Apagar";
             this.Apagarbutton.UseVisualStyleBackColor = true;
+            this.Apagarbutton.Click += new System.EventHandler(this.Apagarbutton_Click);
             // 
-            // IDAdegaLabel
+            // precoLabel
             // 
-            this.IDAdegaLabel.AutoSize = true;
-            this.IDAdegaLabel.Location = new System.Drawing.Point(432, 29);
-            this.IDAdegaLabel.Name = "IDAdegaLabel";
-            this.IDAdegaLabel.Size = new System.Drawing.Size(100, 20);
-            this.IDAdegaLabel.TabIndex = 12;
-            this.IDAdegaLabel.Text = "ID da Adega: ";
+            this.precoLabel.AutoSize = true;
+            this.precoLabel.Location = new System.Drawing.Point(473, 29);
+            this.precoLabel.Name = "precoLabel";
+            this.precoLabel.Size = new System.Drawing.Size(53, 20);
+            this.precoLabel.TabIndex = 12;
+            this.precoLabel.Text = "Preço: ";
             // 
-            // enderecoLabel
+            // produtoLabel
             // 
-            this.enderecoLabel.AutoSize = true;
-            this.enderecoLabel.Location = new System.Drawing.Point(84, 76);
-            this.enderecoLabel.Name = "enderecoLabel";
-            this.enderecoLabel.Size = new System.Drawing.Size(74, 20);
-            this.enderecoLabel.TabIndex = 9;
-            this.enderecoLabel.Text = "Endereço:";
+            this.produtoLabel.AutoSize = true;
+            this.produtoLabel.Location = new System.Drawing.Point(84, 76);
+            this.produtoLabel.Name = "produtoLabel";
+            this.produtoLabel.Size = new System.Drawing.Size(65, 20);
+            this.produtoLabel.TabIndex = 9;
+            this.produtoLabel.Text = "Produto:";
             // 
-            // nomeLabel
+            // IVALabel
             // 
-            this.nomeLabel.AutoSize = true;
-            this.nomeLabel.Location = new System.Drawing.Point(473, 76);
-            this.nomeLabel.Name = "nomeLabel";
-            this.nomeLabel.Size = new System.Drawing.Size(53, 20);
-            this.nomeLabel.TabIndex = 8;
-            this.nomeLabel.Text = "Nome:";
+            this.IVALabel.AutoSize = true;
+            this.IVALabel.Location = new System.Drawing.Point(473, 76);
+            this.IVALabel.Name = "IVALabel";
+            this.IVALabel.Size = new System.Drawing.Size(34, 20);
+            this.IVALabel.TabIndex = 8;
+            this.IVALabel.Text = "IVA:";
             // 
             // idLabel
             // 
             this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(118, 25);
+            this.idLabel.Location = new System.Drawing.Point(84, 22);
             this.idLabel.Name = "idLabel";
-            this.idLabel.Size = new System.Drawing.Size(27, 20);
+            this.idLabel.Size = new System.Drawing.Size(72, 20);
             this.idLabel.TabIndex = 7;
-            this.idLabel.Text = "ID:";
+            this.idLabel.Text = "ID Venda:";
             // 
-            // textBoxAdega
+            // textBoxPreco
             // 
-            this.textBoxAdega.Location = new System.Drawing.Point(545, 26);
-            this.textBoxAdega.Name = "textBoxAdega";
-            this.textBoxAdega.Size = new System.Drawing.Size(233, 27);
-            this.textBoxAdega.TabIndex = 6;
+            this.textBoxPreco.Location = new System.Drawing.Point(545, 26);
+            this.textBoxPreco.Name = "textBoxPreco";
+            this.textBoxPreco.Size = new System.Drawing.Size(233, 27);
+            this.textBoxPreco.TabIndex = 6;
             // 
-            // textBoxENDERECO
+            // textBoxProduto
             // 
-            this.textBoxENDERECO.Location = new System.Drawing.Point(164, 76);
-            this.textBoxENDERECO.Name = "textBoxENDERECO";
-            this.textBoxENDERECO.Size = new System.Drawing.Size(233, 27);
-            this.textBoxENDERECO.TabIndex = 5;
+            this.textBoxProduto.Location = new System.Drawing.Point(164, 76);
+            this.textBoxProduto.Name = "textBoxProduto";
+            this.textBoxProduto.Size = new System.Drawing.Size(233, 27);
+            this.textBoxProduto.TabIndex = 5;
             // 
-            // textBoxNOME
+            // textBoxIVA
             // 
-            this.textBoxNOME.Location = new System.Drawing.Point(545, 76);
-            this.textBoxNOME.Name = "textBoxNOME";
-            this.textBoxNOME.Size = new System.Drawing.Size(233, 27);
-            this.textBoxNOME.TabIndex = 3;
+            this.textBoxIVA.Location = new System.Drawing.Point(545, 76);
+            this.textBoxIVA.Name = "textBoxIVA";
+            this.textBoxIVA.Size = new System.Drawing.Size(233, 27);
+            this.textBoxIVA.TabIndex = 3;
             // 
             // textBoxID
             // 
@@ -210,6 +255,7 @@ namespace WineDBInterfaCe
             this.inserirButton.TabIndex = 0;
             this.inserirButton.Text = "Inserir Adega";
             this.inserirButton.UseVisualStyleBackColor = true;
+            this.inserirButton.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -219,41 +265,56 @@ namespace WineDBInterfaCe
             this.button1.TabIndex = 12;
             this.button1.Text = "Limpar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // listArmazem
+            // listVenda
             // 
-            this.listArmazem.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ID,
-            this.Localizacao,
-            this.Nome,
-            this.Adega});
-            this.listArmazem.HideSelection = false;
-            this.listArmazem.Location = new System.Drawing.Point(43, 102);
-            this.listArmazem.Name = "listArmazem";
-            this.listArmazem.Size = new System.Drawing.Size(1010, 206);
-            this.listArmazem.TabIndex = 11;
-            this.listArmazem.UseCompatibleStateImageBehavior = false;
-            this.listArmazem.View = System.Windows.Forms.View.Details;
+            this.listVenda.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ID_Venda,
+            this.Produto,
+            this.Preco,
+            this.IVA,
+            this.Quantidade,
+            this.Cliente});
+            this.listVenda.HideSelection = false;
+            this.listVenda.Location = new System.Drawing.Point(43, 102);
+            this.listVenda.Name = "listVenda";
+            this.listVenda.Size = new System.Drawing.Size(1010, 206);
+            this.listVenda.TabIndex = 11;
+            this.listVenda.UseCompatibleStateImageBehavior = false;
+            this.listVenda.View = System.Windows.Forms.View.Details;
+            this.listVenda.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listVenda_ColumnClick);
+            this.listVenda.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listVenda_ItemSelectionChanged);
             // 
-            // ID
+            // ID_Venda
             // 
-            this.ID.Text = "ID";
-            this.ID.Width = 75;
+            this.ID_Venda.Text = "ID Venda";
+            this.ID_Venda.Width = 100;
             // 
-            // Localizacao
+            // Produto
             // 
-            this.Localizacao.Text = "Localização";
-            this.Localizacao.Width = 350;
+            this.Produto.Text = "Produto";
+            this.Produto.Width = 150;
             // 
-            // Nome
+            // Preco
             // 
-            this.Nome.Text = "Nome";
-            this.Nome.Width = 250;
+            this.Preco.Text = "Preço";
+            this.Preco.Width = 100;
             // 
-            // Adega
+            // IVA
             // 
-            this.Adega.Text = "Adega a que está associado";
-            this.Adega.Width = 250;
+            this.IVA.Text = "IVA";
+            this.IVA.Width = 75;
+            // 
+            // Quantidade
+            // 
+            this.Quantidade.Text = "Quantidade";
+            this.Quantidade.Width = 125;
+            // 
+            // Cliente
+            // 
+            this.Cliente.Text = "Cliente";
+            this.Cliente.Width = 200;
             // 
             // VendaForm
             // 
@@ -261,13 +322,13 @@ namespace WineDBInterfaCe
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1074, 552);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.countArmazem);
+            this.Controls.Add(this.countVenda);
             this.Controls.Add(this.textBoxPesquisa);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.buttonVoltar);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.listArmazem);
+            this.Controls.Add(this.listVenda);
             this.Name = "VendaForm";
             this.Text = "WineDB - Venda";
             this.panel1.ResumeLayout(false);
@@ -280,27 +341,33 @@ namespace WineDBInterfaCe
         #endregion
 
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label countArmazem;
+        private System.Windows.Forms.Label countVenda;
         private System.Windows.Forms.TextBox textBoxPesquisa;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button buttonVoltar;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button atualizarbutton;
         private System.Windows.Forms.Button Apagarbutton;
-        private System.Windows.Forms.Label IDAdegaLabel;
-        private System.Windows.Forms.Label enderecoLabel;
-        private System.Windows.Forms.Label nomeLabel;
+        private System.Windows.Forms.Label precoLabel;
+        private System.Windows.Forms.Label produtoLabel;
+        private System.Windows.Forms.Label IVALabel;
         private System.Windows.Forms.Label idLabel;
-        private System.Windows.Forms.TextBox textBoxAdega;
-        private System.Windows.Forms.TextBox textBoxENDERECO;
-        private System.Windows.Forms.TextBox textBoxNOME;
+        private System.Windows.Forms.TextBox textBoxPreco;
+        private System.Windows.Forms.TextBox textBoxProduto;
+        private System.Windows.Forms.TextBox textBoxIVA;
         private System.Windows.Forms.TextBox textBoxID;
         private System.Windows.Forms.Button inserirButton;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListView listArmazem;
-        private System.Windows.Forms.ColumnHeader ID;
-        private System.Windows.Forms.ColumnHeader Localizacao;
-        private System.Windows.Forms.ColumnHeader Nome;
-        private System.Windows.Forms.ColumnHeader Adega;
+        private System.Windows.Forms.ListView listVenda;
+        private System.Windows.Forms.ColumnHeader ID_Venda;
+        private System.Windows.Forms.ColumnHeader Produto;
+        private System.Windows.Forms.ColumnHeader Preco;
+        private System.Windows.Forms.ColumnHeader IVA;
+        private System.Windows.Forms.ColumnHeader Quantidade;
+        private System.Windows.Forms.ColumnHeader Cliente;
+        private System.Windows.Forms.TextBox textBoxCliente;
+        private System.Windows.Forms.TextBox textBoxQuantidade;
+        private System.Windows.Forms.Label clienteLabel;
+        private System.Windows.Forms.Label quantidadeLabel;
     }
 }
