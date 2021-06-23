@@ -154,11 +154,11 @@ namespace WineDBInterfaCe
             // NifGerenteLabel
             // 
             this.NifGerenteLabel.AutoSize = true;
-            this.NifGerenteLabel.Location = new System.Drawing.Point(436, 115);
+            this.NifGerenteLabel.Location = new System.Drawing.Point(457, 115);
             this.NifGerenteLabel.Name = "NifGerenteLabel";
-            this.NifGerenteLabel.Size = new System.Drawing.Size(94, 20);
+            this.NifGerenteLabel.Size = new System.Drawing.Size(68, 20);
             this.NifGerenteLabel.TabIndex = 12;
-            this.NifGerenteLabel.Text = "NIF Gerente: ";
+            this.NifGerenteLabel.Text = "Gerente: ";
             // 
             // numCubasLabel
             // 
@@ -298,6 +298,7 @@ namespace WineDBInterfaCe
             this.Limpar.TabIndex = 9;
             this.Limpar.Text = "Limpar";
             this.Limpar.UseVisualStyleBackColor = true;
+            this.Limpar.Click += new System.EventHandler(this.button2_Click);
             // 
             // countAdegas
             // 

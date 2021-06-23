@@ -52,8 +52,9 @@ namespace WineDBInterfaCe
             this.inserirButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.listVenda = new System.Windows.Forms.ListView();
+            this.ID = new System.Windows.Forms.ColumnHeader();
             this.ID_Venda = new System.Windows.Forms.ColumnHeader();
-            this.Produto = new System.Windows.Forms.ColumnHeader();
+            this.Nome = new System.Windows.Forms.ColumnHeader();
             this.Preco = new System.Windows.Forms.ColumnHeader();
             this.IVA = new System.Windows.Forms.ColumnHeader();
             this.Quantidade = new System.Windows.Forms.ColumnHeader();
@@ -271,7 +272,8 @@ namespace WineDBInterfaCe
             // 
             this.listVenda.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ID_Venda,
-            this.Produto,
+            this.ID,
+            this.Nome,
             this.Preco,
             this.IVA,
             this.Quantidade,
@@ -286,35 +288,40 @@ namespace WineDBInterfaCe
             this.listVenda.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listVenda_ColumnClick);
             this.listVenda.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listVenda_ItemSelectionChanged);
             // 
+            // ID
+            // 
+            this.ID.Text = "ID Produto";
+            this.ID.Width = 150;
+            // 
             // ID_Venda
             // 
             this.ID_Venda.Text = "ID Venda";
             this.ID_Venda.Width = 100;
             // 
-            // Produto
+            // Nome
             // 
-            this.Produto.Text = "Produto";
-            this.Produto.Width = 150;
+            this.Nome.Text = "Produto";
+            this.Nome.Width = 100;
             // 
             // Preco
             // 
             this.Preco.Text = "Preço";
-            this.Preco.Width = 100;
+            this.Preco.Width = 75;
             // 
             // IVA
             // 
             this.IVA.Text = "IVA";
-            this.IVA.Width = 75;
+            this.IVA.Width = 125;
             // 
             // Quantidade
             // 
             this.Quantidade.Text = "Quantidade";
-            this.Quantidade.Width = 125;
+            this.Quantidade.Width = 200;
             // 
             // Cliente
             // 
             this.Cliente.Text = "Cliente";
-            this.Cliente.Width = 200;
+            this.Cliente.Width = 150;
             // 
             // VendaForm
             // 
@@ -360,14 +367,15 @@ namespace WineDBInterfaCe
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listVenda;
         private System.Windows.Forms.ColumnHeader ID_Venda;
-        private System.Windows.Forms.ColumnHeader Produto;
+        private System.Windows.Forms.ColumnHeader ID;
+        private System.Windows.Forms.ColumnHeader Nome;
         private System.Windows.Forms.ColumnHeader Preco;
         private System.Windows.Forms.ColumnHeader IVA;
         private System.Windows.Forms.ColumnHeader Quantidade;
-        private System.Windows.Forms.ColumnHeader Cliente;
         private System.Windows.Forms.TextBox textBoxCliente;
         private System.Windows.Forms.TextBox textBoxQuantidade;
         private System.Windows.Forms.Label clienteLabel;
         private System.Windows.Forms.Label quantidadeLabel;
+        private System.Windows.Forms.ColumnHeader Cliente;
     }
 }

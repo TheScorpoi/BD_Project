@@ -199,7 +199,7 @@ namespace WineDBInterfaCe
                 command.Parameters.Add(new SqlParameter("@ID", id));
                 command.Parameters.Add(new SqlParameter("@Localizacao", endereco));
                 command.Parameters.Add(new SqlParameter("@Nome", nome));
-                command.Parameters.Add(new SqlParameter("@ID_Adega", adegaAssociado));
+                command.Parameters.Add(new SqlParameter("@Nome_Adega", adegaAssociado));
 
                 rdr = command.ExecuteReader();
             } catch

@@ -109,11 +109,11 @@ namespace WineDBInterfaCe
             //MessageBox.Show(count);
             reader.Close();
 
-            cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.Cuba", cnn);
+            cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.Venda", cnn);
             reader = cmd.ExecuteReader();
             reader.Read();
             count = reader["Count"].ToString();
-            statCubasLabel.Text = count;
+            statVendasLabel.Text = count;
             //MessageBox.Show(count);
             reader.Close();
         }

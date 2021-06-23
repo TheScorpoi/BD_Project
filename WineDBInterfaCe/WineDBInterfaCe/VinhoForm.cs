@@ -196,7 +196,7 @@ namespace WineDBInterfaCe
             int id_cuba = Int32.Parse(textBoxIDCuba.Text);
             string nome = textBoxNome.Text;
             string doc = textBoxDOC.Text;
-            int id_casta = Int32.Parse(textBoxIDCasta.Text);
+            string nome_casta = textBoxIDCasta.Text;
 
             try
             {
@@ -207,7 +207,7 @@ namespace WineDBInterfaCe
                 command.Parameters.Add(new SqlParameter("@ID_Cuba", id_cuba));
                 command.Parameters.Add(new SqlParameter("@Nome", nome));
                 command.Parameters.Add(new SqlParameter("@DOC", doc));
-                command.Parameters.Add(new SqlParameter("@ID_Casta", id_casta));
+                command.Parameters.Add(new SqlParameter("@Nome_Casta", nome_casta));
 
                 rdr = command.ExecuteReader();
             }

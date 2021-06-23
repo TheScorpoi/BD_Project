@@ -209,20 +209,22 @@ namespace WineDBInterfaCe
             string nome = textBoxNOME.Text;
             int cap_max = Int32.Parse(textBoxCAPMAX.Text);
             int num_cubas = Int32.Parse(textBoxNCUBAS.Text);
-            int nif_gerente = Int32.Parse(textBoxNIFGERENTE.Text);
+            string nif_gerente = textBoxNIFGERENTE.Text;
             try
             {
+
                 SqlCommand command = new SqlCommand("WineDB.AdicionarAdega", cnn);
                 command.CommandType = CommandType.StoredProcedure;
-
                 command.Parameters.Add(new SqlParameter("@ID", id));
                 command.Parameters.Add(new SqlParameter("@Nome", nome));
                 command.Parameters.Add(new SqlParameter("@Endereco", endereco));
                 command.Parameters.Add(new SqlParameter("@Cap_Max", cap_max));
                 command.Parameters.Add(new SqlParameter("@Num_Cubas", num_cubas));
-                command.Parameters.Add(new SqlParameter("@NIF_Gerente", nif_gerente));
+                command.Parameters.Add(new SqlParameter("@NomeGerente", nif_gerente));
+
 
                 rdr = command.ExecuteReader();
+                MessageBox.Show("Ebtaias");
             }
             catch
             {
@@ -243,7 +245,7 @@ namespace WineDBInterfaCe
 
             loadInicial();
         }
-        
+
         private void apagarButton_Click(object sender, EventArgs e)
         {
             string id = textBoxID.Text;

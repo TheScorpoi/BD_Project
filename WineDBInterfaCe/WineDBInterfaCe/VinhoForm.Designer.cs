@@ -101,7 +101,7 @@ namespace WineDBInterfaCe
             // ID_Adega
             // 
             this.ID_Adega.Text = "Adega";
-            this.ID_Adega.Width = 200;
+            this.ID_Adega.Width = 180;
             // 
             // button1
             // 
@@ -165,11 +165,11 @@ namespace WineDBInterfaCe
             // idCastaLabel
             // 
             this.idCastaLabel.AutoSize = true;
-            this.idCastaLabel.Location = new System.Drawing.Point(436, 73);
+            this.idCastaLabel.Location = new System.Drawing.Point(416, 76);
             this.idCastaLabel.Name = "idCastaLabel";
-            this.idCastaLabel.Size = new System.Drawing.Size(88, 20);
+            this.idCastaLabel.Size = new System.Drawing.Size(114, 20);
             this.idCastaLabel.TabIndex = 11;
-            this.idCastaLabel.Text = "ID da Casta:";
+            this.idCastaLabel.Text = "Nome da Casta:";
             // 
             // DOCLabel
             // 

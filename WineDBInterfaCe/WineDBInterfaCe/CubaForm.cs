@@ -77,7 +77,7 @@ namespace WineDBInterfaCe
 
         public void statFundoConico()
         {
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.TipoCuba WHERE TipoCuba = 'Depósito Cónico'", cnn);
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.TipoCuba WHERE TipoCuba = 'Depóstio Fundo Cónico'", cnn);
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
             String count = reader["Count"].ToString();
@@ -117,7 +117,7 @@ namespace WineDBInterfaCe
 
         public void statBalao()
         {
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.TipoCuba WHERE TipoCuba = 'Depósito em Balão'", cnn);
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) AS Count FROM WineDB.TipoCuba WHERE TipoCuba = 'Deposito em Balão'", cnn);
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
             String count = reader["Count"].ToString();
@@ -276,7 +276,7 @@ namespace WineDBInterfaCe
             SqlDataReader rdr = null;
 
             int id = Int32.Parse(textBoxID.Text);
-            string id_adega = textBoxIDAdega.Text;
+            string nome_adega = textBoxIDAdega.Text;
             int cap_max = Int32.Parse(textBoxCapMax.Text);
             string tipo = textBoxTipo.Text;
 
@@ -286,7 +286,7 @@ namespace WineDBInterfaCe
                 command.CommandType = CommandType.StoredProcedure;
                 MessageBox.Show("AQUI");
                 command.Parameters.Add(new SqlParameter("@ID", id));
-                command.Parameters.Add(new SqlParameter("@ID_Adega", id_adega));
+                command.Parameters.Add(new SqlParameter("@Nome_Adega", nome_adega));
                 command.Parameters.Add(new SqlParameter("@Cap_Max", cap_max));
                 command.Parameters.Add(new SqlParameter("@TipoCuba", tipo));
 

@@ -142,11 +142,11 @@ namespace WineDBInterfaCe
             // IDAdegaLabel
             // 
             this.IDAdegaLabel.AutoSize = true;
-            this.IDAdegaLabel.Location = new System.Drawing.Point(432, 29);
+            this.IDAdegaLabel.Location = new System.Drawing.Point(451, 32);
             this.IDAdegaLabel.Name = "IDAdegaLabel";
-            this.IDAdegaLabel.Size = new System.Drawing.Size(100, 20);
+            this.IDAdegaLabel.Size = new System.Drawing.Size(126, 20);
             this.IDAdegaLabel.TabIndex = 12;
-            this.IDAdegaLabel.Text = "ID da Adega: ";
+            this.IDAdegaLabel.Text = "Nome da Adega: ";
             // 
             // enderecoLabel
             // 
@@ -160,11 +160,11 @@ namespace WineDBInterfaCe
             // nomeLabel
             // 
             this.nomeLabel.AutoSize = true;
-            this.nomeLabel.Location = new System.Drawing.Point(473, 76);
+            this.nomeLabel.Location = new System.Drawing.Point(434, 79);
             this.nomeLabel.Name = "nomeLabel";
-            this.nomeLabel.Size = new System.Drawing.Size(53, 20);
+            this.nomeLabel.Size = new System.Drawing.Size(143, 20);
             this.nomeLabel.TabIndex = 8;
-            this.nomeLabel.Text = "Nome:";
+            this.nomeLabel.Text = "Nome do Armazém:";
             // 
             // idLabel
             // 
@@ -177,7 +177,7 @@ namespace WineDBInterfaCe
             // 
             // textBoxAdega
             // 
-            this.textBoxAdega.Location = new System.Drawing.Point(545, 26);
+            this.textBoxAdega.Location = new System.Drawing.Point(583, 29);
             this.textBoxAdega.Name = "textBoxAdega";
             this.textBoxAdega.Size = new System.Drawing.Size(233, 27);
             this.textBoxAdega.TabIndex = 6;
@@ -191,7 +191,7 @@ namespace WineDBInterfaCe
             // 
             // textBoxNOME
             // 
-            this.textBoxNOME.Location = new System.Drawing.Point(545, 76);
+            this.textBoxNOME.Location = new System.Drawing.Point(583, 76);
             this.textBoxNOME.Name = "textBoxNOME";
             this.textBoxNOME.Size = new System.Drawing.Size(233, 27);
             this.textBoxNOME.TabIndex = 3;

@@ -32,9 +32,9 @@ namespace WineDBInterfaCe
         }
 
 
-        private void populate(String ID_Produto, String preco, String iva, String quantidade, String nif)
+        private void populate(String ID_Produto, string idVinho, String preco, String iva, String quantidade, String nif)
         {
-            listVenda.Items.Add(new ListViewItem(new[] { ID_Produto, preco, iva, quantidade, nif}));
+            listVenda.Items.Add(new ListViewItem(new[] { ID_Produto, idVinho, preco, iva, quantidade, nif}));
         }
 
         private void vendaLoad()
@@ -42,7 +42,7 @@ namespace WineDBInterfaCe
             listVenda.Items.Clear();
             listVenda.View = View.Details;
 
-            cmd = new SqlCommand("SELECT V.ID_Venda, VI.Nome, V.Preco, V.IVA, V.Quantidade, P.Nome FROM WineDB.Venda AS V JOIN WineDB.Vinho AS VI ON V.ID_Produto = VI.ID JOIN WineDB.Pessoa AS P ON V.NIF_Cliente = P.NIF", cnn);
+            cmd = new SqlCommand("SELECT V.ID_Venda, VI.ID, VI.Nome, V.Preco, V.IVA, V.Quantidade, P.Nome FROM WineDB.Venda AS V JOIN WineDB.Vinho AS VI ON V.ID_Produto = VI.ID JOIN WineDB.Pessoa AS P ON V.NIF_Cliente = P.NIF", cnn);
 
             da = new SqlDataAdapter(cmd);
             ds = new DataSet();
@@ -58,6 +58,7 @@ namespace WineDBInterfaCe
                 listVenda.Items[i].SubItems.Add(dt.Rows[i].ItemArray[3].ToString());
                 listVenda.Items[i].SubItems.Add(dt.Rows[i].ItemArray[4].ToString());
                 listVenda.Items[i].SubItems.Add(dt.Rows[i].ItemArray[5].ToString());
+                listVenda.Items[i].SubItems.Add(dt.Rows[i].ItemArray[6].ToString());
             }
             countadorVenda();
         }
@@ -86,7 +87,7 @@ namespace WineDBInterfaCe
 
 
             listVenda.Items.Clear();
-            cmd = new SqlCommand("SELECT V.ID_Venda, VI.Nome, V.Preco, V.IVA, V.Quantidade, P.Nome FROM WineDB.Venda AS V JOIN WineDB.Vinho AS VI ON V.ID_Produto = VI.ID JOIN WineDB.Pessoa AS P ON V.NIF_Cliente = P.NIF WHERE V." + filter + " LIKE '%" + pesquisaText + "%'", cnn);
+            cmd = new SqlCommand("SELECT V.ID_Venda, VI.ID, VI.Nome, V.Preco, V.IVA, V.Quantidade, P.Nome FROM WineDB.Venda AS V JOIN WineDB.Vinho AS VI ON V.ID_Produto = VI.ID JOIN WineDB.Pessoa AS P ON V.NIF_Cliente = P.NIF WHERE V." + filter + " LIKE '%" + pesquisaText + "%'", cnn);
             try
             {
                 adaper = new SqlDataAdapter(cmd);
@@ -98,7 +99,7 @@ namespace WineDBInterfaCe
 
                 foreach (DataRow row in dt.Rows)
                 {
-                    populate(row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString());
+                    populate(row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString());
                 }
                 dt.Rows.Clear();
             }
@@ -118,10 +119,10 @@ namespace WineDBInterfaCe
                 {
                     string id_venda = listVenda.SelectedItems[0].SubItems[0].Text;
                     string produto = listVenda.SelectedItems[0].SubItems[1].Text;
-                    string preco = listVenda.SelectedItems[0].SubItems[2].Text;
-                    string iva = listVenda.SelectedItems[0].SubItems[3].Text;
-                    string quantidade = listVenda.SelectedItems[0].SubItems[4].Text;
-                    string cliente = listVenda.SelectedItems[0].SubItems[5].Text;
+                    string preco = listVenda.SelectedItems[0].SubItems[3].Text;
+                    string iva = listVenda.SelectedItems[0].SubItems[4].Text;
+                    string quantidade = listVenda.SelectedItems[0].SubItems[5].Text;
+                    string cliente = listVenda.SelectedItems[0].SubItems[6].Text;
 
                     textBoxID.Text = id_venda;
                     textBoxProduto.Text = produto;
@@ -191,23 +192,22 @@ namespace WineDBInterfaCe
             //https://csharp-station.com/Tutorial/AdoDotNet/Lesson07
             SqlDataReader rdr = null;
 
-            int id = Int32.Parse(textBoxID.Text);
-            string produto = textBoxProduto.Text;
+            string id_produto = textBoxProduto.Text;
             float preco = float.Parse(textBoxPreco.Text);
             int iva = Int32.Parse(textBoxIVA.Text);
             int quantidade = Int32.Parse(textBoxQuantidade.Text);
-            int cliente = Int32.Parse(textBoxCliente.Text);
+            string cliente = textBoxCliente.Text;
+            
             try
             {
                 SqlCommand command = new SqlCommand("WineDB.AdicionarVenda", cnn);
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add(new SqlParameter("@ID_Venda", id));
-                command.Parameters.Add(new SqlParameter("@ID_Produto", produto));
+                command.Parameters.Add(new SqlParameter("@ID_Produto", id_produto));
                 command.Parameters.Add(new SqlParameter("@Preco", preco));
                 command.Parameters.Add(new SqlParameter("@IVA", iva));
                 command.Parameters.Add(new SqlParameter("@Quantidade", quantidade));
-                command.Parameters.Add(new SqlParameter("@NIF_Cliente", cliente));
+                command.Parameters.Add(new SqlParameter("@Nome", cliente));
 
                 rdr = command.ExecuteReader();
             }
@@ -246,7 +246,6 @@ namespace WineDBInterfaCe
             //to refrsh
             vendaLoad();
         }
-
 
     }
 }
