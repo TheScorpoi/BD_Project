@@ -332,7 +332,11 @@ namespace WineDBInterfaCe
                         categoria = "Pessoa";
                         command = new SqlCommand("WineDB.Adicionar" + categoria, cnn);
                         command.CommandType = CommandType.StoredProcedure;
-
+                        MessageBox.Show(nome);
+                        MessageBox.Show(morada);
+                        MessageBox.Show(data_nasc);
+                        MessageBox.Show(genero);
+                        MessageBox.Show(telemovel);
                         command.Parameters.Add(new SqlParameter("@Nome", nome));
                         command.Parameters.Add(new SqlParameter("@Morada", morada));
                         command.Parameters.Add(new SqlParameter("@NIF", nif));

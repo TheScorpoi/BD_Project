@@ -38,7 +38,7 @@ namespace WineDBInterfaCe
             listTerreno.Items.Clear();
             listTerreno.View = View.Details;
 
-            cmd = new SqlCommand("SELECT T.ID, T.Nome, T.Localizacao, C.Nome, T.Hectares, ADEGA.NOME FROM WineDB.Terreno AS T JOIN WineDB.Casta AS C ON T.ID_CASTA = C.ID JOIN WineDB.Adega AS ADEGA ON T.ID_Adega = ADEGA.ID", cnn);
+            cmd = new SqlCommand("SELECT T.ID, T.Nome, T.Localizacao, T.Ano_plantacao, C.Nome, T.Hectares, ADEGA.NOME FROM WineDB.Terreno AS T JOIN WineDB.Casta AS C ON T.ID_CASTA = C.ID JOIN WineDB.Adega AS ADEGA ON T.ID_Adega = ADEGA.ID", cnn);
 
             da = new SqlDataAdapter(cmd);
             ds = new DataSet();
@@ -54,6 +54,7 @@ namespace WineDBInterfaCe
                 listTerreno.Items[i].SubItems.Add(dt.Rows[i].ItemArray[3].ToString());
                 listTerreno.Items[i].SubItems.Add(dt.Rows[i].ItemArray[4].ToString());
                 listTerreno.Items[i].SubItems.Add(dt.Rows[i].ItemArray[5].ToString());
+                listTerreno.Items[i].SubItems.Add(dt.Rows[i].ItemArray[6].ToString());
             }
             contadorTerrenos();
         }
@@ -169,7 +170,7 @@ namespace WineDBInterfaCe
             }
 
             listTerreno.Items.Clear();
-            cmd = new SqlCommand("SELECT T.ID, T.Nome, T.Localizacao, C.Nome, T.Hectares, ADEGA.NOME FROM WineDB.Terreno AS T JOIN WineDB.Casta AS C ON T.ID_Casta = C.ID JOIN WineDB.Adega AS ADEGA ON T.ID_Adega = ADEGA.ID WHERE T." + filter + " LIKE '%" + pesquisaText + "%'", cnn);
+            cmd = new SqlCommand("SELECT T.ID, T.Nome, T.Localizacao, T.Ano_plantacao, C.Nome, T.Hectares, ADEGA.NOME FROM WineDB.Terreno AS T JOIN WineDB.Casta AS C ON T.ID_Casta = C.ID JOIN WineDB.Adega AS ADEGA ON T.ID_Adega = ADEGA.ID WHERE T." + filter + " LIKE '%" + pesquisaText + "%'", cnn);
             try
             {
                 da = new SqlDataAdapter(cmd);
@@ -220,6 +221,7 @@ namespace WineDBInterfaCe
                 command.Parameters.Add(new SqlParameter("@ID", id));
                 command.Parameters.Add(new SqlParameter("@Nome", nome));
                 command.Parameters.Add(new SqlParameter("@Localizacao", endereco));
+                command.Parameters.Add(new SqlParameter("@Ano_plantacao", ano_plantacao));
                 command.Parameters.Add(new SqlParameter("@NomeCasta", nome_casta));
                 command.Parameters.Add(new SqlParameter("@Hectares", hect));
                 command.Parameters.Add(new SqlParameter("@Nome_Adega", nome_adega));
