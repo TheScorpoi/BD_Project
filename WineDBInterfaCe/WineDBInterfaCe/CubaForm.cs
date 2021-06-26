@@ -284,7 +284,6 @@ namespace WineDBInterfaCe
             {
                 SqlCommand command = new SqlCommand("WineDB.AdicionarCuba", cnn);
                 command.CommandType = CommandType.StoredProcedure;
-                MessageBox.Show("AQUI");
                 command.Parameters.Add(new SqlParameter("@ID", id));
                 command.Parameters.Add(new SqlParameter("@Nome_Adega", nome_adega));
                 command.Parameters.Add(new SqlParameter("@Cap_Max", cap_max));

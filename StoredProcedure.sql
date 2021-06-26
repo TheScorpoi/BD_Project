@@ -295,7 +295,7 @@ EXEC WineDB.AdicionarTipoCuba 77777, 'Teste'
 
 Select * from WineDB.TipoCuba
 
-CREATE PROCEDURE WineDB.AdicionarTerreno (@ID VARCHAR(5), @Nome VARCHAR(256), @Localizacao VARCHAR(256), @NomeCasta varchar(128), @Hectares FLOAT , @Nome_Adega VARCHAR(256))
+CREATE PROCEDURE WineDB.AdicionarTerreno (@ID VARCHAR(5), @Nome VARCHAR(256), @Localizacao VARCHAR(256),@Ano_plantacao VARCHAR(4), @NomeCasta varchar(128), @Hectares FLOAT , @Nome_Adega VARCHAR(256))
 AS
 	BEGIN
 		DECLARE @count INT;
@@ -310,7 +310,7 @@ AS
 		ELSE
 			BEGIN
 				BEGIN TRY
-						INSERT INTO WineDB.Terreno(ID, Nome, Localizacao, ID_Casta, Hectares, ID_Adega) VALUES (@ID, @Nome, @Localizacao, @id_casta, @Hectares, @id_Adega);
+						INSERT INTO WineDB.Terreno(ID, Nome, Localizacao, Ano_plantacao ,ID_Casta, Hectares, ID_Adega) VALUES (@ID, @Nome, @Localizacao, @Ano_plantacao,@id_casta, @Hectares, @id_Adega);
 				END TRY
 				BEGIN CATCH
 					SELECT @erro = ERROR_MESSAGE(); 

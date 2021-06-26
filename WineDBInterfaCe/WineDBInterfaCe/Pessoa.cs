@@ -109,12 +109,12 @@ namespace WineDBInterfaCe
                     string data_nasc = listPessoas.SelectedItems[0].SubItems[3].Text;
                     string genero = listPessoas.SelectedItems[0].SubItems[4].Text;
                     string telemovel = listPessoas.SelectedItems[0].SubItems[5].Text;
-                    string iban;
-                    string num_ss;
-                    string inicio_ativ;
-                    string num_func;
-                    string nome_Adega;
-                    string nome_terreno;
+                    string iban = "";
+                    string num_ss = "";
+                    string inicio_ativ = "";
+                    string num_func = "";
+                    string nome_Adega = "";
+                    string nome_terreno = "";
 
 
                     switch (tipoPessoa)
@@ -332,11 +332,6 @@ namespace WineDBInterfaCe
                         categoria = "Pessoa";
                         command = new SqlCommand("WineDB.Adicionar" + categoria, cnn);
                         command.CommandType = CommandType.StoredProcedure;
-                        MessageBox.Show(nome);
-                        MessageBox.Show(morada);
-                        MessageBox.Show(data_nasc);
-                        MessageBox.Show(genero);
-                        MessageBox.Show(telemovel);
                         command.Parameters.Add(new SqlParameter("@Nome", nome));
                         command.Parameters.Add(new SqlParameter("@Morada", morada));
                         command.Parameters.Add(new SqlParameter("@NIF", nif));
@@ -445,6 +440,10 @@ namespace WineDBInterfaCe
                 textBoxInicioAtiv.Text = "";
                 textBoxNunFunc.Text = "";
                 textBoxSS.Text = "";
+                textBoxGenero.Text = "";
+                textBoxIBAN.Text = "";
+                comboBox2.Text = "";
+
 
                 MessageBox.Show("Algum dado passado de forma incorreta");
             }
@@ -459,9 +458,9 @@ namespace WineDBInterfaCe
 
         private void Apagarbutton_Click(object sender, EventArgs e)
         {
-            string nif = textBoxNIF.Text;
+            int nif = Int32.Parse(textBoxNIF.Text);
 
-            if (nif == "")
+            if (nif == 0)
             {
                 MessageBox.Show("Pessoa não foi selecionada corretamente");
             }

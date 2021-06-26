@@ -227,6 +227,8 @@ namespace WineDBInterfaCe
                 rdr.Close();
             }
 
+            contadorVinhos();
+            contadorMaiorQuantidade();
             vinhoLoad();
         }
 
@@ -243,6 +245,8 @@ namespace WineDBInterfaCe
             command.ExecuteNonQuery();
 
             //to refrsh
+            contadorVinhos();
+            contadorMaiorQuantidade();
             vinhoLoad();
         }
 
@@ -251,6 +255,5 @@ namespace WineDBInterfaCe
             int count = listVinho.Items.Count;
             maiorQuantidade.Text = count.ToString();
         }
-
     }
 }

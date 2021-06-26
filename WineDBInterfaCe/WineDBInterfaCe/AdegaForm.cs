@@ -224,7 +224,6 @@ namespace WineDBInterfaCe
 
 
                 rdr = command.ExecuteReader();
-                MessageBox.Show("Ebtaias");
             }
             catch
             {
