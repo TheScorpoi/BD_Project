@@ -24,7 +24,7 @@ AS
 		SELECT @NIFPessoa = WineDB.getNIFFuncfromNum_Func(@Num_Func)
 
 		IF @NIFPessoa IS NOT NULL
-			SELECT @counterPessoa=(SELECT WineDB.checkIfNIFExists(@NIFPessoa))
+			SET @counterPessoa=(SELECT WineDB.checkIfNIFExists(@NIFPessoa))
 		
 		IF(@counterPessoa IS NOT NULL)
 			--Check if gerente exists
@@ -42,6 +42,8 @@ AS
 		RETURN @counter
 	END
 GO
+
+DROP FUNCTION WineDB.checkIfNum_FuncExists
 
 CREATE FUNCTION WineDB.checkIfWineExists (@ID VARCHAR(5)) RETURNS INT
 AS
@@ -91,7 +93,6 @@ GO
 CREATE FUNCTION WineDB.getNIFFuncfromNum_Func(@Num_Func INT) RETURNS INT
 AS
 	BEGIN	
-		DECLARE @condition INT
 		DECLARE @NIFFunc INT
 		DECLARE @counter INT
 		DECLARE @counterGerente INT
@@ -105,28 +106,17 @@ AS
 		SELECT @counterOpAgricola = COUNT(1) FROM WineDB.OperadorAgricola WHERE Num_Func = @Num_Func
 
 		IF @counterGerente = 1
-			-- nao sei, se nao encontrar, se da erro ou nao
-			-- SUPONDO Q O NUM_FUNC JA TA COMO UNIQUE
-			SET @condition = @counterGerente
-			IF @condition = 1
-				SET @NIFFUNC = (SELECT NIF FROM WineDB.Gerente WHERE Num_Func = @Num_Func)
+			SET @NIFFUNC = (SELECT NIF FROM WineDB.Gerente WHERE Num_Func = @Num_Func)
 		IF @counterOpAdega = 1
-			-- nao sei, se nao encontrar, se da erro ou nao
-			-- SUPONDO Q O NUM_FUNC JA TA COMO UNIQUE
-			SET @condition = @counterOpAdega
-			IF @condition = 1
-				SET @NIFFUNC = (SELECT NIF FROM WineDB.OperadorAdega WHERE Num_Func = @Num_Func)
+			SET @NIFFUNC = (SELECT NIF FROM WineDB.OperadorAdega WHERE Num_Func = @Num_Func)
 		IF @counterOpAgricola = 1
-			-- nao sei, se nao encontrar, se da erro ou nao
-			-- SUPONDO Q O NUM_FUNC JA TA COMO UNIQUE
-			SET @condition = @counterOpAgricola
-			IF @condition = 1
-				SET @NIFFUNC = (SELECT NIF FROM WineDB.OperadorAgricola WHERE Num_Func = @Num_Func)
+			SET @NIFFUNC = (SELECT NIF FROM WineDB.OperadorAgricola WHERE Num_Func = @Num_Func)
 
-		RETURN @NIFFunc --means that there is no one with this employee number
+		RETURN @NIFFunc --means that there is no one with this employee number if zero
 	END
 GO
 
+DROP FUNCTION WineDB.getNIFFuncfromNum_Func
 
 CREATE FUNCTION WineDB.getNIFfromNome (@Nome VARCHAR(256)) RETURNS INT
 AS
