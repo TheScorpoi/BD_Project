@@ -1,14 +1,14 @@
 USE p5g8
 GO
 ------------------
-CREATE PROCEDURE WineDB.AdicionarPessoa (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc VARCHAR(10), @Genero VARCHAR(1), @Telemovel VARCHAR(9))
+CREATE PROCEDURE WineDB.AdicionarPessoa (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc DATE, @Genero VARCHAR(1), @Telemovel VARCHAR(9))
 AS
 	BEGIN
 		INSERT INTO WineDB.Pessoa(Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUES (@Nome, @Morada, @NIF, @Data_Nasc, @Genero, @Telemovel);
 	END
 GO
 
-CREATE PROCEDURE WineDB.AdicionarCliente (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc VARCHAR(10), @Genero VARCHAR(1), @Telemovel VARCHAR(9))
+CREATE PROCEDURE WineDB.AdicionarCliente (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc DATE, @Genero VARCHAR(1), @Telemovel VARCHAR(9))
 AS
 	BEGIN
 		DECLARE @count INT;
@@ -34,7 +34,7 @@ AS
 	End
 GO
 
-CREATE PROCEDURE WineDB.AdicionarFuncionario (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc VARCHAR(10), @Genero VARCHAR(1), @Telemovel VARCHAR(9), @IBAN VARCHAR(25), @Num_SS INT, @Data_Inicio_Atividade DATE)
+CREATE PROCEDURE WineDB.AdicionarFuncionario (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc DATE, @Genero VARCHAR(1), @Telemovel VARCHAR(9), @IBAN VARCHAR(25), @Num_SS INT, @Data_Inicio_Atividade DATE)
 AS
 	BEGIN
 		BEGIN TRAN
@@ -44,7 +44,7 @@ AS
 	End
 GO
 
-CREATE PROCEDURE WineDB.AdicionarGerente (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc VARCHAR(10), @Genero VARCHAR(1), @Telemovel VARCHAR(9), @IBAN VARCHAR(25), @Num_SS INT, @Data_Inicio_Atividade DATE, @Num_Func INT)
+CREATE PROCEDURE WineDB.AdicionarGerente (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc DATE, @Genero VARCHAR(1), @Telemovel VARCHAR(9), @IBAN VARCHAR(25), @Num_SS INT, @Data_Inicio_Atividade DATE, @Num_Func INT)
 AS
 	BEGIN
 		DECLARE @count INT;
@@ -74,13 +74,11 @@ AS
 	End
 GO
 
-CREATE PROCEDURE WineDB.AdicionarOperadorAgricola (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc VARCHAR(19), @Genero VARCHAR(1), @Telemovel VARCHAR(9), @IBAN VARCHAR(25), @Num_SS INT, @Data_Inicio_Atividade DATE, @Num_Func INT, @NomeTerreno VARCHAR(256))
+CREATE PROCEDURE WineDB.AdicionarOperadorAgricola (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc DATE, @Genero VARCHAR(1), @Telemovel VARCHAR(9), @IBAN VARCHAR(25), @Num_SS INT, @Data_Inicio_Atividade DATE, @Num_Func INT, @ID_Terreno VARCHAR(5))
 AS
 	BEGIN
 		DECLARE @count INT;
 		DECLARE @erro VARCHAR(100);
-		DECLARE @id VARCHAR(5)
-		SELECT @id = (SELECT WineDB.getNomeTerrenoFROMiD(@NomeTerreno))
 
 		SET @count = (SELECT WineDB.checkIfNIFExists(@NIF))
 		IF(@count>=1)
@@ -91,7 +89,7 @@ AS
 						BEGIN TRAN
 									INSERT INTO WineDB.Pessoa (Nome, Morada, NIF, Data_Nasc, Genero, Telemovel) VALUES (@Nome, @Morada, @NIF, @Data_Nasc, @Genero, @Telemovel);
 									INSERT INTO WineDB.Funcionario (NIF, IBAN, Num_SS, Data_Inicio_Atividade) VALUES (@NIF, @IBAN, @Num_SS, @Data_Inicio_Atividade);
-									INSERT INTO WineDB.OperadorAgricola(NIF, Num_Func, ID_Terreno) VALUES (@NIF, @Num_Func, @id)
+									INSERT INTO WineDB.OperadorAgricola(NIF, Num_Func, ID_Terreno) VALUES (@NIF, @Num_Func, @ID_Terreno)
 						COMMIT TRAN
 					END TRY
 					BEGIN CATCH
@@ -103,7 +101,7 @@ AS
 	End
 GO
 
-CREATE PROCEDURE WineDB.AdicionarOperadorAdega (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc VARCHAR(10), @Genero VARCHAR(1), @Telemovel VARCHAR(9), @IBAN VARCHAR(25), @Num_SS INT, @Data_Inicio_Atividade DATE, @Num_Func INT, @ID_Adega VARCHAR(5))
+CREATE PROCEDURE WineDB.AdicionarOperadorAdega (@Nome VARCHAR(256), @Morada VARCHAR(256), @NIF INT, @Data_Nasc DATE, @Genero VARCHAR(1), @Telemovel VARCHAR(9), @IBAN VARCHAR(25), @Num_SS INT, @Data_Inicio_Atividade DATE, @Num_Func INT, @ID_Adega VARCHAR(5))
 AS
 	BEGIN
 		DECLARE @count INT;
@@ -131,7 +129,7 @@ AS
 	END
 GO
 
-CREATE PROCEDURE WineDB.AdicionarVinho (@ID VARCHAR(5), @ID_Cuba INT, @Nome VARCHAR(256), @DOC VARCHAR(32), @Nome_Casta varchar(128))
+CREATE PROCEDURE WineDB.AdicionarVinho (@ID VARCHAR(5), @ID_Cuba INT, @Nome VARCHAR(256), @DOC VARCHAR(32), @Nome_Casta varchar(128), @Quantidade INT)
 AS
 	BEGIN
 		DECLARE @count INT;
@@ -145,7 +143,7 @@ AS
 			BEGIN
 				BEGIN TRY
 					BEGIN TRAN
-								INSERT INTO WineDB.Vinho(ID, ID_Cuba, Nome, DOC, ID_Casta) VALUES (@ID, @ID_Cuba, @Nome, @DOC, @id_Casta)
+								INSERT INTO WineDB.Vinho(ID, ID_Cuba, Nome, DOC, ID_Casta, Quantidade) VALUES (@ID, @ID_Cuba, @Nome, @DOC, @id_Casta, @Quantidade)
 					COMMIT TRAN
 				END TRY
 				BEGIN CATCH
@@ -291,6 +289,8 @@ AS
 	End
 GO
 
+
+drop proc WineDB.AdicionarVenda
 CREATE PROCEDURE WineDB.AdicionarVenda (@ID_Produto VARCHAR(5), @Preco FLOAT , @IVA INT = 23, @Quantidade INT, @Nome VARCHAR(256))
 AS
 	BEGIN
@@ -299,26 +299,39 @@ AS
 		DECLARE @nif INT;
 		DECLARE @countNIF INT;
 		DECLARE @erro VARCHAR(100);
+		DECLARE @quantity INT;
+		DECLARE @IDVinho VARCHAR(5);
 		SET @nif = (SELECT WineDB.getNIFfromNome(@Nome))
 		SET @countNIF = (SELECT WineDB.checkIfNIFExists(@nif))
 		SET @countVinho = (SELECT WineDB.checkIfWineExists(@ID_Produto))
+
 		IF (@countVinho < 1)
 			RAISERROR ('N�o existe esse vinho em armaz�m.', 16,1);
 		ELSE IF (@countNIF < 1)
 			RAISERROR ('N�o existe esse cliente na base de dados.', 16,1);
 		ELSE
 			BEGIN
-				BEGIN TRY
-					BEGIN TRAN
-						INSERT INTO WineDB.Venda(ID_Produto, Preco, IVA, Quantidade, NIF_Cliente) VALUES (@ID_Produto, @Preco, @IVA, @Quantidade, @nif);
-					COMMIT TRAN
-				END TRY
-				BEGIN CATCH
-					Rollback TRAN
-					SELECT @erro = ERROR_MESSAGE(); 
-					SET @erro = 'N�o foi possivel inserir a venda, algum dado foi passado de forma incorreta'
-					RAISERROR (@erro, 16,1);
-				END CATCH
+				DECLARE WineCursor CURSOR FAST_FORWARD
+					FOR SELECT ID , Quantidade FROM WineDB.Vinho WHERE ID = @ID_Produto;
+				OPEN WineCursor;
+				FETCH WineCursor INTO @IDVinho , @quantity;
+					WHILE @@FETCH_STATUS = 0
+						BEGIN
+							IF @quantity >= @Quantidade
+								BEGIN
+									UPDATE WineDB.Vinho SET Quantidade = Quantidade - @Quantidade WHERE ID = @ID_Produto
+									INSERT INTO WineDB.Venda(ID_Produto, Preco, IVA, Quantidade, NIF_Cliente) VALUES (@ID_Produto, @Preco, @IVA, @Quantidade, @nif);
+								END
+							ELSE
+								BEGIN
+									RAISERROR ('Vinho nao disponivel', 16,1);
+								END
+							FETCH WineCursor INTO @IDVinho , @quantity
+						END
+				CLOSE WineCursor;
+				DEALLOCATE WineCursor;
+				RETURN ;
+					
 			END
 	End
 GO
