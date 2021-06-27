@@ -137,7 +137,7 @@ namespace WineDBInterfaCe
                             textBoxSS.Text = num_ss;
                             textBoxInicioAtiv.Text = inicio_ativ;
                             textBoxNunFunc.Text = num_func;
-                            textBoxAdega.Text = nome_Adega;
+                            textBoxAdega.Text = nome_Adega; //!!!!!
                             textBoxTerreno.Text = "";
                             comboBox2.Text = "Op. Adega";
                             break;
@@ -162,7 +162,7 @@ namespace WineDBInterfaCe
                             textBoxSS.Text = num_ss;
                             textBoxInicioAtiv.Text = inicio_ativ;
                             textBoxNunFunc.Text = num_func;
-                            textBoxTerreno.Text = nome_terreno;
+                            textBoxTerreno.Text = nome_terreno; //!!!!!!
                             textBoxAdega.Text = "";
                             comboBox2.Text = "Op. Agricola";
                             break;
@@ -187,7 +187,7 @@ namespace WineDBInterfaCe
                             textBoxSS.Text = num_ss;
                             textBoxInicioAtiv.Text = inicio_ativ;
                             textBoxNunFunc.Text = num_func;
-                            textBoxAdega.Text = nome_terreno;
+                            textBoxAdega.Text = nome_terreno; //!!!
                             comboBox2.Text = "Gerente";
                             break;
                         case "Cliente":
@@ -361,7 +361,7 @@ namespace WineDBInterfaCe
                         command.Parameters.Add(new SqlParameter("@Num_SS", ss));
                         command.Parameters.Add(new SqlParameter("@Data_Inicio_Atividade", inicio_ativ));
                         command.Parameters.Add(new SqlParameter("@Num_Func", nFunc));
-                        command.Parameters.Add(new SqlParameter("@ID_Terreno", terreno));
+                        command.Parameters.Add(new SqlParameter("@NomeTerreno", terreno));
 
                         rdr = command.ExecuteReader();
                         break;

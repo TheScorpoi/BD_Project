@@ -44,16 +44,14 @@ namespace WineDBInterfaCe
             this.precoLabel = new System.Windows.Forms.Label();
             this.produtoLabel = new System.Windows.Forms.Label();
             this.IVALabel = new System.Windows.Forms.Label();
-            this.idLabel = new System.Windows.Forms.Label();
             this.textBoxPreco = new System.Windows.Forms.TextBox();
             this.textBoxProduto = new System.Windows.Forms.TextBox();
             this.textBoxIVA = new System.Windows.Forms.TextBox();
-            this.textBoxID = new System.Windows.Forms.TextBox();
             this.inserirButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.listVenda = new System.Windows.Forms.ListView();
-            this.ID = new System.Windows.Forms.ColumnHeader();
             this.ID_Venda = new System.Windows.Forms.ColumnHeader();
+            this.ID = new System.Windows.Forms.ColumnHeader();
             this.Nome = new System.Windows.Forms.ColumnHeader();
             this.Preco = new System.Windows.Forms.ColumnHeader();
             this.IVA = new System.Windows.Forms.ColumnHeader();
@@ -122,11 +120,9 @@ namespace WineDBInterfaCe
             this.panel1.Controls.Add(this.precoLabel);
             this.panel1.Controls.Add(this.produtoLabel);
             this.panel1.Controls.Add(this.IVALabel);
-            this.panel1.Controls.Add(this.idLabel);
             this.panel1.Controls.Add(this.textBoxPreco);
             this.panel1.Controls.Add(this.textBoxProduto);
             this.panel1.Controls.Add(this.textBoxIVA);
-            this.panel1.Controls.Add(this.textBoxID);
             this.panel1.Controls.Add(this.inserirButton);
             this.panel1.Location = new System.Drawing.Point(43, 361);
             this.panel1.Name = "panel1";
@@ -211,15 +207,6 @@ namespace WineDBInterfaCe
             this.IVALabel.TabIndex = 8;
             this.IVALabel.Text = "IVA:";
             // 
-            // idLabel
-            // 
-            this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(84, 22);
-            this.idLabel.Name = "idLabel";
-            this.idLabel.Size = new System.Drawing.Size(72, 20);
-            this.idLabel.TabIndex = 7;
-            this.idLabel.Text = "ID Venda:";
-            // 
             // textBoxPreco
             // 
             this.textBoxPreco.Location = new System.Drawing.Point(545, 26);
@@ -240,13 +227,6 @@ namespace WineDBInterfaCe
             this.textBoxIVA.Name = "textBoxIVA";
             this.textBoxIVA.Size = new System.Drawing.Size(233, 27);
             this.textBoxIVA.TabIndex = 3;
-            // 
-            // textBoxID
-            // 
-            this.textBoxID.Location = new System.Drawing.Point(164, 22);
-            this.textBoxID.Name = "textBoxID";
-            this.textBoxID.Size = new System.Drawing.Size(233, 27);
-            this.textBoxID.TabIndex = 1;
             // 
             // inserirButton
             // 
@@ -288,15 +268,15 @@ namespace WineDBInterfaCe
             this.listVenda.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listVenda_ColumnClick);
             this.listVenda.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listVenda_ItemSelectionChanged);
             // 
-            // ID
-            // 
-            this.ID.Text = "ID Produto";
-            this.ID.Width = 150;
-            // 
             // ID_Venda
             // 
             this.ID_Venda.Text = "ID Venda";
             this.ID_Venda.Width = 100;
+            // 
+            // ID
+            // 
+            this.ID.Text = "ID Produto";
+            this.ID.Width = 150;
             // 
             // Nome
             // 

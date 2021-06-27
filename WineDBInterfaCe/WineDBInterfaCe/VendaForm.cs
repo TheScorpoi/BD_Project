@@ -124,7 +124,6 @@ namespace WineDBInterfaCe
                     string quantidade = listVenda.SelectedItems[0].SubItems[5].Text;
                     string cliente = listVenda.SelectedItems[0].SubItems[6].Text;
 
-                    textBoxID.Text = id_venda;
                     textBoxProduto.Text = produto;
                     textBoxPreco.Text = preco;
                     textBoxIVA.Text = iva;
@@ -213,7 +212,6 @@ namespace WineDBInterfaCe
             }
             catch
             {
-                textBoxID.Text = "";
                 textBoxProduto.Text = "";
                 textBoxPreco.Text = "";
                 textBoxIVA.Text = "";

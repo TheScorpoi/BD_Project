@@ -36,8 +36,8 @@ namespace WineDBInterfaCe
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.buttonVoltar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBoxAdega = new System.Windows.Forms.TextBox();
-            this.textBoxTerreno = new System.Windows.Forms.TextBox();
+            this.textBoxAdega = new System.Windows.Forms.ComboBox();
+            this.textBoxTerreno = new System.Windows.Forms.ComboBox();
             this.textBoxNunFunc = new System.Windows.Forms.TextBox();
             this.textBoxInicioAtiv = new System.Windows.Forms.TextBox();
             this.textBoxSS = new System.Windows.Forms.TextBox();
@@ -180,18 +180,44 @@ namespace WineDBInterfaCe
             // 
             // textBoxAdega
             // 
-            this.textBoxAdega.Location = new System.Drawing.Point(768, 148);
+            this.textBoxAdega.FormattingEnabled = true;
+            this.textBoxAdega.Items.AddRange(new object[] {
+            "Solar Dona Maria",
+            "Casa dos Vinhos",
+            "Boa Uva",
+            "Adega La Rose"});
+            this.textBoxAdega.Location = new System.Drawing.Point(767, 145);
             this.textBoxAdega.Name = "textBoxAdega";
-            this.textBoxAdega.PlaceholderText = "(Op. Adega)";
-            this.textBoxAdega.Size = new System.Drawing.Size(125, 27);
+            this.textBoxAdega.Size = new System.Drawing.Size(125, 28);
             this.textBoxAdega.TabIndex = 28;
             // 
             // textBoxTerreno
             // 
-            this.textBoxTerreno.Location = new System.Drawing.Point(768, 115);
+            this.textBoxTerreno.FormattingEnabled = true;
+            this.textBoxTerreno.Items.AddRange(new object[] {
+            "Curtinho",
+            "Ervedeiro",
+            "Sobreira",
+            "Serra - Sul",
+            "Poças de Cima",
+            "Fuseiro",
+            "Vale de Parada",
+            "Montijinho",
+            "Sobreira",
+            "Eucaliptal",
+            "Pinheira",
+            "Ribeiro do Centro",
+            "Alijo de Cima",
+            "Ranhados",
+            "Mouristo",
+            "Silveiro",
+            "Selvagem",
+            "Torneira",
+            "Hortinhas",
+            "Serra - Norte"});
+            this.textBoxTerreno.Location = new System.Drawing.Point(767, 112);
             this.textBoxTerreno.Name = "textBoxTerreno";
-            this.textBoxTerreno.PlaceholderText = "(Op. Agricola)";
-            this.textBoxTerreno.Size = new System.Drawing.Size(125, 27);
+            this.textBoxTerreno.Size = new System.Drawing.Size(125, 28);
             this.textBoxTerreno.TabIndex = 27;
             // 
             // textBoxNunFunc
@@ -221,20 +247,20 @@ namespace WineDBInterfaCe
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(684, 145);
+            this.label8.Location = new System.Drawing.Point(699, 145);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(75, 20);
+            this.label8.Size = new System.Drawing.Size(56, 20);
             this.label8.TabIndex = 23;
-            this.label8.Text = "ID Adega:";
+            this.label8.Text = "Adega:";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(681, 115);
+            this.label7.Location = new System.Drawing.Point(693, 115);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(81, 20);
+            this.label7.Size = new System.Drawing.Size(62, 20);
             this.label7.TabIndex = 22;
-            this.label7.Text = "ID Terreno:";
+            this.label7.Text = "Terreno:";
             // 
             // label6
             // 
@@ -604,8 +630,6 @@ namespace WineDBInterfaCe
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button atualizarbutton;
         private System.Windows.Forms.Button inserirButton;
-        private System.Windows.Forms.TextBox textBoxAdega;
-        private System.Windows.Forms.TextBox textBoxTerreno;
         private System.Windows.Forms.TextBox textBoxNunFunc;
         private System.Windows.Forms.TextBox textBoxInicioAtiv;
         private System.Windows.Forms.TextBox textBoxSS;
@@ -617,5 +641,7 @@ namespace WineDBInterfaCe
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxIBAN;
         private System.Windows.Forms.Button pessoaButton;
+        private System.Windows.Forms.ComboBox textBoxAdega;
+        private System.Windows.Forms.ComboBox textBoxTerreno;
     }
 }

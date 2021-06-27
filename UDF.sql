@@ -145,3 +145,11 @@ AS
 	END
 GO
 
+CREATE FUNCTION WineDB.getNomeTerrenoFROMiD (@ID VARCHAR(5)) RETURNS VARCHAR(256) 
+AS
+	BEGIN
+		DECLARE @nome VARCHAR(256)
+		SELECT @nome = Nome FROM WineDB.Terreno Where ID = @ID
+		RETURN @nome
+	END
+GO
