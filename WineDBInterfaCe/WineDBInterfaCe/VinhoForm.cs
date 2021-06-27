@@ -28,15 +28,14 @@ namespace WineDBInterfaCe
             this.cnn = cnn;
             InitializeComponent();
             vinhoLoad();
-            contadorMaiorQuantidade();
 
             lvwColumnSorter = new ListViewColumnSorter();
             this.listVinho.ListViewItemSorter = (System.Collections.IComparer)lvwColumnSorter;
         }
 
-        private void populate(String ID, String id_cuba, String nome, String doc, String id_casta)
+        private void populate(String ID, String id_cuba, String nome, String doc, String id_casta, String quantidade)
         {
-            listVinho.Items.Add(new ListViewItem(new[] { ID, id_cuba, nome, doc, id_casta}));
+            listVinho.Items.Add(new ListViewItem(new[] { ID, id_cuba, nome, doc, id_casta, quantidade}));
         }
 
         private void vinhoLoad()
@@ -44,7 +43,7 @@ namespace WineDBInterfaCe
             listVinho.Items.Clear();
             listVinho.View = View.Details;
 
-            cmd = new SqlCommand("SELECT V.ID, V.ID_Cuba, V.Nome, V.DOC, C.Nome FROM WineDB.Vinho AS V JOIN WineDB.Casta AS C ON V.ID_Casta = C.ID", cnn);
+            cmd = new SqlCommand("SELECT V.ID, V.ID_Cuba, V.Nome, V.DOC, C.Nome, V.Quantidade FROM WineDB.Vinho AS V JOIN WineDB.Casta AS C ON V.ID_Casta = C.ID", cnn);
 
             da = new SqlDataAdapter(cmd);
             ds = new DataSet();
@@ -59,6 +58,7 @@ namespace WineDBInterfaCe
                 listVinho.Items[i].SubItems.Add(dt.Rows[i].ItemArray[2].ToString());
                 listVinho.Items[i].SubItems.Add(dt.Rows[i].ItemArray[3].ToString());
                 listVinho.Items[i].SubItems.Add(dt.Rows[i].ItemArray[4].ToString());
+                listVinho.Items[i].SubItems.Add(dt.Rows[i].ItemArray[5].ToString());
             }
             contadorVinhos();
         }
@@ -97,7 +97,7 @@ namespace WineDBInterfaCe
 
 
             listVinho.Items.Clear();
-            cmd = new SqlCommand("SELECT V.ID, V.ID_Cuba, V.Nome, V.DOC, C.Nome FROM WineDB.Vinho AS V JOIN WineDB.Casta AS C ON V.ID_Casta = C.ID WHERE V." + filter + " LIKE '%" + pesquisaText + "%'", cnn);
+            cmd = new SqlCommand("SELECT V.ID, V.ID_Cuba, V.Nome, V.DOC, C.Nome, V.Quantidade FROM WineDB.Vinho AS V JOIN WineDB.Casta AS C ON V.ID_Casta = C.ID WHERE V." + filter + " LIKE '%" + pesquisaText + "%'", cnn);
             try
             {
                 da = new SqlDataAdapter(cmd);
@@ -109,7 +109,7 @@ namespace WineDBInterfaCe
 
                 foreach (DataRow row in dt.Rows)
                 {
-                    populate(row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString());
+                    populate(row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString(), row[5].ToString());
                 }
                 dt.Rows.Clear();
             }
@@ -148,13 +148,14 @@ namespace WineDBInterfaCe
                     string nome = listVinho.SelectedItems[0].SubItems[2].Text;
                     string doc = listVinho.SelectedItems[0].SubItems[3].Text;
                     string id_casta = listVinho.SelectedItems[0].SubItems[4].Text;
+                    string quantidade = listVinho.SelectedItems[0].SubItems[5].Text;
 
                     textBoxID.Text = id;
                     textBoxIDCuba.Text = id_cuba;
                     textBoxNome.Text = nome;
                     textBoxDOC.Text = doc;
                     textBoxIDCasta.Text = id_casta;
-
+                    textBoxQuantidade.Text = quantidade;
                     //MessageBox.Show("VINHO " + nome + "\n\nID: " + id + "\nID da Cuba: " + id_cuba + "\nDOC: " + doc + " \nCASTA: " + id_casta);
                 }
 
@@ -197,6 +198,7 @@ namespace WineDBInterfaCe
             string nome = textBoxNome.Text;
             string doc = textBoxDOC.Text;
             string nome_casta = textBoxIDCasta.Text;
+            int quantidade = Int32.Parse(textBoxQuantidade.Text);
 
             try
             {
@@ -208,8 +210,10 @@ namespace WineDBInterfaCe
                 command.Parameters.Add(new SqlParameter("@Nome", nome));
                 command.Parameters.Add(new SqlParameter("@DOC", doc));
                 command.Parameters.Add(new SqlParameter("@Nome_Casta", nome_casta));
+                command.Parameters.Add(new SqlParameter("@Quantidade", quantidade));
 
                 rdr = command.ExecuteReader();
+                MessageBox.Show("Vinho adicionado com sucesso");
             }
             catch
             {
@@ -219,6 +223,7 @@ namespace WineDBInterfaCe
                 textBoxNome.Text = "";
                 textBoxDOC.Text = "";
                 textBoxIDCasta.Text = "";
+                textBoxQuantidade.Text = "";
                 MessageBox.Show("Algum dado passado de forma incorreta");
             }
 
@@ -228,7 +233,6 @@ namespace WineDBInterfaCe
             }
 
             contadorVinhos();
-            contadorMaiorQuantidade();
             vinhoLoad();
         }
 
@@ -238,7 +242,7 @@ namespace WineDBInterfaCe
 
             if (id == "")
             {
-                MessageBox.Show("Armazem não foi selecionado corretamente");
+                MessageBox.Show("Vinho não foi selecionado corretamente");
             }
 
             SqlCommand command = new SqlCommand("DELETE FROM WineDB.Vinho WHERE ID = '" + id + "'", cnn);
@@ -246,14 +250,9 @@ namespace WineDBInterfaCe
 
             //to refrsh
             contadorVinhos();
-            contadorMaiorQuantidade();
             vinhoLoad();
         }
 
-        private void contadorMaiorQuantidade()
-        {
-            int count = listVinho.Items.Count;
-            maiorQuantidade.Text = count.ToString();
-        }
+
     }
 }

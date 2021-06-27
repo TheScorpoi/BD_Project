@@ -224,6 +224,8 @@ namespace WineDBInterfaCe
 
 
                 rdr = command.ExecuteReader();
+                MessageBox.Show("Adega adicionada com sucesso");
+
             }
             catch
             {

@@ -290,6 +290,9 @@ namespace WineDBInterfaCe
                 command.Parameters.Add(new SqlParameter("@TipoCuba", tipo));
 
                 rdr = command.ExecuteReader();
+
+                MessageBox.Show("Cuba adicionada com sucesso");
+
             }
             catch
             {

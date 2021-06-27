@@ -227,6 +227,8 @@ namespace WineDBInterfaCe
                 command.Parameters.Add(new SqlParameter("@Nome_Adega", nome_adega));
 
                 rdr = command.ExecuteReader();
+                MessageBox.Show("Terreno adicionado com sucesso");
+
             }
             catch
             {

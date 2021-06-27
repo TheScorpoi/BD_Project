@@ -35,9 +35,12 @@ namespace WineDBInterfaCe
             this.Nome = new System.Windows.Forms.ColumnHeader();
             this.DOC = new System.Windows.Forms.ColumnHeader();
             this.ID_Adega = new System.Windows.Forms.ColumnHeader();
+            this.Quantidade = new System.Windows.Forms.ColumnHeader();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonVoltar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxQuantidade = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.atualizarbutton = new System.Windows.Forms.Button();
             this.inserirButton = new System.Windows.Forms.Button();
             this.idCastaLabel = new System.Windows.Forms.Label();
@@ -55,8 +58,6 @@ namespace WineDBInterfaCe
             this.textBoxPesquisa = new System.Windows.Forms.TextBox();
             this.countVinhos = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.maiorQuantidade = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,11 +68,12 @@ namespace WineDBInterfaCe
             this.ID_Cuba,
             this.Nome,
             this.DOC,
-            this.ID_Adega});
+            this.ID_Adega,
+            this.Quantidade});
             this.listVinho.HideSelection = false;
             this.listVinho.Location = new System.Drawing.Point(42, 67);
             this.listVinho.Name = "listVinho";
-            this.listVinho.Size = new System.Drawing.Size(782, 234);
+            this.listVinho.Size = new System.Drawing.Size(868, 234);
             this.listVinho.TabIndex = 0;
             this.listVinho.UseCompatibleStateImageBehavior = false;
             this.listVinho.View = System.Windows.Forms.View.Details;
@@ -96,12 +98,17 @@ namespace WineDBInterfaCe
             // DOC
             // 
             this.DOC.Text = "DOC";
-            this.DOC.Width = 200;
+            this.DOC.Width = 150;
             // 
             // ID_Adega
             // 
             this.ID_Adega.Text = "Adega";
             this.ID_Adega.Width = 180;
+            // 
+            // Quantidade
+            // 
+            this.Quantidade.Text = "Quantidade";
+            this.Quantidade.Width = 100;
             // 
             // button1
             // 
@@ -125,6 +132,8 @@ namespace WineDBInterfaCe
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.textBoxQuantidade);
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.atualizarbutton);
             this.panel1.Controls.Add(this.inserirButton);
             this.panel1.Controls.Add(this.idCastaLabel);
@@ -142,6 +151,22 @@ namespace WineDBInterfaCe
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(989, 178);
             this.panel1.TabIndex = 7;
+            // 
+            // textBoxQuantidade
+            // 
+            this.textBoxQuantidade.Location = new System.Drawing.Point(536, 122);
+            this.textBoxQuantidade.Name = "textBoxQuantidade";
+            this.textBoxQuantidade.Size = new System.Drawing.Size(209, 27);
+            this.textBoxQuantidade.TabIndex = 15;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(440, 129);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 20);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Quantidade:";
             // 
             // atualizarbutton
             // 
@@ -292,32 +317,11 @@ namespace WineDBInterfaCe
             this.label2.TabIndex = 11;
             this.label2.Text = "Quantidade de Vinhos:";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(860, 122);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 20);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Quantidade de Vinho:";
-            // 
-            // maiorQuantidade
-            // 
-            this.maiorQuantidade.AutoSize = true;
-            this.maiorQuantidade.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maiorQuantidade.Location = new System.Drawing.Point(900, 163);
-            this.maiorQuantidade.Name = "maiorQuantidade";
-            this.maiorQuantidade.Size = new System.Drawing.Size(83, 54);
-            this.maiorQuantidade.TabIndex = 13;
-            this.maiorQuantidade.Text = "OO";
-            // 
             // VinhoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 561);
-            this.Controls.Add(this.maiorQuantidade);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.countVinhos);
             this.Controls.Add(this.textBoxPesquisa);
@@ -365,5 +369,7 @@ namespace WineDBInterfaCe
         private System.Windows.Forms.Button inserirButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label maiorQuantidade;
+        private System.Windows.Forms.ColumnHeader Quantidade;
+        private System.Windows.Forms.TextBox textBoxQuantidade;
     }
 }

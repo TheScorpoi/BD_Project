@@ -202,7 +202,10 @@ namespace WineDBInterfaCe
                 command.Parameters.Add(new SqlParameter("@Nome_Adega", adegaAssociado));
 
                 rdr = command.ExecuteReader();
-            } catch
+                MessageBox.Show("Armazém adicionado com sucesso");
+
+            }
+            catch
             {
 
                 textBoxID.Text = "";

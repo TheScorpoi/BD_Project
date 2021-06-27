@@ -209,6 +209,8 @@ namespace WineDBInterfaCe
                 command.Parameters.Add(new SqlParameter("@Nome", cliente));
 
                 rdr = command.ExecuteReader();
+                MessageBox.Show("Venda adicionada com sucesso");
+
             }
             catch
             {

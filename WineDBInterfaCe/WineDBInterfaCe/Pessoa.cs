@@ -340,6 +340,8 @@ namespace WineDBInterfaCe
                         command.Parameters.Add(new SqlParameter("@Telemovel", telemovel));
 
                         rdr = command.ExecuteReader();
+                        MessageBox.Show("Pessoa adicionada com sucesso");
+
 
                         break;
 
@@ -364,6 +366,8 @@ namespace WineDBInterfaCe
                         command.Parameters.Add(new SqlParameter("@NomeTerreno", terreno));
 
                         rdr = command.ExecuteReader();
+                        MessageBox.Show("Op. Agricola adicionado com sucesso");
+
                         break;
                     case "Op. Adega":
                         categoria = "OperadorAdega";
@@ -387,6 +391,8 @@ namespace WineDBInterfaCe
                         command.Parameters.Add(new SqlParameter("@ID_Adega", adega));
 
                         rdr = command.ExecuteReader();
+                        MessageBox.Show("Op. Adega adicionado com sucesso");
+
                         break;
                     case "Gerente":
                         categoria = "Gerente";
@@ -409,6 +415,8 @@ namespace WineDBInterfaCe
                         command.Parameters.Add(new SqlParameter("@Num_Func", nFunc));
 
                         rdr = command.ExecuteReader();
+                        MessageBox.Show("Gerente adicionado com sucesso");
+
                         break;
                     case "Cliente":
                         categoria = "Cliente";
@@ -423,6 +431,7 @@ namespace WineDBInterfaCe
                         command.Parameters.Add(new SqlParameter("@Telemovel", telemovel));
 
                         rdr = command.ExecuteReader();
+                        MessageBox.Show("Cliente adicionado com sucesso");
 
                         break;
                 }
