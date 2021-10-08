@@ -10,6 +10,9 @@ O trabalho foi em várias fazes, sendo de destacar especialmente as seguintes:
 - Criação da base de dados, e preenchimento com a informação da mesma
 - Criação de uma interface gráfica que permitisse trabalhar sobre a base de dados.
 
+## Demonstração
+Para uma melhor perceção da experiência ao usar a interface gráfica, temos o seguinte [video](https://youtu.be/zzGJN0dj9f4) que exemplifica o uso da mesma.
+
 ## Relatório
 
 Este projeto está acompanhado por um [Relatório](./Relatorio/RelatórioBD.pdf), onde é explicado todo o processo de construção e resolução do problema, 
