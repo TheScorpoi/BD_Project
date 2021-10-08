@@ -12,7 +12,7 @@ O trabalho foi em várias fazes, sendo de destacar especialmente as seguintes:
 
 ## Relatório
 
-Este projeto está acompanhado por um [Relatório] (./Relatorio/RelatórioBD.pdf), onde é explicado todo o processo de construção e resolução do problema, 
+Este projeto está acompanhado por um [Relatório](./Relatorio/RelatórioBD.pdf), onde é explicado todo o processo de construção e resolução do problema, 
 e onde são tiradas as conclusões do mesmo.
 
 ## Autores
